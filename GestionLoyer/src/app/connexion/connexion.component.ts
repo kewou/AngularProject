@@ -1,41 +1,46 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user/modele/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { UserService } from '../user/service/user.service';
+import { CookieService } from 'ngx-cookie-service';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-connexion',
   templateUrl: './connexion.component.html',
   styleUrls: ['./connexion.component.scss']
 })
-export class ConnexionComponent implements OnInit {
+export class ConnexionComponent {
 
-  username: string="";
-  password: string="";
+
+  loginObj: any = {username:"", password:""};
 
   private backendUrl = environment.backendUrl;
+  errorMessage: string="";
 
-  constructor(private http: HttpClient,private router: Router) {
+  constructor(private http: HttpClient,private router: Router,private userService: UserService,private cookieService: CookieService,
+    ) {
 
-  }
-
-  ngOnInit(): void {
   }
 
   submitForm() {
+    debugger
     const url = `${this.backendUrl}/authenticate`;
-    this.http.post(url, {username:this.username,password:this.password}).subscribe(
-      response => {
-        console.log('Réponse du serveur :', response);
-        // Gérez ici la réponse du serveur en cas de succès
-          this.router.navigate(['/locataire']); // Redirection vers la page de connexion
+    this.userService.loginUser(this.loginObj).subscribe(
+      (response:any) => {
+        debugger
+        console.log("response",response);
+        //localStorage.setItem("jwtToken",response.jwtToken);
+        this.cookieService.set('jwtToken', response.jwtToken, undefined, undefined, undefined, true, 'Lax');
+        this.router.navigate(['/locataire']);
       },
-      (error) => {
-        console.error('Erreur lors de l\'envoi de la requête :', error);
-        // Gérez ici les erreurs de la requête
+      (error:HttpErrorResponse) => {
+          if(error.status === 401){
+            this.errorMessage="Login ou mot de passe incorrect !";
+          }
       }
     );
-  }
+ }
 
 }
