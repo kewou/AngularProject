@@ -13,6 +13,7 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { ContactComponent } from './contact/contact.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { ConnexionComponent } from './connexion/connexion.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { ConnexionComponent } from './connexion/connexion.component';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
