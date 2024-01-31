@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../user/modele/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 
@@ -12,19 +12,32 @@ import { environment } from '../../environments/environment';
 })
 export class InscriptionComponent implements OnInit {
 
-  user: User;
+  user: User = { name: "", lastName: "", email: "", phone: "", password: ""  };
+
   private backendUrl = environment.backendUrl;
+  errorMessage: string | null = null;
 
   constructor(private http: HttpClient,private router: Router) {
-    this.user = { name: '', lastName: '', email: '', phone: '', password: ''  };
   }
 
   ngOnInit(): void {
   }
 
-    submitForm() {
+  httpOptions = {
+    headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+    })
+  };
+
+  registerSubmit() {
+    debugger
+    this.errorMessage = null;
+    if (this.user.name==='' || this.user.lastName==='' || this.user.phone==='' || this.user.email===''|| this.user.password==='') {
+      this.errorMessage = "Veuillez remplir tous les champs requis.";
+      return;
+    }
       const url = `${this.backendUrl}/users/create`;
-      this.http.post(url, this.user).subscribe(
+      this.http.post(url, this.user,this.httpOptions).subscribe(
         response => {
           console.log('Réponse du serveur :', response);
           // Gérez ici la réponse du serveur en cas de succès
@@ -32,7 +45,7 @@ export class InscriptionComponent implements OnInit {
         },
         (error) => {
           console.error('Erreur lors de l\'envoi de la requête :', error);
-          // Gérez ici les erreurs de la requête
+          this.errorMessage="Une erreur s'est produite :" + error;
         }
       );
     }

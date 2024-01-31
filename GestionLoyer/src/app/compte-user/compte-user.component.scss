@@ -1,0 +1,41 @@
+#infosUser {
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-top: 6%;
+}
+
+/* Style pour le titre */
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Style pour le tableau */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Style pour les lignes du tableau */
+tr {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Style pour les cellules du tableau */
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+/* Style pour les cellules de la première colonne (clé) */
+td:first-child {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Style pour les cellules de la deuxième colonne (valeur) */
+td:nth-child(2) {
+  color: #666;
+  text-align: center;
+}

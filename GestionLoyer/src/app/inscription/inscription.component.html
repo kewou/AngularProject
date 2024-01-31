@@ -1,27 +1,27 @@
-<div>
-  <h2>Inscription</h2>
+<mat-card>
+  <mat-card-content>
+    <form (submit)="registerSubmit()">
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Nom" [(ngModel)]=user.name name="name" required>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Prénom" [(ngModel)]=user.lastName name="lastName" required>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput type="email" placeholder="Email" [(ngModel)]=user.email name="email" required>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput type="number" placeholder="Téléphone" [(ngModel)]=user.phone name="phone" required><mat-icon matSuffix>phone</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput type="password" placeholder="Mot de passe" [(ngModel)]=user.password name="password" required>
+      </mat-form-field>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      <button mat-raised-button color="primary" type="submit">INSCRIPTION</button>
+    </form>
+  </mat-card-content>
+</mat-card>
 
-  <form (submit)="submitForm()">
-    <div>
-      <label for="nom">Nom :</label>
-      <input type="text" id="nom" name="nom" [(ngModel)]="user.name" required>
-    </div>
-    <div>
-      <label for="prenom">Prénom :</label>
-      <input type="text" id="prenom" name="prenom" [(ngModel)]="user.lastName" required>
-    </div>
-    <div>
-      <label for="email">Email :</label>
-      <input type="email" id="email" name="email" [(ngModel)]="user.email" required>
-    </div>
-    <div>
-      <label for="telephone">Téléphone :</label>
-      <input type="tel" id="telephone" name="telephone" [(ngModel)]="user.phone" required>
-    </div>
-    <div>
-      <label for="password">Mot de passe :</label>
-      <input type="password" id="password" name="password" [(ngModel)]="user.password" required>
-    </div>
-    <button type="submit">S'inscrire</button>
-  </form>
-</div>
+
