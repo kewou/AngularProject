@@ -17,23 +17,26 @@ export class ConnexionComponent {
   loginObj: any = {username:"", password:""};
 
   private backendUrl = environment.backendUrl;
-  errorMessage: string="";
+  errorMessage: string | null = null;
 
   constructor(private http: HttpClient,private router: Router,private userService: UserService,private cookieService: CookieService,
     ) {
 
   }
 
-  submitForm() {
-    debugger
+  loginSubmit() {
+    this.errorMessage = null;
+    if (this.loginObj.username==='' || this.loginObj.password==='') {
+      this.errorMessage = "Veuillez remplir tous les champs requis.";
+      return;
+    }
     const url = `${this.backendUrl}/authenticate`;
     this.userService.loginUser(this.loginObj).subscribe(
       (response:any) => {
-        debugger
         console.log("response",response);
-        //localStorage.setItem("jwtToken",response.jwtToken);
         this.cookieService.set('jwtToken', response.jwtToken, undefined, undefined, undefined, true, 'Lax');
-        this.router.navigate(['/locataire']);
+        this.userService.connectOrDisconnect();
+        this.router.navigate(['/compte-user']);
       },
       (error:HttpErrorResponse) => {
           if(error.status === 401){
@@ -41,6 +44,11 @@ export class ConnexionComponent {
           }
       }
     );
+ }
+
+
+ logoutSubmit(){
+  this.userService.connectOrDisconnect();
  }
 
 }

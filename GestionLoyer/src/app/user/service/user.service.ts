@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { User } from '../modele/user';
-import { USERS } from '../modele/mockUser';
 import { Observable, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { jwtDecode } from "jwt-decode";
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ import { environment } from '../../../environments/environment';
 export class UserService {
 
   private backendUrl = environment.backendUrl;
-  constructor(private http: HttpClient) { }
+  private estConnecte = false;
+  constructor(private http: HttpClient,private cookieService: CookieService) { }
 
   getUsers(): Observable<any>{
     const url = `${this.backendUrl}/users`;
@@ -21,7 +23,25 @@ export class UserService {
   loginUser(obj: any) : Observable<any> {
     const url = `${this.backendUrl}/authenticate`;
     return this.http.post(url,obj);
-
   }
+
+  estUtilisateurConnecte(): boolean {
+    return this.estConnecte;
+  }
+
+  connectOrDisconnect(){
+    this.estConnecte=this.estConnecte ? false : true;
+  }
+
+
+  getUserInfo(): Observable<any>{
+    const token = this.cookieService.get('jwtToken');
+    const decodedToken = jwtDecode(token);
+    const username = decodedToken.sub
+    console.log('Decoded Token:', decodedToken);
+    return this.http.get(`${this.backendUrl}/users/email/${username}`);
+  }
+
+
 
 }
