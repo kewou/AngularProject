@@ -1,0 +1,35 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+form button[type="submit"] {
+  background-color: #e13652;
+  border: none;
+  cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+#mat-input-0::placeholder{
+  color: black;
+  font-style: italic;
+}
+
+
+#mat-input-1::placeholder{
+  color: black;
+  font-style: italic;
+}
+
+.error-message {
+  color: red;
+  margin-top: 8px;
+}
+

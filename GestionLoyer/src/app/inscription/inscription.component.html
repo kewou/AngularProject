@@ -1,0 +1,27 @@
+<mat-card>
+  <mat-card-content>
+    <form (submit)="registerSubmit()">
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Nom" [(ngModel)]=user.name name="name" required>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Prénom" [(ngModel)]=user.lastName name="lastName" required>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput type="email" placeholder="Email" [(ngModel)]=user.email name="email" required>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput type="number" placeholder="Téléphone" [(ngModel)]=user.phone name="phone" required><mat-icon matSuffix>phone</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <input matInput type="password" placeholder="Mot de passe" [(ngModel)]=user.password name="password" required>
+      </mat-form-field>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+      <button mat-raised-button color="primary" type="submit">INSCRIPTION</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+
