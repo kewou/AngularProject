@@ -26,7 +26,7 @@ lerna-debug.log*
 
 # Build artifacts and caches
 .cache/
-.angular/cache/
+.angular/cache/*
 *.log
 .npm/
 .pnp/
