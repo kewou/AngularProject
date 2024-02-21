@@ -3,7 +3,7 @@ pipeline{
   agent any
 
       environment {
-        NEXUS_URL = 'http://localhost:8081'
+        NEXUS_URL = 'http://172.16.0.4:8081'
         NPM_REGISTRY = "$NEXUS_URL/repository/npmHosted/"
         NPM_USERNAME = 'admin'
         NPM_PASSWORD = 'sonarsbeezy'
