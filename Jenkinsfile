@@ -18,8 +18,7 @@ pipeline{
     }
 
     stage('Install dependencies') {
-        steps {
-            sh 'nvm use 20'
+        steps {            
             sh 'npm install'
         }    
     }
