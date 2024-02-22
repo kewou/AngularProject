@@ -1,0 +1,19 @@
+#!/usr/bin/expect -f
+
+set username "admin"
+set password "sonarsbeezy"
+set email "kewou.noumia@gmail.com"
+set registry "http://172.16.0.4:8081/repository/npmHosted/"
+
+spawn npm login --registry=$registry
+
+expect "Username:"
+send "$username\n"
+
+expect "Password:"
+send "$password\n"
+
+expect "Email: (this IS public)"
+send "$email\n"
+
+expect eof
