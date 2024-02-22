@@ -13,7 +13,9 @@ send "$username\n"
 expect "Password:"
 send "$password\n"
 
-expect "Email: (this IS public)"
-send "$email\n"
-
-expect eof
+# Attendre la fin de la session ou toute autre attente générique
+expect {
+    "logged in" { puts "Successfully logged in!" }
+    timeout { puts "Timed out waiting for login confirmation." }
+    eof { puts "End of session." }
+}
