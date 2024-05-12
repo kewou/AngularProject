@@ -1,7 +1,7 @@
 #accueil{
   padding-top:3.5%;
   padding-left:8%;
-  padding-right:8%;
+  padding-right:7%;
 }
 
 #accueil h2{
@@ -20,3 +20,18 @@
 #accueil p{
   font-family: 'serif';
 }
+
+#accueilLeft{
+  float:left;
+  width:50%;
+}
+
+#accueilRight{
+  float:right;
+  width:50%;
+}
+
+#accueilRight img{    
+  width:100%;  
+}
+

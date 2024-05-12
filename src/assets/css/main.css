@@ -3346,12 +3346,14 @@ input::-moz-focus-inner {
   min-height: 84vh;
 }
 
-/* Header */
+/* Conenu */
 
 	#page-wrapper {
-		padding-top: 1em;
+	padding-top: 1em;
     color:black;
     background-color: #F8F8FF;
+	margin-left: 15%;
+	margin-right: 15%;
     display:block;
     flex:1;
 	}
