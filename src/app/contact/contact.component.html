@@ -1,17 +1,25 @@
 <div id="contact">
   <div id="contactLeft">
+    <div class="alert alert-danger" role="alert" style="background-color:orangered;">
+      <ul>
+        <li *ngFor="let error of errorMessages">{{error}}</li>
+      </ul>
+    </div>
+    <div class="alert alert-success" role="alert" style="background-color: #45a049;">
+      {{successMessage}}
+    </div>
     <h2>Formulaire de contact</h2>
-    <form class="example-form">
+    <form class="example-form" (submit)="sendContactMessage()">
       <mat-form-field>
-        <input matInput placeholder="Nom complet">
+        <input matInput placeholder="Nom complet" [(ngModel)]=message.senderName name="senderName" required>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="Adresse e-mail">
+        <input matInput placeholder="Adresse e-mail" [(ngModel)]=message.senderMail name="senderMail" required>
       </mat-form-field>
 
       <mat-form-field>
-        <textarea matInput rows="6" cols="50" placeholder="Message"></textarea>
+        <textarea matInput rows="6" cols="50" placeholder="Message" [(ngModel)]=message.message name="message" required ></textarea>
       </mat-form-field>
 
       <button mat-raised-button color="primary" type="submit">Envoyer</button>
