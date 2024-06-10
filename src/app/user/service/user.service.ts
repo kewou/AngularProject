@@ -36,10 +36,10 @@ export class UserService {
 
   getUserInfo(): Observable<any>{
     const token = this.cookieService.get('jwtToken');
-    const decodedToken = jwtDecode(token);
-    const username = decodedToken.sub
+    const decodedToken:any = jwtDecode(token);
     console.log('Decoded Token:', decodedToken);
-    return this.http.get(`${this.backendUrl}/users/email/${username}`);
+    const referenceUser = decodedToken.reference    
+    return this.http.get(`${this.backendUrl}/users/${referenceUser}`);
   }
 
 
