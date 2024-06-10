@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { User } from '../modele/user';
-import { Observable, of } from 'rxjs';
+import { Observable, of,throwError } from 'rxjs';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { jwtDecode } from "jwt-decode";
 import { CookieService } from 'ngx-cookie-service';
+import { catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class UserService {
 
   private backendUrl = environment.backendUrl;
   private estConnecte = false;
-  constructor(private http: HttpClient,private cookieService: CookieService) { }
+  constructor(private http: HttpClient,private cookieService: CookieService,private router: Router) { }
 
   getUsers(): Observable<any>{
     const url = `${this.backendUrl}/users`;
@@ -25,6 +26,12 @@ export class UserService {
     return this.http.post(url,obj);
   }
 
+  logout(): void {
+    this.cookieService.delete('jwtToken');
+    console.log('Token deleted and user logged out.');    
+    this.router.navigate(['/app-accueil']);
+  }
+
   estUtilisateurConnecte(): boolean {
     return this.estConnecte;
   }
@@ -34,12 +41,35 @@ export class UserService {
   }
 
 
-  getUserInfo(): Observable<any>{
-    const token = this.cookieService.get('jwtToken');
-    const decodedToken:any = jwtDecode(token);
-    console.log('Decoded Token:', decodedToken);
-    const referenceUser = decodedToken.reference    
-    return this.http.get(`${this.backendUrl}/users/${referenceUser}`);
+  getUserInfo(): Observable<any>{    
+    debugger
+    try{
+      const token = this.cookieService.get('jwtToken');
+      if (!token) {       
+        throw new Error('Token is missing');
+      } 
+      const decodedToken:any = jwtDecode(token);    
+      const referenceUser = decodedToken.reference
+      if (!referenceUser) {
+        throw new Error('Reference user information is missing in the token');
+      }    
+      return this.http.get(`${this.backendUrl}/users/${referenceUser}`).pipe(
+        catchError((error) => {
+          console.error('Error fetching user info:', error);
+          return throwError('Failed to fetch user info');
+        })
+      );
+    } catch (error) {      
+      this.handleForbidden("Access forbidden");
+      return throwError(() => new Error((error as Error).message || 'Invalid token'));
+    }
+
+  }
+
+  private handleForbidden(message: string): void {
+    console.error(message);   
+    alert(message);    
+    this.router.navigate(['']);
   }
 
 

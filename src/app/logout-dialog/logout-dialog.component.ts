@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { UserService } from '../user/service/user.service';
 
 
 @Component({
@@ -9,10 +10,14 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class LogoutDialogComponent {
 
-  constructor(public dialogRef: MatDialogRef<LogoutDialogComponent>) {}
+  constructor(public dialogRef: MatDialogRef<LogoutDialogComponent>,private userService: UserService) {}
+
+
 
   onConfirm(): void {
     this.dialogRef.close('confirm');
+    this.userService.logout();
+
   }
 
   onCancel(): void {
