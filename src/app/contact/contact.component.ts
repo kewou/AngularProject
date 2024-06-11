@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Router} from "@angular/router";
@@ -9,16 +9,13 @@ import {Router} from "@angular/router";
   styleUrls: ['./contact.component.scss']
 })
 export class ContactComponent implements OnInit {
-
   private backendUrl = environment.backendUrl;
 
-  message : MessageDto = {"senderName": "", "senderMail": "", "message": ""}
+  message : MessageDto = {"senderName": "", "senderMail": "", "senderMessage": ""}
 
   successMessage: string | null = null;
+
   errorMessages: any[] = [];
-
-
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -34,7 +31,8 @@ export class ContactComponent implements OnInit {
   sendContactMessage() {
     const url = `${this.backendUrl}/contact`;
     this.errorMessages = []
-    this.http.post(url, this.message,this.httpOptions).subscribe(
+    let sendMessage = {"senderName": this.message.senderName, "senderMail": this.message.senderMail, "message": this.message.senderMessage}
+    this.http.post(url, sendMessage,this.httpOptions).subscribe(
         response => {
           console.log('Réponse du serveur :', response);
           // Gérez ici la réponse du serveur en cas de succès
@@ -52,7 +50,7 @@ export class ContactComponent implements OnInit {
               }
             }
           }
-          if (error.status == 500) {
+          if (error.status == 500 || error.status == 0) {
             this.errorMessages.push("Erreur survenue lors de l'envoi du mail")
           }
           this.router.navigate(['/contact']);
@@ -64,5 +62,5 @@ export class ContactComponent implements OnInit {
   export interface MessageDto {
   senderName: string,
   senderMail: string,
-  message: string,
+  senderMessage: string,
 }

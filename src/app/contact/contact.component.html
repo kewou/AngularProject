@@ -1,28 +1,57 @@
 <div id="contact">
   <div id="contactLeft">
-    <div class="error-message">
-      <ul>
-        <li *ngFor="let error of errorMessages">{{error}}</li>
-      </ul>
-    </div>
-    <div class="alert alert-success" role="alert" style="background-color: #45a049;">
-      {{successMessage}}
-    </div>
     <h2>Formulaire de contact</h2>
-    <form class="example-form" (submit)="sendContactMessage()">
+    <form #contactForm="ngForm" name="contactForm" class="contact-form" (submit)="sendContactMessage()">
       <mat-form-field>
-        <input matInput placeholder="Nom complet" [(ngModel)]=message.senderName name="senderName" required>
+        <input matInput placeholder="Nom complet" [(ngModel)]=message.senderName name="senderName" #senderName="ngModel" required maxlength="50">
       </mat-form-field>
+      <div
+              *ngIf="senderName.invalid && (senderName.dirty || senderName.touched)"
+              class="alert"
+      >
+        <div *ngIf="senderName.errors?.['required']">Le nom complet est obligatoire.</div>
+        <div *ngIf="senderName.errors?.['maxlength']">
+          Le nom complet doit avoir au plus 50 caractères.
+        </div>
+      </div>
 
       <mat-form-field>
-        <input matInput placeholder="Adresse e-mail" [(ngModel)]=message.senderMail name="senderMail" required>
+        <input matInput placeholder="Adresse e-mail" [(ngModel)]=message.senderMail name="senderMail" #senderMail="ngModel" required email>
       </mat-form-field>
+      <div
+              *ngIf="senderMail.invalid && (senderMail.dirty || senderMail.touched)"
+              class="alert"
+      >
+        <div *ngIf="senderMail.errors?.['required']">L'adresse e-mail est obligatoire.</div>
+        <div *ngIf="senderMail.errors?.['email']">
+          Le format de l'adresse e-mail est invalide
+        </div>
+      </div>
 
       <mat-form-field>
-        <textarea matInput rows="6" cols="50" placeholder="Message" [(ngModel)]=message.message name="message" required ></textarea>
+        <textarea matInput rows="6" cols="50" placeholder="Message" [(ngModel)]=message.senderMessage name="senderMessage" #senderMessage="ngModel" required minlength="10"></textarea>
       </mat-form-field>
+      <div
+              *ngIf="senderMessage.invalid && (senderMessage.dirty || senderMessage.touched)"
+              class="alert"
+      >
+        <div *ngIf="senderMessage.errors?.['required']">Le message est obligatoire.</div>
+        <div *ngIf="senderMessage.errors?.['minlength']">
+          Le message doit avoir au moins 10 caractères
+        </div>
+      </div>
 
-      <button mat-raised-button color="primary" type="submit">Envoyer</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!contactForm.form.valid">Envoyer</button>
+
+      <div class="error-message">
+        <ul>
+          <li *ngFor="let error of errorMessages">{{error}}</li>
+        </ul>
+      </div>
+      <div class="alert alert-success" role="alert" style="background-color: #45a049;">
+        {{successMessage}}
+      </div>
+
     </form>
   </div>
   <div id="contactRight">
