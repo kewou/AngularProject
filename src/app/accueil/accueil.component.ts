@@ -1,6 +1,4 @@
 import { Component, OnInit,AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import * as $ from 'jquery';
-import 'slick-carousel';
 
 
 //declare var $: any;
@@ -13,11 +11,11 @@ import 'slick-carousel';
 export class AccueilComponent implements OnInit {
 
   /*
-  constructor(private elementRef: ElementRef) { 
+  constructor(private elementRef: ElementRef) {
     this.slick = undefined;
   }
 
-  
+
   @ViewChild('slick', { static: true }) slick!: ElementRef | undefined;
 
   ngAfterViewInit(): void {
@@ -29,7 +27,7 @@ export class AccueilComponent implements OnInit {
         slidesToShow: 2,
         autoplay: true,
         autoplaySpeed: 2000,
-        dots: false,      
+        dots: false,
         prevArrow: false, // Désactiver le bouton "prev"
         nextArrow: false // Désactiver le bouton "next"
       });

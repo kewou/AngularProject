@@ -9,10 +9,10 @@
               *ngIf="senderName.invalid && (senderName.dirty || senderName.touched)"
               class="alert"
       >
-        <div *ngIf="senderName.errors?.['required']">Le nom complet est obligatoire.</div>
-        <div *ngIf="senderName.errors?.['maxlength']">
+        <span *ngIf="senderName.errors?.['required']">Le nom complet est obligatoire.</span>
+        <span *ngIf="senderName.errors?.['maxlength']">
           Le nom complet doit avoir au plus 50 caractères.
-        </div>
+        </span>
       </div>
 
       <mat-form-field>
@@ -22,10 +22,10 @@
               *ngIf="senderMail.invalid && (senderMail.dirty || senderMail.touched)"
               class="alert"
       >
-        <div *ngIf="senderMail.errors?.['required']">L'adresse e-mail est obligatoire.</div>
-        <div *ngIf="senderMail.errors?.['email']">
+        <span *ngIf="senderMail.errors?.['required']">L'adresse e-mail est obligatoire.</span>
+        <span *ngIf="senderMail.errors?.['email']">
           Le format de l'adresse e-mail est invalide
-        </div>
+        </span>
       </div>
 
       <mat-form-field>
@@ -35,10 +35,10 @@
               *ngIf="senderMessage.invalid && (senderMessage.dirty || senderMessage.touched)"
               class="alert"
       >
-        <div *ngIf="senderMessage.errors?.['required']">Le message est obligatoire.</div>
-        <div *ngIf="senderMessage.errors?.['minlength']">
+        <span *ngIf="senderMessage.errors?.['required']">Le message est obligatoire.</span>
+        <span *ngIf="senderMessage.errors?.['minlength']">
           Le message doit avoir au moins 10 caractères
-        </div>
+        </span>
       </div>
 
       <button mat-raised-button color="primary" type="submit" [disabled]="!contactForm.form.valid">Envoyer</button>
