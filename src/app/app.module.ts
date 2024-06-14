@@ -25,6 +25,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { MatIconModule } from '@angular/material/icon';
 import { CompteUserComponent } from './compte-user/compte-user.component';
 import { LogoutDialogComponent } from './logout-dialog/logout-dialog.component';
+import { MatchPasswordDirective } from './directives/match-password.directive';
 
 
 
@@ -41,7 +42,8 @@ import { LogoutDialogComponent } from './logout-dialog/logout-dialog.component';
     LoginRegisterComponent,
     ResetPasswordComponent,
     CompteUserComponent,
-    LogoutDialogComponent
+    LogoutDialogComponent,
+    MatchPasswordDirective
   ],
   imports: [
     BrowserModule,
