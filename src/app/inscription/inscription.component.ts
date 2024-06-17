@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../user/modele/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
@@ -19,6 +18,9 @@ export class InscriptionComponent implements OnInit {
 
   errorMessages: any[] = [];
 
+  showPass: boolean = false
+  showConfirmPass: boolean = false
+
   constructor(private http: HttpClient,private router: Router) {
   }
 
@@ -30,6 +32,14 @@ export class InscriptionComponent implements OnInit {
       'Content-Type': 'application/json'
     })
   };
+
+  showPassword() {
+    this.showPass = !this.showPass;
+  }
+
+  showConfirmPassword() {
+    this.showConfirmPass = !this.showConfirmPass
+  }
 
   registerLocataire()  {
     return this.registerSubmit(`${this.backendUrl}/users/create-locataire`)
@@ -45,10 +55,6 @@ export class InscriptionComponent implements OnInit {
 
   registerSubmit(url: string = `${this.backendUrl}/users/create-bailleur`) {
     this.errorMessages = []
-    if (this.user.firstName==='' || this.user.lastName==='' || this.user.phone==='' || this.user.email===''|| this.user.password==='') {
-      this.errorMessage = "Veuillez remplir tous les champs requis.";
-      return;
-    }
     let userToSubmit = {name: this.user.firstName, lastName: this.user.lastName, email: this.user.email, phone: this.user.phone, password: this.user.password}
     this.http.post(url, userToSubmit,this.httpOptions).subscribe(
         response => {
