@@ -3896,6 +3896,7 @@ input::-moz-focus-inner {
 					height: 3em;
 					line-height: 3em;
 					text-decoration: none;
+					color: #ffffff;
 				}
 
 					#navPanel .link:hover {

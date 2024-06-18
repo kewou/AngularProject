@@ -29,7 +29,7 @@ export class UserService {
   logout(): void {
     this.cookieService.delete('jwtToken');
     console.log('Token deleted and user logged out.');    
-    this.router.navigate(['/app-accueil']);
+    this.router.navigate(['']);
   }
 
   estUtilisateurConnecte(): boolean {
@@ -41,8 +41,7 @@ export class UserService {
   }
 
 
-  getUserInfo(): Observable<any>{    
-    debugger
+  getUserInfo(): Observable<any>{
     try{
       const token = this.cookieService.get('jwtToken');
       if (!token) {       

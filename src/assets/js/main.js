@@ -6,6 +6,8 @@
 
 (function($) {
 
+   // $(document).ready(function() {
+
 	var	$window = $(window),
 		$body = $('body');
 
@@ -246,5 +248,7 @@
 
 		$banner
 			._parallax();
+
+			  //});
 
 })(jQuery);

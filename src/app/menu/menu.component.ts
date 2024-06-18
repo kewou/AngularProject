@@ -1,4 +1,4 @@
-import { ChangeDetectorRef,Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef,Component, OnInit,AfterViewInit } from '@angular/core';
 import { UserService } from '../user/service/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
@@ -23,16 +23,9 @@ export class MenuComponent  implements OnInit{
 
   ngOnInit() {
 
+
   }
 
-
-  /*
-  openRegistrationModal() {
-    this.registrationModalOpen = true;
-  }
-  closeModal() {
-    this.registrationModalOpen = false;
-  }*/
 
   openLogoutDialog(event: Event): void {
     event.preventDefault();
