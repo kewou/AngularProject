@@ -28,17 +28,19 @@ export class UserService {
 
   logout(): void {
     this.cookieService.delete('jwtToken');
-    console.log('Token deleted and user logged out.');    
+    console.log('Token deleted and user logged out.');
     this.router.navigate(['']);
   }
 
   estUtilisateurConnecte(): boolean {
-    return this.estConnecte;
+        const token = this.cookieService.get('jwtToken');
+        if (!token) {
+          return false;
+        }
+        return !this.isTokenExpired(token);
   }
 
-  connectOrDisconnect(){
-    this.estConnecte=this.estConnecte ? false : true;
-  }
+
 
 
   getUserInfo(): Observable<any>{
@@ -70,6 +72,19 @@ export class UserService {
     alert(message);    
     this.router.navigate(['']);
   }
+
+  private isTokenExpired(token: string): boolean {
+      try {
+        const decoded: any = jwtDecode(token);
+        if (decoded.exp === undefined) return false;
+
+        const date = new Date(0);
+        date.setUTCSeconds(decoded.exp);
+        return date.valueOf() < new Date().valueOf();
+      } catch (err) {
+        return false;
+      }
+    }
 
 
 

@@ -6,7 +6,7 @@
 
 (function($) {
 
-   // $(document).ready(function() {
+    $(document).ready(function() {
 
 	var	$window = $(window),
 		$body = $('body');
@@ -48,7 +48,7 @@
 			$(
 				'<div id="titleBar">' +
 					'<a href="#navPanel" class="toggle"></a>' +
-					'<span class="title">' + '<a href="index.html">Accueil</a>' + '</span>' +
+					'<span class="title">' + '<a _ngcontent-htt-c25="" routerlink="" ng-reflect-router-link="" href="/beezyApi/">Accueil</a>' + '</span>' +
 				'</div>'
 			)
 				.appendTo($body);
@@ -249,6 +249,6 @@
 		$banner
 			._parallax();
 
-			  //});
+			  });
 
 })(jQuery);

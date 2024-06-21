@@ -33,12 +33,6 @@ export class MenuComponent  implements OnInit{
       width: '300px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'confirm') {
-        this.cookieService.delete('jwtToken');
-        this.userService.connectOrDisconnect();
-        this.router.navigate(['']);
-      }
-    });
+
   }
 }

@@ -17,7 +17,6 @@ export class LogoutDialogComponent {
   onConfirm(): void {
     this.dialogRef.close('confirm');
     this.userService.logout();
-
   }
 
   onCancel(): void {
