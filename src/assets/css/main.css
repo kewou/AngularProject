@@ -226,6 +226,22 @@ input::-moz-focus-inner {
 	.align-right {
 		text-align: right;
 	}
+	/* Message color */
+	.success-message {
+      color: greenyellow;
+      margin-top: 8px;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 8px;
+      display:inline;
+    }
+
+    .alert {
+      color: red;
+    }
+
 
 /* Loader */
 
@@ -3672,6 +3688,11 @@ input::-moz-focus-inner {
 
 		/* Basic */
 
+		#page-wrapper {
+		    margin-left: 5%;
+            margin-right: 5%;
+		}
+
 			html, body {
 				overflow-x: hidden;
 			}
@@ -3681,7 +3702,8 @@ input::-moz-focus-inner {
 			}
 
 			h2 {
-				font-size: 1.5em;
+			    margin-top:30px;
+				font-size: 20px;
 			}
 
 			h3 {
@@ -3988,7 +4010,7 @@ input::-moz-focus-inner {
 			input[type="reset"],
 			input[type="button"],
 			.button {
-				padding: 0;
+				
 			}
 
 		/* Spotlight */

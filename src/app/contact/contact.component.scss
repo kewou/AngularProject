@@ -18,6 +18,7 @@
 
 #paris{
   text-align:center;
+  margin-top:15px;
 }
 
 #contactRight{
@@ -71,16 +72,19 @@ form button[type="submit"]:hover {
   font-style: italic;
 }
 
-.success-message {
-  color: greenyellow;
-  margin-top: 8px;
+
+@media screen and (max-width: 736px) {
+
+    #contactLeft{
+        float:none;
+        width:100%;
+        margin:0px;
+    }
+
+    #contactRight{
+        float:none;
+        width:100%;
+    }
+
 }
 
-.error-message {
-  color: red;
-  margin-top: 8px;
-}
-
-.alert {
-  color: red;
-}

@@ -1,68 +1,73 @@
 <div id="contact">
-  <div id="contactLeft">
-    <h2>Formulaire de contact</h2>
-    <form #contactForm="ngForm" name="contactForm" class="contact-form" (submit)="sendContactMessage()">
-      <mat-form-field>
-        <input matInput placeholder="Nom complet" [(ngModel)]=message.senderName name="senderName" #senderName="ngModel" required maxlength="50">
-      </mat-form-field>
-      <div
-              *ngIf="senderName.invalid && (senderName.dirty || senderName.touched)"
-              class="alert"
-      >
-        <span *ngIf="senderName.errors?.['required']">Le nom complet est obligatoire.</span>
-        <span *ngIf="senderName.errors?.['maxlength']">
+    <div id="contactLeft">
+        <h2>Contacter nous</h2>
+        <form #contactForm="ngForm" name="contactForm" class="contact-form" (submit)="sendContactMessage()">
+            <mat-form-field>
+                <input matInput placeholder="Nom complet" [(ngModel)]=message.senderName name="senderName"
+                       #senderName="ngModel" required maxlength="50">
+            </mat-form-field>
+            <div
+                    *ngIf="senderName.invalid && (senderName.dirty || senderName.touched)"
+                    class="alert"
+            >
+                <span *ngIf="senderName.errors?.['required']">Le nom complet est obligatoire.</span>
+                <span *ngIf="senderName.errors?.['maxlength']">
           Le nom complet doit avoir au plus 50 caractères.
         </span>
-      </div>
+            </div>
 
-      <mat-form-field>
-        <input matInput placeholder="Adresse e-mail" [(ngModel)]=message.senderMail name="senderMail" #senderMail="ngModel" required email>
-      </mat-form-field>
-      <div
-              *ngIf="senderMail.invalid && (senderMail.dirty || senderMail.touched)"
-              class="alert"
-      >
-        <span *ngIf="senderMail.errors?.['required']">L'adresse e-mail est obligatoire.</span>
-        <span *ngIf="senderMail.errors?.['email']">
+            <mat-form-field>
+                <input matInput placeholder="Adresse e-mail" [(ngModel)]=message.senderMail name="senderMail"
+                       #senderMail="ngModel" required email>
+            </mat-form-field>
+            <div
+                    *ngIf="senderMail.invalid && (senderMail.dirty || senderMail.touched)"
+                    class="alert"
+            >
+                <span *ngIf="senderMail.errors?.['required']">L'adresse e-mail est obligatoire.</span>
+                <span *ngIf="senderMail.errors?.['email']">
           Le format de l'adresse e-mail est invalide
         </span>
-      </div>
+            </div>
 
-      <mat-form-field>
-        <textarea matInput rows="6" cols="50" placeholder="Message" [(ngModel)]=message.senderMessage name="senderMessage" #senderMessage="ngModel" required minlength="10"></textarea>
-      </mat-form-field>
-      <div
-              *ngIf="senderMessage.invalid && (senderMessage.dirty || senderMessage.touched)"
-              class="alert"
-      >
-        <span *ngIf="senderMessage.errors?.['required']">Le message est obligatoire.</span>
-        <span *ngIf="senderMessage.errors?.['minlength']">
+            <mat-form-field>
+                <textarea matInput rows="6" cols="50" placeholder="Message" [(ngModel)]=message.senderMessage
+                          name="senderMessage" #senderMessage="ngModel" required minlength="10"></textarea>
+            </mat-form-field>
+            <div
+                    *ngIf="senderMessage.invalid && (senderMessage.dirty || senderMessage.touched)"
+                    class="alert"
+            >
+                <span *ngIf="senderMessage.errors?.['required']">Le message est obligatoire.</span>
+                <span *ngIf="senderMessage.errors?.['minlength']">
           Le message doit avoir au moins 10 caractères
         </span>
-      </div>
+            </div>
 
-      <button mat-raised-button color="primary" type="submit" [disabled]="!contactForm.form.valid">Envoyer</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="!contactForm.form.valid">Envoyer
+            </button>
 
-      <div class="error-message">
-        <ul>
-          <li *ngFor="let error of errorMessages">{{error}}</li>
-        </ul>
-      </div>
-      <div class="alert alert-success" role="alert" style="background-color: #45a049;">
-        {{successMessage}}
-      </div>
+            <div class="error-message">
+                <ul>
+                    <li *ngFor="let error of errorMessages">{{error}}</li>
+                </ul>
+            </div>
+            <div class="alert alert-success" role="alert" style="background-color: #45a049;">
+                {{successMessage}}
+            </div>
 
-    </form>
-  </div>
-  <div id="contactRight">
-    <h2>Notre localisation</h2>
-    <div>
-      <img src="./assets/css/images/france.jpg" alt="Paris" height="335px" width="100%"/>
+        </form>
     </div>
-    <div id="paris">
-      <img src="./assets/css/images/drapeau.png" alt="Drapeau France" height="38px" width="50px"/> &nbsp;&nbsp; Paris, France
+    <div id="contactRight">
+        <h2>Notre localisation</h2>
+        <div>
+            <img src="./assets/css/images/france.jpg" alt="Paris" height="375px" width="100%"/>
+        </div>
+        <div id="paris">
+            <img src="./assets/css/images/drapeau.png" alt="Drapeau France" height="55px" width="65px"/> &nbsp;&nbsp;
+            Paris, France
+        </div>
     </div>
-  </div>
-  <div class="clearer"></div>
+    <div class="clearer"></div>
 </div>
 

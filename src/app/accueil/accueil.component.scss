@@ -35,3 +35,26 @@
   width:100%;  
 }
 
+@media screen and (max-width: 736px) {
+
+    #accueilLeft{
+        float:none;
+        width:100%;
+    }
+    #accueilLeft a{
+
+    }
+    #accueilRight{
+        width:0px
+    }
+    h2{margin:0px;}
+
+    ol{
+        margin-left:10px;
+        padding-left: 0.25em;
+        }
+    ol li{margin-top:20px}
+
+    ol li p{margin-top:15px}
+}
+
