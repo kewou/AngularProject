@@ -39,3 +39,19 @@ td:nth-child(2) {
   color: #666;
   text-align: center;
 }
+
+@media screen and (max-width: 736px) {
+
+    #infosUser{
+        width:100%;
+        margin:0px;
+        margin-top: 20%;
+
+    }
+
+    #infosUser  tr td{
+                padding:15px;
+        }
+
+
+}

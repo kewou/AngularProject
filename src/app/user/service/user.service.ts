@@ -29,7 +29,7 @@ export class UserService {
   logout(): void {
     this.cookieService.delete('jwtToken');
     console.log('Token deleted and user logged out.');
-    this.router.navigate(['']);
+    window.location.href = '';
   }
 
   estUtilisateurConnecte(): boolean {

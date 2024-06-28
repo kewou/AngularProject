@@ -42,7 +42,7 @@ export class ConnexionComponent implements OnInit{
             (response:any) => {
                 console.log("response",response);
                 this.cookieService.set('jwtToken', response.jwtToken, undefined, undefined, undefined, true, 'Lax');
-                this.router.navigate(['/compte-user']);
+                window.location.href = '/beezyApi/compte-user';
             },
             (error:HttpErrorResponse) => {
                 if(error.status === 401){
@@ -61,7 +61,7 @@ export class ConnexionComponent implements OnInit{
             this.http.post(`${this.backendUrl}/users/verify-account`, accountParams, this.httpOptions).subscribe(
                 (response: any) => {
                     this.cookieService.set('jwtToken', response.jwtToken, undefined, undefined, undefined, true, 'Lax');
-                    this.router.navigate(['/compte-user']);
+                    window.location.href = '/beezyApi/compte-user';
                 },
                 error => {
                     console.log("Error occured", error);

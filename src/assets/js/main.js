@@ -6,7 +6,6 @@
 
 (function($) {
 
-    $(document).ready(function() {
 
 	var	$window = $(window),
 		$body = $('body');
@@ -249,6 +248,21 @@
 		$banner
 			._parallax();
 
-			  });
+    // Déconnexion mobile
+
+        var logoutLink = $("#navPanel a").get(2); // Récupération du lien
+        var $logoutLink = $(logoutLink);          // Convertion en objet JQuery
+
+        if($logoutLink.text().trim() === 'Déconnexion'){
+            $logoutLink.on('click', function(e) {
+                e.preventDefault(); // Empêche le comportement par défaut du lien
+                if (typeof window.logout === 'function') {
+                    window.logout();
+                }else {
+                    console.log("logout function is not defined");
+                }
+            });
+        };
+
 
 })(jQuery);
