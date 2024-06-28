@@ -2163,6 +2163,7 @@ input::-moz-focus-inner {
 
   header a{
     color:white;
+    display:inline-block
   }
 
 	header p {
