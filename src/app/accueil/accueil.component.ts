@@ -1,5 +1,5 @@
-import { Component, OnInit,AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-
+import { Component, OnInit,AfterViewInit, ViewChild, Renderer2 } from '@angular/core';
+import { Router, NavigationEnd, Event as RouterEvent } from '@angular/router';
 
 //declare var $: any;
 
@@ -10,31 +10,21 @@ import { Component, OnInit,AfterViewInit, ViewChild, ElementRef } from '@angular
 })
 export class AccueilComponent implements OnInit {
 
-  /*
-  constructor(private elementRef: ElementRef) {
-    this.slick = undefined;
+  constructor(private router: Router, private renderer: Renderer2) {}
+
+  ngOnInit(): void {
+      //this.loadScript('assets/js/main.js');
   }
 
+loadScript(src: string) {
+  const script = this.renderer.createElement('script');
+  script.type = 'text/javascript';
+  script.src = src;
+  script.onload = () => {
 
-  @ViewChild('slick', { static: true }) slick!: ElementRef | undefined;
-
-  ngAfterViewInit(): void {
-    const slickElement = this.elementRef.nativeElement.querySelector('.slick-carousel');
-    if (slickElement) {
-      $(slickElement).slick({
-        // Options de configuration de Slick Carousel
-        infinite: false,
-        slidesToShow: 2,
-        autoplay: true,
-        autoplaySpeed: 2000,
-        dots: false,
-        prevArrow: false, // Désactiver le bouton "prev"
-        nextArrow: false // Désactiver le bouton "next"
-      });
-    }
-  }
-  */
-  ngOnInit(): void {}
+  };
+  this.renderer.appendChild(document.body, script);
+}
 
 
 }

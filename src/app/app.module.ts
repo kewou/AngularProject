@@ -8,7 +8,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
 import { MenuComponent } from './menu/menu.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AccueilComponent } from './accueil/accueil.component';
@@ -26,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { CompteUserComponent } from './compte-user/compte-user.component';
 import { LogoutDialogComponent } from './logout-dialog/logout-dialog.component';
 import { MatchPasswordDirective } from './directives/match-password.directive';
+import { AProposComponent } from './a-propos/a-propos.component';
 
 
 
@@ -33,7 +33,6 @@ import { MatchPasswordDirective } from './directives/match-password.directive';
   declarations: [
     AppComponent,
     UserComponent,
-    UserDetailComponent,
     MenuComponent,
     AccueilComponent,
     ContactComponent,
@@ -43,7 +42,8 @@ import { MatchPasswordDirective } from './directives/match-password.directive';
     ResetPasswordComponent,
     CompteUserComponent,
     LogoutDialogComponent,
-    MatchPasswordDirective
+    MatchPasswordDirective,
+    AProposComponent
   ],
   imports: [
     BrowserModule,
