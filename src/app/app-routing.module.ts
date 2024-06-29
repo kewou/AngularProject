@@ -5,6 +5,7 @@ import { ContactComponent } from './contact/contact.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 import { CompteUserComponent } from './compte-user/compte-user.component';
+import { AProposComponent } from './a-propos/a-propos.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
   { path: 'connexion', component: ConnexionComponent },
   { path: 'compte-user', component: CompteUserComponent },
+  { path: 'a-propos', component: AProposComponent }
 ];
 
 

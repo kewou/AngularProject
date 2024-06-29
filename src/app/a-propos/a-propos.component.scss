@@ -1,0 +1,53 @@
+
+#aPropos h2{
+  color:white;
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#aPropos strong {
+  color: #3498db;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+
+#aPropos p{
+    margin: 0 0 2em 0;
+    color:white;
+    font-size: 20px;
+}
+
+#about-container {
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #1c1d26;
+}
+
+#sections{
+    margin-left:20%;
+    margin-right:20%;
+}
+
+#sections li{
+    margin: 0 0 2em 0;
+    color: white;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 736px) {
+
+    #page-wrapper{
+        padding-top:1px;}
+
+    #about-container{
+        padding-top:1px;}
+
+        #sections{
+            margin:0px}
+
+            #sections .button{
+               margin-left: 20%;}
+}

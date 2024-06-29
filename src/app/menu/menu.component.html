@@ -4,15 +4,14 @@
         Gestion Loyer</a></h1>
     <nav id="nav" *ngIf="this.userService.estUtilisateurConnecte();">
         <ul>
-            <li><a routerLink="">Accueil</a></li>
+            <li><a routerLink="">Mes logements</a></li>
             <li><a routerLink="/compte-user">Mon compte</a></li>
-            <li><a (click)="openLogoutDialog($event)"
-                   class="button primary">Déconnexion</a></li>
+            <li><a (click)="openLogoutDialog($event)" class="button primary">Déconnexion</a></li>
         </ul>
     </nav>
     <nav id="nav" *ngIf="!this.userService.estUtilisateurConnecte();">
         <ul>
-            <li><a routerLink="">A propos</a></li>
+            <li><a routerLink="/a-propos">A propos</a></li>
             <li><a routerLink="/contact">Contact</a></li>
             <li><a routerLink="/login" class="button primary">Connection / Inscription </a></li>
         </ul>
