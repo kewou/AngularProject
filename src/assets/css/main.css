@@ -3925,7 +3925,7 @@ input::-moz-focus-inner {
 				}
 
 					#navPanel .link:hover {
-						color: inherit !important;
+						color: #e44c65;
 					}
 
 					#navPanel .link:first-child {
@@ -3934,7 +3934,7 @@ input::-moz-focus-inner {
 
 					#navPanel .link.depth-0 {
 						color: #ffffff;
-						font-weight: 300;
+						font-weight: 400;
 					}
 
 					#navPanel .link .indent-1 {
