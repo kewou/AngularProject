@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '../modules/http/http.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
@@ -26,6 +27,11 @@ import { CompteUserComponent } from './compte-user/compte-user.component';
 import { LogoutDialogComponent } from './logout-dialog/logout-dialog.component';
 import { MatchPasswordDirective } from './directives/match-password.directive';
 import { AProposComponent } from './a-propos/a-propos.component';
+import { LogementComponent } from './logement/logement.component';
+import { AppartComponent } from './appart/appart.component';
+import { EditLogementDialogComponent } from './logement/edit-logement-dialog/edit-logement-dialog.component';
+import { DeleteLogementDialogComponent } from './logement/delete-logement-dialog/delete-logement-dialog.component';
+import { AddLogementDialogComponent } from './logement/add-logement-dialog/add-logement-dialog.component';
 
 
 
@@ -43,7 +49,12 @@ import { AProposComponent } from './a-propos/a-propos.component';
     CompteUserComponent,
     LogoutDialogComponent,
     MatchPasswordDirective,
-    AProposComponent
+    AProposComponent,
+    LogementComponent,
+    AppartComponent,
+    EditLogementDialogComponent,
+    DeleteLogementDialogComponent,
+    AddLogementDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +69,8 @@ import { AProposComponent } from './a-propos/a-propos.component';
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

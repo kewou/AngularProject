@@ -32,7 +32,5 @@ export class MenuComponent  implements OnInit{
     const dialogRef = this.dialog.open(LogoutDialogComponent, {
       width: '300px',
     });
-
-
   }
 }
