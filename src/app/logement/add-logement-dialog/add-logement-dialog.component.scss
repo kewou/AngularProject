@@ -1,0 +1,43 @@
+/* Styles généraux pour le formulaire */
+#addLogementForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Espace entre les champs */
+}
+
+.form-field {
+  width: 100%; /* Assure que les champs prennent toute la largeur disponible */
+}
+
+mat-form-field {
+  width: 100%; /* Assure que les champs prennent toute la largeur disponible */
+}
+
+#description {
+  width: 100%;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end; /* Aligne les boutons à droite */
+  gap: 8px; /* Espace entre les boutons */
+}
+
+/* Optionnel : ajout de styles pour les boutons */
+button {
+  min-width: 80px; /* Assure une taille minimum pour les boutons */
+}
+
+button[mat-button] {
+  color: #3f51b5; /* Couleur des boutons */
+}
+
+button[mat-button][color="accent"] {
+  background-color: #e44c65; /* Couleur de fond pour le bouton accent */
+  color: white;
+}
+
+/* Ajout de marges ou padding si nécessaire */
+.mat-form-field-wrapper {
+  padding-bottom: 8px; /* Ajoute de l'espace sous chaque champ de formulaire */
+}

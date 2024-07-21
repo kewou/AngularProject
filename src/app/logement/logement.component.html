@@ -1,0 +1,25 @@
+<div *ngIf="logements.length > 0; else noLogements">
+    <div *ngFor="let logement of logements" class="logement-item">
+        <h4>{{ logement.quartier }}, &nbsp;{{ logement.ville }}</h4>
+        <p>{{ logement.description }}</p>
+        <button (click)="openEditLogementDialog(logement)">Modifier</button>
+        <button (click)="openDeleteLogementDialog(logement.reference)">Supprimer</button>
+    </div>
+
+</div>
+
+
+<ng-template #noLogements>
+    <p>Vous n'avez pas encore déclaré de logement</p>
+</ng-template>
+
+<button (click)="openAddLogementDialog($event)">Ajouter Logement</button>
+<app-add-logement-dialog *ngIf="isModalOpen" [logement]="logement" (close)="closeModal()"
+                         (logementAdded)="addLogement($event)"></app-add-logement-dialog>
+
+
+
+
+
+
+
