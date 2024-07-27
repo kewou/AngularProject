@@ -44,7 +44,7 @@ export class ConnexionComponent implements OnInit{
                 this.cookieService.set('jwtToken', response.jwtToken, undefined, undefined, undefined, true, 'Lax');
                 const userReference = this.userService.getCurrentUserReference(response.jwtToken)
                 this.cookieService.set('userReference', userReference, undefined, undefined, undefined, true, 'Lax');
-                window.location.href = '/beezyApi/compte-user';
+                window.location.href = '/beezyApi/logements';
             },
             (error:HttpErrorResponse) => {
                 if(error.status === 401){
