@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Confirmation</h1>
+<div mat-dialog-content>
+    <p>Voulez-vous vraiment verser le montant {{ data.amount }} € ?</p>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Annuler</button>
+    <button mat-button color="accent" (click)="onConfirm()">Verser</button>
+</div>
+

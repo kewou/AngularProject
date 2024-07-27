@@ -1,0 +1,52 @@
+<h2>Historique des loyers</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Mois</th>
+        <th>Prix loyer</th>
+        <th>Etat</th>
+        <th>Payé</th>
+        <th>Solde</th>
+        <th>Arriéré</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let loyer of appart.loyers">
+        <td>{{ loyer.dateLoyer | date: 'MMMM yyyy' }}</td>
+        <td>{{ formatAmount(appart.prixLoyer) }}</td>
+        <td [ngClass]="{ 'ok': loyer.isOk, 'ko': !loyer.isOk }">{{ loyer.isOk ? 'ok' : 'ko' }}</td>
+        <td>{{ formatAmount(loyer.solde+appart.prixLoyer) }}</td>
+        <td [ngClass]="{ 'ok': loyer.isOk, 'ko': !loyer.isOk }">{{ formatAmount(loyer.solde) }}</td>
+        <td [ngClass]="{ 'ok': loyer.isOk, 'ko': !loyer.isOk }">{{ loyer.isOk ? '0' : formatAmount(loyer.solde) }}</td>
+    </tr>
+    </tbody>
+</table>
+
+<h1>Effectuer un versement</h1>
+<div mat-dialog-content id="transactionForm">
+    <form [formGroup]="transactionForm">
+        <mat-form-field class="form-field">
+            <mat-label>Montant</mat-label>
+            <input matInput type="number" placeholder="Montant du versement" formControlName="montantVerser">
+            <mat-error *ngIf="transactionForm.get('montantVerser')?.hasError('required')">
+                Le montant à verser est obligatoire.
+            </mat-error>
+            <mat-error *ngIf="transactionForm.get('montantVerser')?.hasError('minimumAmount')">
+                Le montant doit être supérieur à {{ appart.prixLoyer }}K : Prix d'un loyer.
+            </mat-error>
+            <mat-error *ngIf="transactionForm.get('montantVerser')?.hasError('notMultipleOf')">
+                Le montant doit être un multiple de {{ appart.prixLoyer }}K : Prix d'un loyer.
+            </mat-error>
+            <mat-error *ngIf="transactionForm.get('montantVerser')?.hasError('noSpecialCharacters')">
+                Les caractères spéciaux ne sont pas autorisés
+            </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="openVersementDialog()">Verser ce montant</button>
+    </form>
+
+</div>
+
+
+
+
