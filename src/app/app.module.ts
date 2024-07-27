@@ -43,6 +43,10 @@ import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
 import { VersementDialogComponent } from './loyer/versement/versement-dialog.component';
 
+import { CookieService } from 'ngx-cookie-service';
+import { AuthGuard } from './authentication.guard';
+import { UserService } from './user/service/user.service';
+
 registerLocaleData(localeFr);
 
 @NgModule({
@@ -90,7 +94,7 @@ registerLocaleData(localeFr);
     MatSelectModule
 
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'fr' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr' },UserService,AuthGuard,CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

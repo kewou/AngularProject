@@ -9,17 +9,18 @@ import { AProposComponent } from './a-propos/a-propos.component';
 import { LogementComponent } from './logement/logement.component';
 import { AppartComponent } from './appart/appart.component';
 import { LoyerComponent } from './loyer/loyer.component';
+import { AuthGuard } from './authentication.guard';
 
 const routes: Routes = [
   { path: '', component: AccueilComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginRegisterComponent },
   { path: 'connexion', component: ConnexionComponent },
-  { path: 'compte-user', component: CompteUserComponent },
-  { path: 'a-propos', component: AProposComponent },
-  { path: 'logements', component: LogementComponent },
-  { path: 'logements/:logementRef/apparts', component: AppartComponent },
-  { path: 'logements/:logementRef/apparts/:appartRef', component: LoyerComponent }
+  { path: 'compte-user', component: CompteUserComponent,canActivate: [AuthGuard] },
+  { path: 'a-propos', component: AProposComponent,canActivate: [AuthGuard]},
+  { path: 'logements', component: LogementComponent,canActivate: [AuthGuard]},
+  { path: 'logements/:logementRef/apparts', component: AppartComponent ,canActivate: [AuthGuard]},
+  { path: 'logements/:logementRef/apparts/:appartRef', component: LoyerComponent ,canActivate: [AuthGuard]}
 ];
 
 
