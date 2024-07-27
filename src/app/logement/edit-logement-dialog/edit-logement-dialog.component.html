@@ -1,3 +1,4 @@
+<h2 mat-dialog-title>Modifier un Logement</h2>
 <div mat-dialog-content id="editLogementForm">
     <form [formGroup]="logementForm">
         <mat-form-field class="form-field">
@@ -32,19 +33,30 @@
                 <ng-container *ngIf="logementForm.get('ville')?.errors?.['maxlength']">Au plus 25 caractères pour le nom
                     de la ville.
                 </ng-container>
+                <ng-container *ngIf="logementForm.get('ville')?.errors?.['specialCharacters']">Les caractères
+                    spéciaux ne sont pas autorisés.
+                </ng-container>
             </mat-error>
         </mat-form-field>
 
         <mat-form-field id="description" class="form-field">
             <mat-label>Description</mat-label>
-            <textarea matInput rows="5" placeholder="Description" formControlName="description"></textarea>
+            <input matInput placeholder="Ex Maison-R2" formControlName="description">
             <mat-error *ngIf="logementForm.get('description')?.invalid && logementForm.get('description')?.touched">
                 <ng-container *ngIf="logementForm.get('description')?.errors?.['required']">La description du logement
                     est obligatoire.
                 </ng-container>
-                <ng-container *ngIf="logementForm.get('description')?.errors?.['minlength']">Au moins 10 caractères pour
+                <ng-container *ngIf="logementForm.get('description')?.errors?.['minlength']">Au moins 5 caractères pour
                     la description.
                 </ng-container>
+                <ng-container *ngIf="logementForm.get('description')?.errors?.['maxlength']">Au plus 15 caractères pour
+                    la
+                    description
+                </ng-container>
+                <ng-container *ngIf="logementForm.get('description')?.errors?.['specialCharacters']">Les caractères
+                    spéciaux ne sont pas autorisés.
+                </ng-container>
+
             </mat-error>
         </mat-form-field>
     </form>

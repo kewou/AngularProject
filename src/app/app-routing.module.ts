@@ -7,7 +7,8 @@ import { LoginRegisterComponent } from './login-register/login-register.componen
 import { CompteUserComponent } from './compte-user/compte-user.component';
 import { AProposComponent } from './a-propos/a-propos.component';
 import { LogementComponent } from './logement/logement.component';
-
+import { AppartComponent } from './appart/appart.component';
+import { LoyerComponent } from './loyer/loyer.component';
 
 const routes: Routes = [
   { path: '', component: AccueilComponent },
@@ -16,7 +17,9 @@ const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
   { path: 'compte-user', component: CompteUserComponent },
   { path: 'a-propos', component: AProposComponent },
-  { path: 'logements', component: LogementComponent }
+  { path: 'logements', component: LogementComponent },
+  { path: 'logements/:logementRef/apparts', component: AppartComponent },
+  { path: 'logements/:logementRef/apparts/:appartRef', component: LoyerComponent }
 ];
 
 

@@ -22,7 +22,7 @@ export class EditLogementDialogComponent {
           reference: [data.logement.reference],
           quartier: [data.logement.quartier, [Validators.required, Validators.minLength(2), Validators.maxLength(30),CustomValidators.noSpecialCharacters()]],
           ville: [data.logement.ville, [Validators.required, Validators.minLength(2), Validators.maxLength(25),CustomValidators.noSpecialCharacters()]],
-          description: [data.logement.description, [Validators.required, Validators.minLength(10),CustomValidators.noSpecialCharacters()]]
+          description: [data.logement.description, [Validators.required, Validators.minLength(5),Validators.maxLength(25),CustomValidators.noSpecialCharacters()]]
         });
 
     }

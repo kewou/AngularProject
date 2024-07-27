@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddLogementDialogComponent } from './add-logement-dialog/add-logement-dialog.component';
 import { EditLogementDialogComponent } from './edit-logement-dialog/edit-logement-dialog.component';
 import { DeleteLogementDialogComponent } from './delete-logement-dialog/delete-logement-dialog.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class LogementComponent implements OnInit{
 
     isModalOpen = false;
 
-    constructor(private logementService: LogementService,private dialog: MatDialog){}
+    constructor(private logementService: LogementService,private dialog: MatDialog,private router: Router){}
 
     ngOnInit() : void{
         this.logementService.getLogements().subscribe(
@@ -131,6 +132,11 @@ export class LogementComponent implements OnInit{
         }
     }
 
+
+
+      viewApparts(logementRef: string): void {
+        this.router.navigate([`/logements/${logementRef}/apparts`]);
+      }
 
 
 

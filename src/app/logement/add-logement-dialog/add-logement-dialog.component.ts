@@ -24,10 +24,10 @@ export class AddLogementDialogComponent {
         private fb: FormBuilder,
         public dialogRef: MatDialogRef<AddLogementDialogComponent>) {
                 this.logementForm = this.fb.group({
-                  reference: [this.logement.reference],
-                  quartier: [this.logement.quartier, [Validators.required, Validators.minLength(2), Validators.maxLength(30),CustomValidators.noSpecialCharacters()]],
-                  ville: [this.logement.ville, [Validators.required, Validators.minLength(2), Validators.maxLength(25),CustomValidators.noSpecialCharacters()]],
-                  description: [this.logement.description, [Validators.required, Validators.minLength(10),CustomValidators.noSpecialCharacters()]]
+                  reference: [''],
+                  quartier: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30),CustomValidators.noSpecialCharacters()]],
+                  ville: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25),CustomValidators.noSpecialCharacters()]],
+                  description: ['', [Validators.required, Validators.minLength(5),Validators.maxLength(15),CustomValidators.noSpecialCharacters()]]
                 });
         }
 

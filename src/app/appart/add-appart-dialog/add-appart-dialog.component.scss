@@ -1,5 +1,5 @@
 /* Styles généraux pour le formulaire */
-#addLogementForm {
+#addAppartForm {
   display: flex;
   flex-direction: column;
   gap: 16px; /* Espace entre les champs */
@@ -36,20 +36,4 @@ button[mat-button][color="accent"] {
   background-color: #e44c65; /* Couleur de fond pour le bouton accent */
   color: white;
 }
-
-/* Ajout de marges ou padding si nécessaire */
-.mat-form-field-wrapper {
-  padding-bottom: 8px; /* Ajoute de l'espace sous chaque champ de formulaire */
-}
-
-.mat-form-field-wrapper {
-  padding-bottom: 8px; /* Ajoute de l'espace sous chaque champ de formulaire */
-}
-
-mat-error div {
-  margin-top: 4px;
-   /* Optionnel : Change la couleur du texte */
-}
-
-
 

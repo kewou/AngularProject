@@ -25,7 +25,9 @@ export class LogementService {
               private router: Router, private userService: UserService) { }
 
   getLogements(): Observable<any>{
-    return this.http.get(`${this.backendUrl}/bailleur/users/${this.userService.getCurrentUserReference('userReference')}/logements`).pipe(
+      const userReference = this.getUserReference();
+      const url = `${this.backendUrl}/bailleur/users/${userReference}/logements`;
+    return this.http.get(url).pipe(
         catchError((error) => {
           console.error('Error fetching user logements:')
           return throwError('Failed to fetch user logements');
@@ -65,8 +67,8 @@ export class LogementService {
 
        return this.http.delete<void>(url).pipe(
                    catchError((error) => {
-                     console.error('Error adding logement:', error);
-                     return throwError('Failed to add logement');
+                     console.error('Error deleteting logement:', error);
+                     return throwError('Failed to delete logement');
                    })
                );
     }
