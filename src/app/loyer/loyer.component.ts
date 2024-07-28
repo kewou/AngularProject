@@ -10,6 +10,7 @@ import { LoyerService } from './service/loyer.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VersementDialogComponent} from './versement/versement-dialog.component';
 import { CustomValidators } from 'src/app/utils/custom-validators';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-loyer',
@@ -34,7 +35,7 @@ export class LoyerComponent implements OnInit, OnChanges {
 
     constructor(private route: ActivatedRoute,
        private appartService: AppartService,private loyerService:LoyerService,
-       private router: Router,private dialog: MatDialog,
+       private router: Router,private dialog: MatDialog,private location: Location,
        private fb: FormBuilder){
 
                this.transactionForm = this.fb.group({
@@ -138,6 +139,10 @@ export class LoyerComponent implements OnInit, OnChanges {
                                                      }
                                                    });
        }
+
+     goBack(): void {
+       this.location.back();
+     }
 
 
 

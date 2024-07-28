@@ -18,9 +18,9 @@ const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
   { path: 'compte-user', component: CompteUserComponent,canActivate: [AuthGuard] },
   { path: 'a-propos', component: AProposComponent,canActivate: [AuthGuard]},
-  { path: 'logements', component: LogementComponent,canActivate: [AuthGuard]},
-  { path: 'logements/:logementRef/apparts', component: AppartComponent ,canActivate: [AuthGuard]},
-  { path: 'logements/:logementRef/apparts/:appartRef', component: LoyerComponent ,canActivate: [AuthGuard]}
+  { path: 'logements', component: LogementComponent,canActivate: [AuthGuard], data: { breadcrumb: 'Mes logements' } },
+  { path: 'logements/:logementRef/apparts', component: AppartComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Mes appartements' } },
+  { path: 'logements/:logementRef/apparts/:appartRef', component: LoyerComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Historique des loyers' }}
 ];
 
 

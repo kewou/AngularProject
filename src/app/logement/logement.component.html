@@ -1,3 +1,5 @@
+<h2>Mes logements</h2>
+
 <div *ngIf="logements.length > 0; else noLogements">
     <div *ngFor="let logement of logements" class="logement-item">
         <div (click)="viewApparts(logement.reference)">

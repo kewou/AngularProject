@@ -7,6 +7,8 @@ import { AddAppartDialogComponent } from './add-appart-dialog/add-appart-dialog.
 import { EditAppartDialogComponent } from './edit-appart-dialog/edit-appart-dialog.component';
 import { DeleteAppartDialogComponent } from './delete-appart-dialog/delete-appart-dialog.component';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { LogementService } from '../logement/service/logement.service'
 
 @Component({
   selector: 'app-appart',
@@ -16,13 +18,14 @@ import { Router } from '@angular/router';
 export class AppartComponent implements OnInit{
 
       apparts: Appart[] = [];
+      descriptionLogement:string ='';
       //appart: Appart = {reference:'',nom:'',prixLoyer:0,prixCaution:0,user?:User};
       logementRef: string="";
       isModalOpen = false;
       displayedColumns: string[] = ['reference', 'nom', 'prixLoyer', 'prixCaution', 'user'];
 
        constructor(private route: ActivatedRoute,
-          private appartService: AppartService,
+          private appartService: AppartService,private location: Location,private logementService:LogementService,
           private dialog: MatDialog,private router: Router
        ) {}
 
@@ -38,6 +41,15 @@ export class AppartComponent implements OnInit{
                                               console.error("Erreur fetching apparts");
                                             }
                                         );
+
+                                    this.logementService.getOneLogement(this.logementRef).subscribe(
+                                          (data) => {
+                                           this.descriptionLogement= data.description;
+                                          },
+                                          (error) => {
+                                            console.error("Erreur fetching apparts");
+                                          }
+                                      );
                    }
                })
 
@@ -157,5 +169,10 @@ export class AppartComponent implements OnInit{
                      }
             })
          }
+
+          goBack(): void {
+            this.location.back();
+          }
+
 
 }

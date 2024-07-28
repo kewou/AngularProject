@@ -35,6 +35,17 @@ export class LogementService {
     );
   }
 
+    getOneLogement(logementRef:string): Observable<any>{
+        const userReference = this.getUserReference();
+        const url = `${this.backendUrl}/bailleur/users/${userReference}/logements/${logementRef}`;
+      return this.http.get(url).pipe(
+          catchError((error) => {
+            console.error('Error fetching user logement:')
+            return throwError('Failed to fetch user logement');
+          })
+      );
+    }
+
    addLogement(logement: Logement): Observable<any> {
        const userReference = this.getUserReference();
        const url = `${this.backendUrl}/bailleur/users/${userReference}/logements/create`;

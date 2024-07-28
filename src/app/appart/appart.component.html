@@ -1,3 +1,7 @@
+<h2>Les appartements de : {{descriptionLogement}}</h2>
+<div>
+    <button mat-raised-button color="primary" (click)="goBack()">Retour</button>
+</div>
 <div *ngIf="apparts.length > 0; else noApparts">
     <div *ngFor="let appart of apparts" class="appart-item">
         <div (click)="viewLoyers(appart.reference)">
