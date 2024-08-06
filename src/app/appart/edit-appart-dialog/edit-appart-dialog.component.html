@@ -2,20 +2,18 @@
 <mat-dialog-content>
     <form [formGroup]="appartForm">
 
-        <mat-form-field id="nom" class="form-field">
-            <mat-label>Nom</mat-label>
-            <input matInput placeholder="Nom permettant d'identifier l'appartement" formControlName="nom">
-            <mat-error *ngIf="appartForm.get('nom')?.invalid && appartForm.get('nom')?.touched">
-                <ng-container *ngIf="appartForm.get('nom')?.errors?.['required']">Le nom de l'appartement
+        <mat-form-field id="numero" class="form-field">
+            <mat-label>Numéro</mat-label>
+            <input matInput placeholder="Numero permettant d'identifier l'appartement" formControlName="numero">
+            <mat-error *ngIf="appartForm.get('numero')?.invalid && appartForm.get('numero')?.touched">
+                <ng-container *ngIf="appartForm.get('numero')?.errors?.['required']">Le numero de l'appartement
                     est obligatoire.
                 </ng-container>
-                <ng-container *ngIf="appartForm.get('nom')?.errors?.['minlength']">Au moins 2 caractères pour
-                    le nom.
+                <ng-container *ngIf="appartForm.get('numero')?.errors?.['min']">Entrer un entier positif
                 </ng-container>
-                <ng-container *ngIf="appartForm.get('nom')?.errors?.['maxlength']">Au plus 15 caractères pour le
-                    nom
+                <ng-container *ngIf="appartForm.get('numero')?.errors?.['max']">Maximum 1000
                 </ng-container>
-                <ng-container *ngIf="appartForm.get('nom')?.errors?.['specialCharacters']">Les caractères
+                <ng-container *ngIf="appartForm.get('numero')?.errors?.['specialCharacters']">Les caractères
                     spéciaux ne sont pas autorisés.
                 </ng-container>
             </mat-error>
@@ -29,6 +27,8 @@
                     obligatoire.
                 </ng-container>
                 <ng-container *ngIf="appartForm.get('prixLoyer')?.errors?.['min']">Entrer un entier positif
+                </ng-container>
+                <ng-container *ngIf="appartForm.get('prixLoyer')?.errors?.['max']">Maximum 1 million
                 </ng-container>
                 <ng-container *ngIf="appartForm.get('prixLoyer')?.errors?.['specialCharacters']">Les caractères
                     spéciaux ne sont pas autorisés.
@@ -45,6 +45,8 @@
                 </ng-container>
                 <ng-container *ngIf="appartForm.get('prixCaution')?.errors?.['min']">Entrer un entier positif
                 </ng-container>
+                <ng-container *ngIf="appartForm.get('prixLoyer')?.errors?.['max']">Maximum 1 million
+                </ng-container>
                 <ng-container *ngIf="appartForm.get('prixCaution')?.errors?.['specialCharacters']">Les caractères
                     spéciaux ne sont pas autorisés.
                 </ng-container>
@@ -54,6 +56,7 @@
 
     </form>
 </mat-dialog-content>
+
 <mat-dialog-actions>
     <button mat-button (click)="onCancel()">Annuler</button>
     <button mat-button color="accent" (click)="onConfirm()">Modifier</button>

@@ -1,50 +1,58 @@
-#accueil{
+.accueil{
   padding-top:3.5%;
   padding-left:8%;
   padding-right:7%;
 }
 
-#accueil h2{
+.accueil h2{
   color:black;
   font-size: 25px;
   font-weight: bold;
+  text-align:center;
 }
 
-#accueil strong {
+.accueil h4{
+  color:black;
+  font-weight: bold;
+  margin-top:5%;
+
+}
+
+.accueil strong {
   color: #3498db;
   font-weight: bold;
   font-size: 18px;
 }
 
 
-#accueil p{
+.accueil p{
   font-family: 'serif';
 }
 
-#accueilLeft{
+.accueilLeft{
   float:left;
   width:50%;
 }
 
-#accueilRight{
+.accueilRight{
   float:right;
   width:50%;
 }
 
-#accueilRight img{    
-  width:100%;  
+.accueilRight img{
+  width:100%;
 }
 
 @media screen and (max-width: 736px) {
 
-    #accueilLeft{
+    .accueilLeft{
         float:none;
         width:100%;
     }
-    #accueilLeft a{
+    .accueilLeft a{
 
     }
-    #accueilRight{
+    .accueilRight{
         width:100%
     }
     .button.primary{

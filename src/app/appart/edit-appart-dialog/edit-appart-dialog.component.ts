@@ -20,9 +20,9 @@ export class EditAppartDialogComponent {
 
                       this.appartForm = this.fb.group({
                         reference: [data.appart.reference],
-                        nom: [data.appart.nom, [Validators.required, Validators.minLength(2), Validators.maxLength(30),CustomValidators.noSpecialCharacters()]],
-                        prixLoyer: [data.appart.prixLoyer, [Validators.required,Validators.min(1),CustomValidators.noSpecialCharacters()]],
-                        prixCaution: [data.appart.prixCaution, [Validators.required,Validators.min(1) ,CustomValidators.noSpecialCharacters()]]
+                        numero: [data.appart.numero, [Validators.required,Validators.min(1),Validators.max(1000),CustomValidators.noSpecialCharacters()]],
+                        prixLoyer: [data.appart.prixLoyer, [Validators.required,Validators.min(1),Validators.max(1000000),CustomValidators.noSpecialCharacters()]],
+                        prixCaution: [data.appart.prixCaution, [Validators.required,Validators.min(1),Validators.max(1000000) ,CustomValidators.noSpecialCharacters()]]
                       });
 
         

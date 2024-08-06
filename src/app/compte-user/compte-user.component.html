@@ -1,16 +1,10 @@
-<div>
-  <table *ngIf="user"  id="infosUser">
-      <tr>
-        <td>Nom</td><td>{{ user.name }}</td>
-      </tr>
-      <tr>
-        <td>Prénom</td><td>{{ user.lastName }}</td>
-      </tr>
-      <tr>
-        <td>Email</td><td>{{ user.email }}</td>
-      </tr>
-      <tr>
-        <td>Téléphone</td><td>{{ user.phone}}</td>
-      </tr>
-  </table>
+<h2>Mes informations personnelles</h2>
+
+<div class="user-card">
+    <div class="user-info">
+        <h2 class="user-name"> {{ user.lastName }} {{ user.name }} </h2>
+        <p class="user-detail">Email : <span class="value">{{ user.email }}</span></p>
+        <p class="user-detail">Téléphone : <span class="value">{{ user.phone}}</span></p>
+        <button class="modifier" mat-raised-button (click)="openEditUserProfilDialog(user)">Modifier</button>
+    </div>
 </div>

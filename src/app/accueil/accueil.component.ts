@@ -1,7 +1,8 @@
 import { Component, OnInit,AfterViewInit, ViewChild, Renderer2 } from '@angular/core';
 import { Router, NavigationEnd, Event as RouterEvent } from '@angular/router';
+import { UserService } from '../user/service/user.service';
 
-//declare var $: any;
+
 
 @Component({
   selector: 'app-accueil',
@@ -10,10 +11,12 @@ import { Router, NavigationEnd, Event as RouterEvent } from '@angular/router';
 })
 export class AccueilComponent implements OnInit {
 
-  constructor(private router: Router, private renderer: Renderer2) {}
+    isLoggedIn: boolean = false;
+
+  constructor(private router: Router, private renderer: Renderer2,private userService:UserService) {}
 
   ngOnInit(): void {
-      //this.loadScript('assets/js/main.js');
+    this.isLoggedIn = this.userService.estUtilisateurConnecte();
   }
 
 loadScript(src: string) {

@@ -10,17 +10,19 @@ import { LogementComponent } from './logement/logement.component';
 import { AppartComponent } from './appart/appart.component';
 import { LoyerComponent } from './loyer/loyer.component';
 import { AuthGuard } from './authentication.guard';
+import {NotFoundComponent} from './not-found/not-found.component';
 
 const routes: Routes = [
   { path: '', component: AccueilComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'login', component: LoginRegisterComponent },
   { path: 'connexion', component: ConnexionComponent },
+  { path: 'a-propos', component: AProposComponent},
   { path: 'compte-user', component: CompteUserComponent,canActivate: [AuthGuard] },
-  { path: 'a-propos', component: AProposComponent,canActivate: [AuthGuard]},
   { path: 'logements', component: LogementComponent,canActivate: [AuthGuard], data: { breadcrumb: 'Mes logements' } },
   { path: 'logements/:logementRef/apparts', component: AppartComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Mes appartements' } },
-  { path: 'logements/:logementRef/apparts/:appartRef', component: LoyerComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Historique des loyers' }}
+  { path: 'logements/:logementRef/apparts/:appartRef', component: LoyerComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Historique des loyers' }},
+  { path: '**', component: NotFoundComponent }
 ];
 
 

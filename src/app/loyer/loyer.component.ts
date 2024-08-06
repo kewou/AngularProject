@@ -21,7 +21,7 @@ export class LoyerComponent implements OnInit, OnChanges {
 
       appart: Appart = {
          reference: '',
-         nom: '',
+         numero: 0,
          prixLoyer: 0,
          prixCaution: 0,
          user: null,

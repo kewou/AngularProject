@@ -19,10 +19,9 @@ export class AppartComponent implements OnInit{
 
       apparts: Appart[] = [];
       descriptionLogement:string ='';
-      //appart: Appart = {reference:'',nom:'',prixLoyer:0,prixCaution:0,user?:User};
       logementRef: string="";
       isModalOpen = false;
-      displayedColumns: string[] = ['reference', 'nom', 'prixLoyer', 'prixCaution', 'user'];
+      displayedColumns: string[] = ['reference', 'numero', 'prixLoyer', 'prixCaution', 'user'];
 
        constructor(private route: ActivatedRoute,
           private appartService: AppartService,private location: Location,private logementService:LogementService,

@@ -1,44 +1,49 @@
-#infosUser {
-  width: 40%;
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-top: 6%;
+h2{
+    color:black;
+    text-align:center;
+        margin-top: 3%;
+    }
+
+.value{
+    font-weight: 550;
+    }
+
+
+.user-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width:50%;
+    margin-left:25%;
 }
 
-/* Style pour le titre */
-h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
+.user-info {
+    margin-bottom: 20px;
 }
 
-/* Style pour le tableau */
-table {
-  border-collapse: collapse;
-  width: 100%;
+.user-name {
+    margin: 0;
+    color: #333;
+    font-size: 2em;
 }
 
-/* Style pour les lignes du tableau */
-tr {
-  border-bottom: 1px solid #ddd;
+.user-detail {
+    margin: 5px 0;
+    color: #333;
+    font-size: 1em;
+    font-weight:300;
 }
 
-/* Style pour les cellules du tableau */
-td {
-  padding: 8px;
-  text-align: left;
+.user-detail strong {
+    color: #333;
 }
 
-/* Style pour les cellules de la première colonne (clé) */
-td:first-child {
-  font-weight: bold;
-  color: #333;
-}
-
-/* Style pour les cellules de la deuxième colonne (valeur) */
-td:nth-child(2) {
-  color: #666;
-  text-align: center;
-}
+button.modifier{
+    margin-top:7%;
+    color:white;
+    background-color:#008B8B;}
 
 @media screen and (max-width: 736px) {
 

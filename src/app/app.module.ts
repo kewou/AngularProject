@@ -46,6 +46,8 @@ import { VersementDialogComponent } from './loyer/versement/versement-dialog.com
 import { CookieService } from 'ngx-cookie-service';
 import { AuthGuard } from './authentication.guard';
 import { UserService } from './user/service/user.service';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { EditProfilUserDialogComponent } from './compte-user/edit-profil-user-dialog/edit-profil-user-dialog.component';
 
 registerLocaleData(localeFr);
 
@@ -74,6 +76,8 @@ registerLocaleData(localeFr);
     DeleteAppartDialogComponent,
     LoyerComponent,
     VersementDialogComponent,
+    NotFoundComponent,
+    EditProfilUserDialogComponent,
   ],
   imports: [
     BrowserModule,

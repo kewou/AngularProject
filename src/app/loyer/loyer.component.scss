@@ -8,9 +8,11 @@ h1{
     margin-top: 5%;
     }
 table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    margin-left: 10%;
+    margin-top: 5%;
 }
 
 table, th, td {
@@ -23,7 +25,7 @@ th, td {
 }
 
 th {
-    background-color: gray;
+    background-color: #404040;
     color: white;
     font-weight:bold;
 }
@@ -49,18 +51,14 @@ tr:hover {
    color: red;
 }
 
-#transactionForm {
-  display: flex;
-  flex-direction: column;
-  gap: 16px; /* Espace entre les champs */
-}
 
 .form-field {
-  width: 100%; /* Assure que les champs prennent toute la largeur disponible */
+  width: 55%;
+  float:left;/* Assure que les champs prennent toute la largeur disponible */
 }
 
 mat-form-field {
-  width: 100%; /* Assure que les champs prennent toute la largeur disponible */
+  width: 55%; /* Assure que les champs prennent toute la largeur disponible */
 }
 
 #description {
@@ -100,4 +98,38 @@ mat-error div {
   margin-top: 4px;
   color:red;
    /* Optionnel : Change la couleur du texte */
+}
+
+button.back{
+    background-color:#696969}
+
+#transactionForm{
+  display: flex;
+  flex-direction: column;
+  gap: 16px; }
+
+#versement{
+    width:56%;
+    margin-left:20%;
+    margin-bottom:10%;
+    margin-top:5%;
+    border:solid black 1px;
+    padding:2%;
+    }
+
+#versement p{
+    font-weight:550;
+    margin-bottom: 3%;
+    }
+
+#verser{
+    margin-top: 5%;}
+
+#verser button{
+    height: 50px;
+    margin-top: 5px;
+}
+
+#verser button:hover{
+    background-color: #800000;
 }

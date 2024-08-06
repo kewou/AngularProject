@@ -38,6 +38,15 @@ export class ConnexionComponent implements OnInit{
             return;
         }
         const url = `${this.backendUrl}/authenticate`;
+        const token = this.cookieService.get('jwtToken');
+        const userReference = this.cookieService.get('userReference');
+        if(token){
+            this.cookieService.delete('jwtToken');
+
+        }
+        if(userReference){
+            this.cookieService.delete('jwtToken');
+            }
         this.userService.loginUser(this.loginObj).subscribe(
             (response:any) => {
                 console.log("response",response);

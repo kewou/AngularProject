@@ -3,7 +3,7 @@ import { Loyer } from '../../loyer/modele/loyer';
 
 export interface Appart {
   reference: string;
-  nom: string;
+  numero: number;
   prixLoyer: number;
   prixCaution: number;
   user: User | null;

@@ -21,12 +21,12 @@ export class AddAppartDialogComponent {
         private fb: FormBuilder,
         private userService: UserService
       ) {
-        this.appartForm = this.fb.group({
-          reference: [''],
-          nom: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30),CustomValidators.noSpecialCharacters()]],
-          prixLoyer: ['', [Validators.required, Validators.min(1),CustomValidators.positiveInteger()]],
-          prixCaution: ['', [Validators.required, Validators.min(1),CustomValidators.positiveInteger()]]
-        });
+              this.appartForm = this.fb.group({
+                reference: [''],
+                numero: ['', [Validators.required,Validators.min(1),Validators.max(1000),CustomValidators.noSpecialCharacters()]],
+                prixLoyer: ['', [Validators.required,Validators.min(1),Validators.max(1000000),CustomValidators.noSpecialCharacters()]],
+                prixCaution: ['', [Validators.required,Validators.min(1),Validators.max(1000000) ,CustomValidators.noSpecialCharacters()]]
+              });
       }
 
 

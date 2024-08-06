@@ -14,6 +14,11 @@ import { User } from '../modele/user';
 export class UserService {
 
   private backendUrl = environment.backendUrl;
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
   private estConnecte = false;
   private userReference = this.cookieService.get('userReference');
 
@@ -45,7 +50,13 @@ export class UserService {
         if (!token) {
           return false;
         }
-        return !this.isTokenExpired(token);
+        if(this.isTokenExpired(token)){
+            this.cookieService.delete('jwtToken');
+            this.cookieService.delete('userReference');
+            return false;
+        }
+        return true;
+
   }
 
 
@@ -79,6 +90,16 @@ export class UserService {
         })
       );
   }
+
+  updateUser(updatedUser:User) : Observable<any>{
+            return this.http.put(`${this.backendUrl}/users/${this.userReference}`,updatedUser,this.httpOptions).pipe(
+              catchError((error) => {
+                console.error('Error fetching update user:')
+                return throwError('Failed to update user ');
+              })
+            );
+
+      }
 
 
   private handleForbidden(message: string): void {

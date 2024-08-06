@@ -1,17 +1,18 @@
-<h2>Les appartements de : {{descriptionLogement}}</h2>
 <div>
-    <button mat-raised-button color="primary" (click)="goBack()">Retour</button>
+    <button mat-raised-button class="back" color="primary" (click)="goBack()">Retour</button>
 </div>
-<div *ngIf="apparts.length > 0; else noApparts">
+<h2>Les appartements du logement : {{descriptionLogement}}</h2>
+<div id="apparts" *ngIf="apparts.length > 0; else noApparts">
     <div *ngFor="let appart of apparts" class="appart-item">
         <div (click)="viewLoyers(appart.reference)">
-            <h4>Nom : {{ appart.nom }}</h4>
-            <h4>Prix Loyer : {{ appart.prixLoyer }} €</h4>
-            <h4>Prix caution : {{ appart.prixCaution }} €</h4>
+            <p>Numéro : <span class="value">{{ appart.numero }}</span></p>
+            <p>Prix Loyer : <span class="value">{{ appart.prixLoyer }}</span></p>
+            <p>Prix caution : <span class="value">{{ appart.prixCaution }}</span></p>
         </div>
-        <div>
-            <button (click)="openEditAppartDialog(appart)">Modifier</button>
-            <button (click)="openDeleteAppartDialog(appart.reference)">Supprimer</button>
+        <div id="actionsAppart">
+            <button class="modifier" mat-raised-button (click)="openEditAppartDialog(appart)">Modifier</button>
+            <button class="supprimer" mat-raised-button (click)="openDeleteAppartDialog(appart.reference)">Supprimer
+            </button>
         </div>
     </div>
 </div>
@@ -20,7 +21,7 @@
     <p>Aucun appartement trouvé pour ce logement</p>
 </ng-template>
 
-<button mat-raised-button color="primary" (click)="openAddAppartDialog()">
+<button class="ajouter" mat-raised-button color="primary" (click)="openAddAppartDialog()">
     Ajouter Appartement
 </button>
 
