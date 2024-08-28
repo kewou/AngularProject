@@ -21,7 +21,7 @@ export class EditProfilUserDialogComponent {
               this.userForm = this.fb.group({
                 name: [data.user.name, [Validators.required,Validators.minLength(2), Validators.maxLength(20),CustomValidators.noSpecialCharacters()]],
                 lastName: [data.user.lastName, [Validators.required,Validators.minLength(2), Validators.maxLength(20),CustomValidators.noSpecialCharacters()]],
-                email: [data.user.email, [Validators.required,Validators.minLength(2), Validators.email,CustomValidators.noSpecialCharacters()]],
+                email: [data.user.email, [Validators.required,Validators.minLength(2), Validators.email]],
                 phone: [data.user.phone, [Validators.required,Validators.minLength(8), Validators.maxLength(20) ,CustomValidators.noSpecialCharacters()]]
               });
 
@@ -37,7 +37,9 @@ export class EditProfilUserDialogComponent {
                 };
           this.userUpdated.emit(updatedUser);
           this.dialogRef.close('confirm');
-          }
+          }else{
+            alert("fuck");
+            }
     }
 
     onCancel(): void {
