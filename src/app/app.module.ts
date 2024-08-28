@@ -48,6 +48,7 @@ import { AuthGuard } from './authentication.guard';
 import { UserService } from './user/service/user.service';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { EditProfilUserDialogComponent } from './compte-user/edit-profil-user-dialog/edit-profil-user-dialog.component';
+import { ConfirmationRegisterComponent } from './inscription/confirmation-register/confirmation-register.component';
 
 registerLocaleData(localeFr);
 
@@ -78,6 +79,7 @@ registerLocaleData(localeFr);
     VersementDialogComponent,
     NotFoundComponent,
     EditProfilUserDialogComponent,
+    ConfirmationRegisterComponent,
   ],
   imports: [
     BrowserModule,

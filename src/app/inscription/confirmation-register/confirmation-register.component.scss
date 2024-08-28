@@ -1,0 +1,24 @@
+.confirmation-container {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #FFFAF0;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 500px;
+  margin-top:6%;
+}
+
+.confirmation-container h2 {
+  color: #4CAF50;
+}
+
+.confirmation-container a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.confirmation-container a:hover {
+  text-decoration: underline;
+}

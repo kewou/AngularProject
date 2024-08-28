@@ -60,7 +60,7 @@ export class InscriptionComponent implements OnInit {
         response => {
           console.log('Réponse du serveur :', response);
           // Gérez ici la réponse du serveur en cas de succès
-          this.router.navigate(['/connexion']); // Redirection vers la page de connexion
+          this.router.navigate(['/confirmation-inscription']); // Redirection vers la page de connexion
         },
         (error) => {
           console.error('Erreur lors de l\'envoi de la requête :', error);
