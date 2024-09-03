@@ -1,6 +1,7 @@
 <div class="user-card">
     <div class="user-info">
         <h2 class="user-name"> {{ user.lastName }} {{ user.name }} </h2>
+        <p class="user-detail">Profil : <span class="value">Propriètaire</span></p>
         <p class="user-detail">Email : <span class="value">{{ user.email }}</span></p>
         <p class="user-detail">Téléphone : <span class="value">{{ user.phone}}</span></p>
         <button class="modifier" mat-raised-button (click)="openEditUserProfilDialog(user)">Modifier</button>
