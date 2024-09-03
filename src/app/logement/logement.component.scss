@@ -118,5 +118,18 @@ form button:hover {
 button.ajouter{
     margin-left:43%;
     margin-top:5%;
-    margin-bottom:2%,};
+    margin-bottom:2%};
 
+@media screen and (max-width: 736px) {
+
+    .logement-item{
+        width:100%;
+        margin:0px;
+        margin-bottom:15px;
+        }
+
+    button.ajouter{
+        margin-left:25%;
+    }
+
+}

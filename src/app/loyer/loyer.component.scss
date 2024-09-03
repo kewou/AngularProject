@@ -133,3 +133,43 @@ button.back{
 #verser button:hover{
     background-color: #800000;
 }
+
+@media screen and (max-width: 736px) {
+
+    button.back{
+        font-size:10px;}
+
+        h2{
+            color:black;
+            text-align:center;
+                margin-top: 15%;
+            }
+
+    .appart-item{
+        width:100%;
+        margin:0px;
+        margin-bottom:15px;
+        }
+
+    table{
+        width:100%;
+        margin:0px;}
+
+    td{
+        font-size: 13px;
+    }
+
+    #versement{
+        width:100%;
+        margin-left:0px;
+        margin-top:10%;}
+
+    #transactionForm{
+        }
+
+    mat-form-field.form-field {
+      width: 100%;
+    }
+
+
+}

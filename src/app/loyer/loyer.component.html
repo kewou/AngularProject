@@ -2,7 +2,7 @@
     <button mat-raised-button class="back" color="primary" (click)="goBack()">Retour</button>
 </div>
 
-<h2>Historique des loyers de l'appartement numero : {{appart.numero}}</h2>
+<h2>Historique des loyers de l'appart. n° : {{appart.numero}}</h2>
 
 
 <table>
@@ -38,11 +38,8 @@
                 <mat-error *ngIf="transactionForm.get('montantVerser')?.hasError('required')">
                     Le montant à verser est obligatoire.
                 </mat-error>
-                <mat-error *ngIf="transactionForm.get('montantVerser')?.hasError('minimumAmount')">
-                    Le montant doit être supérieur à {{ appart.prixLoyer }} : Prix d'un loyer.
-                </mat-error>
                 <mat-error *ngIf="transactionForm.get('montantVerser')?.hasError('notMultipleOf')">
-                    Le montant doit être un multiple de {{ appart.prixLoyer }} : Prix d'un loyer.
+                    Saississez un multiple de {{ appart.prixLoyer }} : Prix d'un loyer.
                 </mat-error>
                 <mat-error *ngIf="transactionForm.get('montantVerser')?.hasError('noSpecialCharacters')">
                     Les caractères spéciaux ne sont pas autorisés
