@@ -24,6 +24,7 @@ pipeline{
     }
 
     stage ('Increment version') {
+        steps{
                 // Vérifie d'abord si le répertoire est propre
                 sh 'git diff-index --quiet HEAD || (echo "Git working directory not clean" && exit 1)'
 
@@ -32,6 +33,7 @@ pipeline{
 
                 // Pousse les changements de version et le tag dans le dépôt Git
                 sh 'git push origin HEAD --tags'
+        }
     }
 
     stage ('Nexus Login'){
