@@ -23,18 +23,24 @@ pipeline{
         }
     }
 
-    stage ('Increment version') {
-        steps{
-                // Vérifie d'abord si le répertoire est propre
-                sh 'git diff-index --quiet HEAD || (echo "Git working directory not clean" && exit 1)'
+stage('Increment version') {
+    steps {
+        script {
+            // Vérifie l'état de la branche
+            sh 'git status'
 
-                // Incrémente la version (par exemple, patch)
-                sh 'npm version patch'
+            // Incrémente la version (par exemple, patch)
+            sh 'npm version patch'
 
-                // Pousse les changements de version et le tag dans le dépôt Git
-                sh 'git push origin HEAD --tags'
+            // Récupère le nom de la branche actuelle
+            def branchName = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+
+            // Pousse les changements de version et le tag dans le dépôt Git
+            sh "git push origin ${branchName} --tags"
         }
     }
+}
+
 
     stage ('Nexus Login'){
         steps {            
