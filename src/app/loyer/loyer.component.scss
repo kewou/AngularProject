@@ -1,0 +1,175 @@
+h2{
+    color:black;
+    text-align:center;
+        margin-top: 3%;
+    }
+h1{
+    color:black;
+    margin-top: 5%;
+    }
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #404040;
+    color: white;
+    font-weight:bold;
+}
+
+td {
+    color: black;
+    font-weight:bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.ok {
+   color: green;
+}
+
+.ko {
+   color: red;
+}
+
+
+.form-field {
+  width: 55%;
+  float:left;/* Assure que les champs prennent toute la largeur disponible */
+}
+
+mat-form-field {
+  width: 55%; /* Assure que les champs prennent toute la largeur disponible */
+}
+
+#description {
+  width: 100%;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end; /* Aligne les boutons à droite */
+  gap: 8px; /* Espace entre les boutons */
+}
+
+/* Optionnel : ajout de styles pour les boutons */
+button {
+  min-width: 80px; /* Assure une taille minimum pour les boutons */
+}
+
+button[mat-button] {
+  color: #3f51b5; /* Couleur des boutons */
+}
+
+button[mat-button][color="accent"] {
+  background-color: #e44c65; /* Couleur de fond pour le bouton accent */
+  color: white;
+}
+
+/* Ajout de marges ou padding si nécessaire */
+.mat-form-field-wrapper {
+  padding-bottom: 8px; /* Ajoute de l'espace sous chaque champ de formulaire */
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 8px; /* Ajoute de l'espace sous chaque champ de formulaire */
+}
+
+mat-error div {
+  margin-top: 4px;
+  color:red;
+   /* Optionnel : Change la couleur du texte */
+}
+
+button.back{
+    background-color:#696969}
+
+#transactionForm{
+  display: flex;
+  flex-direction: column;
+  gap: 16px; }
+
+#versement{
+    width:56%;
+    margin-left:20%;
+    margin-bottom:10%;
+    margin-top:5%;
+    border:solid black 1px;
+    padding:2%;
+    }
+
+#versement p{
+    font-weight:550;
+    margin-bottom: 3%;
+    }
+
+#verser{
+    margin-top: 5%;}
+
+#verser button{
+    height: 50px;
+    margin-top: 5px;
+}
+
+#verser button:hover{
+    background-color: #800000;
+}
+
+@media screen and (max-width: 736px) {
+
+    button.back{
+        font-size:10px;}
+
+        h2{
+            color:black;
+            text-align:center;
+                margin-top: 15%;
+            }
+
+    .appart-item{
+        width:100%;
+        margin:0px;
+        margin-bottom:15px;
+        }
+
+    table{
+        width:100%;
+        margin:0px;}
+
+    td{
+        font-size: 13px;
+    }
+
+    #versement{
+        width:100%;
+        margin-left:0px;
+        margin-top:10%;}
+
+    #transactionForm{
+        }
+
+    mat-form-field.form-field {
+      width: 100%;
+    }
+
+
+}

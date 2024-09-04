@@ -1,0 +1,73 @@
+<h2 mat-dialog-title>Modifier son profil</h2>
+<div mat-dialog-content id="editProfilForm">
+    <form [formGroup]="userForm">
+        <mat-form-field id="name" class="form-field">
+            <mat-label>Nom</mat-label>
+            <input matInput placeholder="Votre nom" formControlName="name">
+            <mat-error *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+                <ng-container *ngIf="userForm.get('name')?.errors?.['required']">Votre nom
+                    est obligatoire.
+                </ng-container>
+                <ng-container *ngIf="userForm.get('name')?.errors?.['minlength']">Minimum 2 caractères
+                </ng-container>
+                <ng-container *ngIf="userForm.get('name')?.errors?.['maxlength']">Maximum 20 caractères
+                </ng-container>
+                <ng-container *ngIf="userForm.get('name')?.errors?.['specialCharacters']">Les caractères
+                    spéciaux ne sont pas autorisés.
+                </ng-container>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field id="lastName" class="form-field">
+            <mat-label>Prénom</mat-label>
+            <input matInput placeholder="Votre nom" formControlName="lastName">
+            <mat-error *ngIf="userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched">
+                <ng-container *ngIf="userForm.get('lastName')?.errors?.['required']">Votre prénom
+                    est obligatoire.
+                </ng-container>
+                <ng-container *ngIf="userForm.get('lastName')?.errors?.['minlength']">Minimum 2 caractères
+                </ng-container>
+                <ng-container *ngIf="userForm.get('lastName')?.errors?.['maxlength']">Maximum 20 caractères
+                </ng-container>
+                <ng-container *ngIf="userForm.get('lastName')?.errors?.['specialCharacters']">Les caractères
+                    spéciaux ne sont pas autorisés.
+                </ng-container>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field id="email" class="form-field">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Votre email" formControlName="email">
+            <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+                <ng-container *ngIf="userForm.get('email')?.errors?.['required']">Votre émail
+                    est obligatoire.
+                </ng-container>
+                <ng-container *ngIf="userForm.get('email')?.errors?.['email']">Votre email doit être valide
+                </ng-container>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field id="phone" class="form-field">
+            <mat-label>Téléphone</mat-label>
+            <input matInput placeholder="Votre numéro de téléphone" formControlName="phone">
+            <mat-error *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
+                <ng-container *ngIf="userForm.get('phone')?.errors?.['required']">Votre numéro de téléphone
+                    est obligatoire.
+                </ng-container>
+                <ng-container *ngIf="userForm.get('phone')?.errors?.['minlength']">Minimum 8 caractères
+                </ng-container>
+                <ng-container *ngIf="userForm.get('phone')?.errors?.['maxlength']">Maximum 20 caractères
+                </ng-container>
+                <ng-container *ngIf="userForm.get('phone')?.errors?.['specialCharacters']">Les caractères
+                    spéciaux ne sont pas autorisés.
+                </ng-container>
+            </mat-error>
+        </mat-form-field>
+
+    </form>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Annuler</button>
+    <button mat-button color="accent" (click)="onConfirm()">Modifier</button>
+</div>

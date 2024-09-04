@@ -1,0 +1,88 @@
+<mat-card>
+  <mat-card-content>
+    <form #inscriptionForm="ngForm"
+          [appMatchPassword]="['password', 'confirmPassword']"
+          (submit)="registerBailleur()" >
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Prénom" [(ngModel)]=user.firstName name="firstName" #firstName="ngModel" required minlength="2" maxlength="50">
+      </mat-form-field>
+      <div
+              *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+              class="alert"
+      >
+        <span *ngIf="firstName.errors?.['required']">Le prénom est obligatoire.</span>
+        <span *ngIf="firstName.errors?.['minlength']">
+          Le prénom doit avoir au moins 2 caractères.
+        </span>
+        <span *ngIf="firstName.errors?.['maxlength']">
+          Le prénom doit avoir au plus 50 caractères.
+        </span>
+      </div>
+      <mat-form-field class="form-field">
+        <input matInput placeholder="Nom" [(ngModel)]=user.lastName name="lastName" #lastName="ngModel" required minlength="2" maxlength="50">
+      </mat-form-field>
+      <div
+              *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+              class="alert"
+      >
+        <span *ngIf="lastName.errors?.['required']">Le nom est obligatoire.</span>
+        <span *ngIf="lastName.errors?.['minlength']">
+          Le nom doit avoir au moins 2 caractères.
+        </span>
+        <span *ngIf="firstName.errors?.['maxlength']">
+          Le nom doit avoir au plus 50 caractères.
+        </span>
+      </div>
+      <mat-form-field class="form-field">
+        <input matInput type="email" placeholder="Email" [(ngModel)]=user.email name="email"  #email="ngModel" required email>
+      </mat-form-field>
+      <div
+              *ngIf="email.invalid && (email.dirty || email.touched)"
+              class="alert"
+      >
+        <span *ngIf="email.errors?.['required']">L'adresse e-mail est obligatoire.</span>
+        <span *ngIf="email.errors?.['email']">
+          Le format de l'adresse e-mail est invalide
+        </span>
+      </div>
+      <mat-form-field class="form-field">
+        <input matInput type="number" placeholder="Téléphone" [(ngModel)]=user.phone name="phone" #phone="ngModel" required><mat-icon matSuffix>phone</mat-icon>
+      </mat-form-field>
+      <div
+              *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+              class="alert"
+      >
+        <span *ngIf="phone.errors?.['required']">Le téléphone est obligatoire.</span>
+      </div>
+      <mat-form-field class="form-field">
+        <input matInput [type]="showPass ? 'text':'password'" class="form-control" placeholder="Mot de passe" [(ngModel)]=user.password #password="ngModel" name="password" required><mat-icon matSuffix (click)="showPassword()">visibility</mat-icon>
+      </mat-form-field>
+      <div
+              *ngIf="password.invalid && (password.dirty || password.touched)"
+              class="alert"
+      >
+        <span *ngIf="password.errors?.['required']">Le mot de passe est obligatoire.</span>
+      </div>
+      <mat-form-field class="form-field">
+        <input matInput [type]="showConfirmPass ? 'text':'password'" class="form-control" placeholder="Confirmer le Mot de passe" [(ngModel)]=user.confirmPassword #confirmPassword="ngModel" name="confirmPassword"
+               [ngClass]="{'is-invalid': (confirmPassword.dirty || confirmPassword.touched) && confirmPassword.errors }"
+               required><mat-icon matSuffix (click)="showConfirmPassword()">visibility</mat-icon>
+      </mat-form-field>
+      <div
+              *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)"
+              class="alert"
+      >
+        <span *ngIf="confirmPassword.errors?.['required']">Le champ Confirmer le mot de passe est obligatoire</span>
+        <span *ngIf="confirmPassword.errors?.['matching']">Les deux champs mot de passe ne sont pas identiques</span>
+      </div>
+      <div class="error-message">
+        <ul>
+          <li *ngFor="let error of errorMessages">{{error}}</li>
+        </ul>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!inscriptionForm.form.valid">INSCRIPTION</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+

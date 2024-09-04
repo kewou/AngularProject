@@ -1,0 +1,89 @@
+#contact{
+  margin-top:2%;
+}
+
+#contact h2{
+  color:black;
+  text-align:center;
+  margin-top:3%;
+  margin-bottom: 1%;
+}
+
+#contactLeft{
+  float: left;
+  width:46%;
+  margin-left:2%;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+#paris{
+  text-align:center;
+}
+
+#contactRight{
+  float: right;
+  width:46%;
+  margin-right:2%;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+
+.clearer{
+  clear: both;
+  display: block;
+  content: "";
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+form button[type="submit"] {
+  background-color: #e13652;
+  border: none;
+  cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+#mat-input-0::placeholder{
+  color: black;
+  font-style: italic;
+}
+
+
+#mat-input-1::placeholder{
+  color: black;
+  font-style: italic;
+}
+
+
+#mat-input-2::placeholder{
+  color: black;
+  font-style: italic;
+}
+
+
+@media screen and (max-width: 736px) {
+
+    #contactLeft{
+        float:none;
+        width:100%;
+        margin:0px;
+    }
+
+    #contactRight{
+        float:none;
+        width:100%;
+    }
+
+}
+

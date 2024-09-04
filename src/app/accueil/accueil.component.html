@@ -1,0 +1,89 @@
+<div *ngIf="isLoggedIn; else guestContent">
+    <div class="accueil">
+        <div>
+            <h2>Simplifiez la gestion de vos biens immobiliers à laide de ces fonctionnalités :</h2>
+            <section>
+                <h4>Gestion des Logements</h4>
+                <ul>
+                    <li><p><strong>Déclarer vos logements</strong> : Ajoutez facilement tous vos logements à
+                        l'application
+                        pour une gestion centralisée.</p>
+                    </li>
+                    <li><p><strong>Modifier et Supprimer</strong> : Mettez à jour les informations de vos logements à
+                        tout
+                        moment ou supprimez-les si nécessaire.</p>
+                    </li>
+                    <li><p><strong>Visualisation Claire</strong> : Consultez rapidement tous vos logements enregistrés
+                        avec
+                        des détails précis.</p>
+                    </li>
+                    <li><p><strong>Organisation Structurée</strong> : Gérez chaque appartement séparément pour une
+                        organisation optimale.</p>
+                    </li>
+                </ul>
+            </section>
+
+
+            <section>
+                <h4>Historique des Paiements</h4>
+                <ul>
+                    <li><p><strong>Suivi des Paiements des Locataires</strong> : Consultez l'historique des paiements de
+                        chaque locataire pour un logement donné.</p>
+                    </li>
+                    <li><p><strong>Détails Complets</strong> : Accédez aux détails des paiements, incluant la date, le
+                        prix
+                        du loyer et bien plus encore.</p>
+                    </li>
+                    <li><p><strong>Analyse et Gestion</strong> : Analysez les paiements pour une gestion financière plus
+                        précise et une planification future.</p>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h4>Fonctionnalités Clés</h4>
+                <ul>
+                    <li><p><strong>Interface Intuitive</strong> : Une interface utilisateur conviviale pour une
+                        expérience
+                        de gestion simplifiée.</p>
+                    </li>
+                    <li><p><strong>Sécurité et Confidentialité</strong> : Vos données sont sécurisées et protégées pour
+                        garantir la confidentialité.</p>
+                    </li>
+                    <li><p><strong>Accessibilité</strong> : Accédez à votre application depuis n'importe quel appareil,
+                        à
+                        tout moment.</p>
+                    </li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #guestContent>
+    <div class="accueil">
+        <div class="accueilLeft">
+            <section>
+                <h2>Pourquoi choisir Beezyweb ?</h2>
+                <ol>
+                    <li>
+                        <strong>Suivi Simplifié</strong>
+                        <p>Notre plateforme offre un suivi simplifié de toutes vos locations en un seul endroit.</p>
+                        <p>Plus de tracas liés à la gestion dispersée de vos biens immobiliers. Avec Beezyweb, la
+                            gestion
+                            locative devient un jeu d'enfant.</p>
+                    </li>
+                    <li>
+                        <strong>Inscrivez-vous gratuitement:</strong>
+                        <p>Créez votre compte en quelques étapes simples.</p>
+                    </li>
+                </ol>
+                <a routerLink="/login" class="button primary">Connection / Inscription </a>
+            </section>
+        </div>
+        <div class="accueilRight">
+            <img src="./assets/css/images/femme.jpg" alt="Jolie femme">
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,51 @@
+# Node modules
+node_modules/
+
+# Angular build output
+/dist/
+/dist-server/
+/tmp/
+/out-tsc/
+
+# IDE and editor files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Dependency directories
+/jspm_packages/
+/bower_components/
+
+# Build artifacts and caches
+.cache/
+.angular/cache/*
+*.log
+.npm/
+.pnp/
+.pnpm/
+.yarn/
+.yarnrc
+*.pem
+*.key
+
+# Angular specific
+*.class
+*.lock
+*.md
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Miscellaneous
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

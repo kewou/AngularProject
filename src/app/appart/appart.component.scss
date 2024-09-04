@@ -1,0 +1,153 @@
+/* appart-list.component.css */
+
+h2{
+    color:black;
+    text-align:center;
+        margin-top: 1%;
+    }
+
+#apparts{
+    margin-left:5%;
+    margin-right:5%;
+    }
+.appart-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  width:30%;
+  display:inline-block;
+  margin-left:2%;
+  background-color: white;
+}
+
+.appart-item:hover {
+  transform: scale(1.02);
+  cursor:pointer;
+  background-color:#FAF0E6;
+}
+
+.appart-item h4 {
+  margin-top: 0;
+  color: #333;
+  font-weight: bold;
+}
+
+.appart-item p{
+       font-weight: 300;
+    }
+.value{
+    font-weight: 550;
+    }
+.appart-item p:first-child  {
+  margin: 5px 0;
+
+  color:black;
+}
+
+.appart-item p:last-child {
+
+}
+
+form {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: blue;
+}
+
+form input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+form button {
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+form button:hover {
+  background-color: #218838;
+}
+
+#mat-input-0::placeholder{
+  color: black;
+  font-style: italic;
+}
+
+#mat-input-1::placeholder{
+  color: black;
+  font-style: italic;
+}
+
+#mat-input-2::placeholder{
+  color: black;
+  font-style: italic;
+}
+
+button.back{
+    background-color:#696969}
+
+#actionsAppart{
+    margin-top:5%;}
+
+#actionsAppart button{
+    margin-right:3%;}
+
+#actionsAppart button.modifier{
+    color:white;
+    background-color:#008B8B;}
+
+#noAppart{
+    text-align:center;
+    }
+
+#actionsAppart button.supprimer{
+    color:white;
+    background-color:red;}
+
+button.ajouter{
+    margin-left:43%;
+    margin-top:5%;
+    margin-bottom:2%};
+
+@media screen and (max-width: 736px) {
+
+    button.back{
+        font-size:10px;}
+
+        h2{
+            color:black;
+            text-align:center;
+                margin-top: 15%;
+            }
+
+    .appart-item{
+        width:100%;
+        margin:0px;
+        margin-bottom:15px;
+        }
+
+    button.ajouter{
+        margin-left:25%;
+    }
+
+}

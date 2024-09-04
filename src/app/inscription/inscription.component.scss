@@ -1,0 +1,46 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+form button[type="submit"] {
+  background-color: #e13652;
+  border: none;
+  cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+#mat-input-2::placeholder{
+  color: black;
+  font-style: italic;
+}
+
+
+#mat-input-3::placeholder{
+  color: black;
+  font-style: italic;
+}
+#mat-input-4::placeholder{
+  color: black;
+  font-style: italic;
+}
+#mat-input-5::placeholder{
+  color: black;
+  font-style: italic;
+}
+#mat-input-6::placeholder{
+  color: black;
+  font-style: italic;
+}
+
+#mat-input-7::placeholder{
+  color: black;
+  font-style: italic;
+}

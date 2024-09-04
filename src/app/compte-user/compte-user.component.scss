@@ -1,0 +1,69 @@
+h2{
+    color:black;
+    text-align:center;
+        margin-top: 3%;
+    }
+
+.value{
+    font-weight: 550;
+    }
+
+
+.user-card {
+    margin-top:6%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width:50%;
+    margin-left:25%;
+}
+
+.user-info {
+    margin-bottom: 20px;
+    padding-top:2%;
+}
+
+.user-name {
+    margin: 0;
+    color: #333;
+    font-size: 2em;
+}
+
+.user-detail {
+    margin: 5px 0;
+    color: #333;
+    font-size: 1em;
+    font-weight:300;
+}
+
+.user-detail strong {
+    color: #333;
+}
+
+button.modifier{
+    margin-top:7%;
+    color:white;
+    background-color:#008B8B;}
+
+@media screen and (max-width: 736px) {
+
+    .user-card{
+        width:100%;
+        margin:0px;
+        }
+
+    #infosUser{
+        width:100%;
+        margin:0px;
+        margin-top: 20%;
+
+    }
+
+    #infosUser  tr td{
+                padding:15px;
+        }
+
+
+}

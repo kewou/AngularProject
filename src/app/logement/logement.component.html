@@ -1,0 +1,36 @@
+<h2>Mes logements</h2>
+
+<div id="logements" *ngIf="logements.length > 0; else noLogements">
+    <div *ngFor="let logement of logements" class="logement-item">
+        <div (click)="viewApparts(logement.reference)">
+            <h4>{{ logement.quartier }}, &nbsp;{{ logement.ville }}</h4>
+            <p>{{ logement.description }}</p>
+        </div>
+        <div id="actionsLogement">
+            <button class="modifier" mat-raised-button (click)="openEditLogementDialog(logement)">Modifier</button>
+            <button class="supprimer" mat-raised-button (click)="openDeleteLogementDialog(logement.reference)">
+                Supprimer
+            </button>
+        </div>
+    </div>
+
+</div>
+
+
+<ng-template #noLogements>
+    <p id="noLogement">Vous n'avez pas encore déclaré de logement</p>
+</ng-template>
+
+<button mat-raised-button class="ajouter" color="primary" (click)="openAddLogementDialog($event)">Ajouter
+    Logement
+</button>
+
+<app-add-logement-dialog *ngIf="isModalOpen" [logement]="logement" (close)="closeModal()"
+                         (logementAdded)="addLogement($event)"></app-add-logement-dialog>
+
+
+
+
+
+
+
