@@ -23,6 +23,12 @@ pipeline{
         }
     }
 
+    stage ('Increment version') {
+            steps {
+                sh "npm version patch"
+            }
+    }
+
     stage ('Nexus Login'){
         steps {            
             sh "./npmLoginToNexus.expect"
