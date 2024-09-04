@@ -28,7 +28,7 @@ stage('Increment version') {
         script {
 
             // Incrémente la version (par exemple, patch)
-            sh 'npm version patch'
+            sh 'npm version major'
 
         }
     }
