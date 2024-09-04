@@ -24,9 +24,14 @@ pipeline{
     }
 
     stage ('Increment version') {
-            steps {
-                sh "npm version patch"
-            }
+                // Vérifie d'abord si le répertoire est propre
+                sh 'git diff-index --quiet HEAD || (echo "Git working directory not clean" && exit 1)'
+
+                // Incrémente la version (par exemple, patch)
+                sh 'npm version patch'
+
+                // Pousse les changements de version et le tag dans le dépôt Git
+                sh 'git push origin HEAD --tags'
     }
 
     stage ('Nexus Login'){
