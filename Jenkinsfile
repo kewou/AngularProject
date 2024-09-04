@@ -35,8 +35,17 @@ stage('Increment version') {
             // Récupère le nom de la branche actuelle
             def branchName = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
 
-            // Pousse les changements de version et le tag dans le dépôt Git
-            sh "git push origin ${branchName} --tags"
+            withCredentials([
+            string(
+                credentialsId: 'github_token',
+                variable: 'TOKEN'
+            )
+            ]) {
+                    // Pousse les changements de version et le tag dans le dépôt Git
+                    sh "git push origin ${branchName} --tags"
+                }
+
+
         }
     }
 }
