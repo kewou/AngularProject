@@ -26,8 +26,6 @@ pipeline{
 stage('Increment version') {
     steps {
         script {
-            // Vérifie l'état de la branche
-            sh 'git status'
 
             // Incrémente la version (par exemple, patch)
             sh 'npm version patch'
