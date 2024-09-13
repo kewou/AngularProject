@@ -3,20 +3,18 @@ import { Router, NavigationEnd, Event as RouterEvent } from '@angular/router';
 import { UserService } from './user/service/user.service';
 import { filter } from 'rxjs/operators';
 
-declare function initializeNavPanel(): any;
-declare function deconnexion(): any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
 
     title = 'GestionLoyer';
 
     constructor(private router: Router, private renderer: Renderer2,private userService: UserService) {}
-
+    /*
     ngOnInit() {
     this.router.events
       .pipe(filter((event: RouterEvent) => event instanceof NavigationEnd))
@@ -38,5 +36,6 @@ export class AppComponent implements OnInit {
         initializeNavPanel();
         deconnexion();
     }
+*/
 
 }

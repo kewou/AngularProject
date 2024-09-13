@@ -1,8 +1,23 @@
 
-#body{
-  font-family: Arial, sans-serif;
-  background-color: black;
-  margin: 0;
-  padding: 0;
+
+#page-wrapper {
+    color: black;
+    background-color: #F8F8FF;
+    margin-left: 15%;
+    margin-right: 15%;
+    display: block;
+    flex: 1;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
+
+@media screen and (max-width: 736px) {
+
+    #page-wrapper {
+        margin:0px;
+        }
+
+
+}
+
 

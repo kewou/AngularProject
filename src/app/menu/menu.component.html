@@ -1,26 +1,39 @@
-<header id="header">
-    <h1 id="logo"><a routerLink="">
-        <mat-icon id="iconHome">home</mat-icon>
-        Gestion Loyer</a></h1>
-    <nav id="nav" *ngIf="this.userService.estUtilisateurConnecte();">
-        <ul>
-            <li><a routerLink="/logements">Mes logements</a></li>
-            <li><a routerLink="/compte-user">Mon compte</a></li>
-            <li><a (click)="openLogoutDialog($event)" class="button primary">Déconnexion</a></li>
-        </ul>
-    </nav>
-    <nav id="nav" *ngIf="!this.userService.estUtilisateurConnecte();">
-        <ul>
-            <li><a routerLink="/a-propos">A propos</a></li>
-            <li><a routerLink="/contact">Contact</a></li>
-            <li><a routerLink="/login" class="button primary">Connection / Inscription </a></li>
-        </ul>
-    </nav>
-</header>
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" routerLink="">
+            Gestion Loyer</a>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto" *ngIf="this.userService.estUtilisateurConnecte();">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/logements">Mes
+                    logements</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                                                     routerLink="/compte-user">Mon compte</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded"
+                                                     (click)="openLogoutDialog($event)" href="#">Déconnexion</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto" *ngIf="!this.userService.estUtilisateurConnecte();">
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/a-propos">A
+                    propos</a></li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/contact">Contact</a>
+                </li>
+                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/login"
+                >Connection
+                    / Inscription </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
 <div id="bannerMenu">
     <h1>Bienvenue sur Beezyweb</h1>
     <h2>Votre Partenaire de Confiance pour le Suivi de Locations Immobilières</h2>
 </div>
-
 
 

@@ -55,7 +55,6 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "src/assets/js/nav.js"
             ]
           },
           "configurations": {

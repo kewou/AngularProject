@@ -5,28 +5,38 @@
     <title>GestionLoyer</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1" , user-scalable=no">
-    <link rel="stylesheet" href="assets/css/main.css"/>
-    <noscript>
-        <link rel="stylesheet" href="assets/css/noscript.css"/>
-    </noscript>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/css/images/favicon.ico"/>
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css"/>
+    <link rel="stylesheet" href="assets/css/styles.css"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-<body class="is-preload landing">
+<body id="page-top">
 <app-root id="rootApplication">
 
 </app-root>
 <footer id="footer">
     <ul class="icons">
-        <li><a href="https://www.facebook.com/profile.php?id=100088740184789"
-               class="icon brands alt fa-facebook-f"><span
-                class="label">Facebook</span></a></li>
-        <li><a href="https://www.linkedin.com/in/joel-noumia-5404a8101/" class="icon brands alt fa-linkedin-in"><span
-                class="label">LinkedIn</span></a></li>
-        <li><a href="https://github.com/kewou" class="icon brands alt fa-github"><span class="label">GitHub</span></a>
+        <li>
+            <a class="btn btn-outline-light btn-social mx-1"
+               href="https://www.facebook.com/profile.php?id=100088740184789"><i
+                    class="fab fa-fw fa-facebook-f"></i>
+            </a></li>
+        <li>
+            <a class="btn btn-outline-light btn-social mx-1"
+               href="https://www.linkedin.com/in/joel-noumia-5404a8101/"><i class="fab fa-fw fa-linkedin-in"></i>
+            </a></li>
+
+        <li><a class="btn btn-outline-light btn-social mx-1" href="https://github.com/kewou"><i
+                class="fab fa-fw fa-github"></i></a>
         </li>
-        <li><a href="https://www.facebook.com/souljajoe.sbeezy" class="icon solid alt fa-envelope"><span class="label">Email</span></a>
+        <li><a class="btn btn-outline-light btn-social mx-1" href="https://www.facebook.com/souljajoe.sbeezy"><i
+                class="fab fa-fw fa-twitter"></i></a>
         </li>
     </ul>
     <p>&copy; <span id="annee"></span> Gestion de locations immobilières. Tous droits réservés. Joel NOUMIA</p>
@@ -41,17 +51,17 @@
     // Mettre à jour le contenu de l'élément avec l'id "annee"
     document.getElementById("annee").textContent = annee;
 </script>
-<script src="assets/js/jquery.min.js"></script>
 
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/jquery.dropotron.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-<script>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="assets/js/scripts.js"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                               SB Forms JS                               * *-->
+<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
-</script>
+
 </body>
 </html>

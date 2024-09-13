@@ -1,16 +1,8 @@
 #contact{
-  margin-top:2%;
 }
 
-#contact h2{
-  color:black;
-  text-align:center;
-  margin-top:3%;
-  margin-bottom: 1%;
-}
 
 #contactLeft{
-  float: left;
   width:46%;
   margin-left:2%;
   box-shadow: 0 3px 1px -2px rgba(0,0,0,.2),0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12);
@@ -32,6 +24,36 @@
   clear: both;
   display: block;
   content: "";
+}
+
+.alert{
+    color:red;
+}
+
+
+.contactMessageSent {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #FFFAF0;
+  margin: 20px auto;
+  width: 80%;
+  max-width: 500px;
+  margin-top:6%;
+}
+
+.contactMessageSent h2 {
+  color: #4CAF50;
+}
+
+.contactMessageSent a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.contactMessageSent a:hover {
+  text-decoration: underline;
 }
 
 
