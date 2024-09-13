@@ -25,7 +25,7 @@ jobs:
       run: npm run build --if-present
 
     - name: Deploy to S3
-      uses: jakejarvis/s3-sync-action@v1.0.0
+      uses: jakejarvis/s3-sync-action@v2.0.0
       with:
         args: --delete --acl public-read --follow-symlinks ./dist/ s3://my-angular-app-bucket-unique-id/
       env:
