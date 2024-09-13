@@ -28,9 +28,10 @@ jobs:
     - name: Deploy to S3     
       uses: jakejarvis/s3-sync-action@master
       with:
-        args: --delete --acl public-read --follow-symlinks ./dist/ s3://my-angular-app-bucket-unique-id/
+        args: --delete --acl public-read --follow-symlinks 
       env:
         AWS_S3_BUCKET: beezyweb-app-bucket
         AWS_REGION: eu-west-3
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        SOURCE_DIR: './dist'
