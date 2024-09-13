@@ -5,10 +5,12 @@
 }
 
 .accueil h2{
-  color:black;
-  font-size: 25px;
-  font-weight: bold;
-  text-align:center;
+    color: #000;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 1.5em;
+    letter-spacing: -0.025em;
 }
 
 .accueil h4{
@@ -27,11 +29,13 @@
 
 .accueil p{
   font-family: 'serif';
+  font-size: 16px;
+  padding-top: 2%;
 }
 
 .accueilLeft{
   float:left;
-  width:50%;
+  width:48%;
 }
 
 .accueilRight{
@@ -42,6 +46,38 @@
 .accueilRight img{
   width:100%;
 }
+
+button.button {
+    background-color: #e13652;
+    border: none;
+    cursor: pointer;
+    color:white;
+    width:20%;
+    font-size:16px;
+    height:55px;
+    width:65%;
+}
+
+button.button:hover{
+    background-color:#6ec654}
+
+
+section {
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+ol {
+    list-style: decimal;
+    margin: 0 0 2em 0;
+    padding-left: 1.25em;
+    margin-top: 5%;
+}
+
+li {
+  margin-bottom: 20px;
+}
+
 
 @media screen and (max-width: 736px) {
 
@@ -67,5 +103,8 @@
     ol li{margin-top:20px}
 
     ol li p{margin-top:15px}
+
+    button.button{
+        width:100%}
 }
 

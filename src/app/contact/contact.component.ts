@@ -13,6 +13,8 @@ export class ContactComponent implements OnInit {
 
   message : MessageDto = {"senderName": "", "senderMail": "", "senderMessage": ""}
 
+  isMessageSent = false;
+
   successMessage: string | null = null;
 
   errorMessages: any[] = [];
@@ -35,9 +37,13 @@ export class ContactComponent implements OnInit {
     this.http.post(url, sendMessage,this.httpOptions).subscribe(
         response => {
           console.log('Réponse du serveur :', response);
+          // Simuler l'envoi réussi du message
+          this.isMessageSent = true;
           // Gérez ici la réponse du serveur en cas de succès
           this.successMessage = "Message envoyé avec succès"
-          this.router.navigate(['/contact']); // Redirection vers la page de connexion
+            setTimeout(() => {
+              this.router.navigate(['']);
+            }, 4000000); // 3000ms = 3 secondes, redirection vers la page d'accueil
         },
         (error) => {
           console.error('Erreur lors de l\'envoi de la requête :', error);

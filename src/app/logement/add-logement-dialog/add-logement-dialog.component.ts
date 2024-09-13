@@ -27,7 +27,7 @@ export class AddLogementDialogComponent {
                   reference: [''],
                   quartier: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30),CustomValidators.noSpecialCharacters()]],
                   ville: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25),CustomValidators.noSpecialCharacters()]],
-                  description: ['', [Validators.required, Validators.minLength(5),Validators.maxLength(15),CustomValidators.noSpecialCharacters()]]
+                  description: ['', [Validators.required, Validators.minLength(5),Validators.maxLength(50),CustomValidators.noSpecialCharacters()]]
                 });
         }
 
