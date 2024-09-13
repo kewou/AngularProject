@@ -23,17 +23,6 @@ pipeline{
         }
     }
 
-stage('Increment version') {
-    steps {
-        script {
-
-            // Incrémente la version (par exemple, patch)
-            sh 'npm version patch'
-
-        }
-    }
-}
-
 
     stage ('Nexus Login'){
         steps {            
