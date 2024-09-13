@@ -1,6 +1,7 @@
 name: Deploy Angular App to S3
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main  # Déclenche le workflow sur les pushes vers la branche principale
