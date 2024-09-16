@@ -16,4 +16,4 @@ jobs:
 
 
     - name: Amplify webhook
-      run: curl -X POST -d {} "https://webhooks.amplify.eu-west-3.amazonaws.com/prod/webhooks?id=10b02dbf-401e-42b0-949e-fefcbf20be77&token=${{ secrets.AMPLIFY_TOKEN }}&operation=startbuild" -H "Content-Type:application/json"
+      run: curl -X POST -d {} "https://webhooks.amplify.eu-west-3.amazonaws.com/prod/webhooks?id=${{ secrets.AMPLIFY_ID }}&token=${{ secrets.AMPLIFY_TOKEN }}&operation=startbuild" -H "Content-Type:application/json"
