@@ -1,9 +1,10 @@
 
 #aPropos h2{
-  color:white;
+  color:#3498db;
   font-size: 25px;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 #aPropos strong {
@@ -15,15 +16,14 @@
 
 #aPropos p{
     margin: 0 0 2em 0;
-    color:white;
-    font-size: 20px;
+    font-size: 16px;
+    color:black;
 }
 
 #about-container {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    background-color: #1c1d26;
 }
 
 #sections{
@@ -33,8 +33,8 @@
 
 #sections li{
     margin: 0 0 2em 0;
-    color: white;
-    font-size: 20px;
+    color: black;
+    font-size: 16px;
 }
 
 @media screen and (max-width: 736px) {
