@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: "https://api.beezyweb.net"
+  backendUrl: "https://api.beezyweb.net/beezyApi"
 };
