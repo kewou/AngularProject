@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backendUrl: "https://api.beezyweb.net:8080/beezyApi"
+  backendUrl: "https://api.beezyweb.net"
 };
 
 /*
