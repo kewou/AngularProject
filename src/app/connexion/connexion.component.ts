@@ -73,7 +73,7 @@ export class ConnexionComponent implements OnInit{
             this.http.post(`${this.backendUrl}/users/verify-account`, accountParams, this.httpOptions).subscribe(
                 (response: any) => {
                     this.cookieService.set('jwtToken', response.jwtToken, undefined, undefined, undefined, true, 'Lax');
-                    window.location.href = '/beezyApi/connexion';
+                    this.router.navigate(['connexion']);
                 },
                 error => {
                     console.log("Error occured", error);
