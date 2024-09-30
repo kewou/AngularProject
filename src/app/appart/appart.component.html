@@ -5,7 +5,7 @@
 <div id="apparts" *ngIf="apparts.length > 0; else noApparts">
     <div *ngFor="let appart of apparts" class="appart-item">
         <div (click)="viewLoyers(appart.reference)">
-            <p>Numéro : <span class="value">{{ appart.numero }}</span></p>
+            <p>Nom : <span class="value">{{ appart.nom }}</span></p>
             <p>Prix Loyer : <span class="value">{{ appart.prixLoyer }}</span></p>
             <p>Prix caution : <span class="value">{{ appart.prixCaution }}</span></p>
         </div>
