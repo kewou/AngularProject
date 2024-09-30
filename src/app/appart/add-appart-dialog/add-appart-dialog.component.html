@@ -4,7 +4,7 @@
 
         <mat-form-field id="nom" class="form-field">
             <mat-label>Nom</mat-label>
-            <input matInput placeholder="Nom de l'appartement" formControlName="nom">
+            <input matInput placeholder="Exemple: T4" formControlName="nom">
             <mat-error *ngIf="appartForm.get('nom')?.invalid && appartForm.get('nom')?.touched">
                 <ng-container *ngIf="appartForm.get('nom')?.errors?.['required']">Le nom de l'appartement
                     est obligatoire.

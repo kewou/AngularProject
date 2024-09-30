@@ -1,4 +1,4 @@
-<h2>Mes logements</h2>
+<h2>Mes biens immobiliers</h2>
 
 <div id="logements" *ngIf="logements.length > 0; else noLogements">
     <div *ngFor="let logement of logements" class="logement-item">
@@ -22,7 +22,7 @@
 </ng-template>
 
 <button mat-raised-button class="ajouter" color="primary" (click)="openAddLogementDialog($event)">Ajouter
-    Logement
+    un Bien
 </button>
 
 <app-add-logement-dialog *ngIf="isModalOpen" [logement]="logement" (close)="closeModal()"
