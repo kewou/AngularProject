@@ -6,6 +6,7 @@ import { HttpModule } from '../modules/http/http.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
@@ -97,7 +98,8 @@ registerLocaleData(localeFr);
     MatDialogModule,
     ReactiveFormsModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatMenuModule
 
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' },UserService,AuthGuard,CookieService],
