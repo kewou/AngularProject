@@ -1,7 +1,7 @@
 <div>
     <button mat-raised-button class="back" color="primary" (click)="goBack()">Retour</button>
 </div>
-<h2>Les appartements du logement : {{descriptionLogement}}</h2>
+<h2>Les appartements du bien : {{descriptionLogement}}</h2>
 <div id="apparts" *ngIf="apparts.length > 0; else noApparts">
     <div *ngFor="let appart of apparts" class="appart-item">
         <div (click)="viewLoyers(appart.reference)">
@@ -18,7 +18,7 @@
 </div>
 
 <ng-template #noApparts>
-    <p id="noAppart">Aucun appartement trouvé pour ce logement</p>
+    <p id="noAppart">Aucun appartement trouvé pour ce bien</p>
 </ng-template>
 
 <button class="ajouter" mat-raised-button color="primary" (click)="openAddAppartDialog()">

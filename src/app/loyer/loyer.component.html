@@ -2,7 +2,7 @@
     <button mat-raised-button class="back" color="primary" (click)="goBack()">Retour</button>
 </div>
 
-<h2>Historique des loyers de l'appart. n° : {{appart.nom}}</h2>
+<h2>Historique des loyers de l'appart : {{appart.nom}}</h2>
 
 
 <table>
@@ -11,7 +11,6 @@
         <th>Mois</th>
         <th>Prix loyer</th>
         <th>Etat</th>
-        <th>Payé</th>
         <th>Solde</th>
         <th>Arriéré</th>
     </tr>
@@ -21,9 +20,10 @@
         <td>{{ loyer.dateLoyer | date: 'MMMM yyyy' }}</td>
         <td>{{ formatAmount(appart.prixLoyer) }}</td>
         <td [ngClass]="{ 'ok': loyer.isOk, 'ko': !loyer.isOk }">{{ loyer.isOk ? 'ok' : 'ko' }}</td>
-        <td>{{ formatAmount(loyer.solde+appart.prixLoyer) }}</td>
         <td [ngClass]="{ 'ok': loyer.isOk, 'ko': !loyer.isOk }">{{ formatAmount(loyer.solde) }}</td>
-        <td [ngClass]="{ 'ok': loyer.isOk, 'ko': !loyer.isOk }">{{ loyer.isOk ? '0' : formatAmount(loyer.solde) }}</td>
+        <td [ngClass]="{ 'ok': loyer.isOk, 'ko': !loyer.isOk }">{{ loyer.isOk ? '0' : loyer.solde/appart.prixLoyer*-1 }}
+            mois
+        </td>
     </tr>
     </tbody>
 </table>
