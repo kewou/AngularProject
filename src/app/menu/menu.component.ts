@@ -1,30 +1,53 @@
-import { ChangeDetectorRef,Component, OnInit,AfterViewInit } from '@angular/core';
+import { Component,ViewChild, ElementRef, OnInit,AfterViewInit,Renderer2 } from '@angular/core';
 import { UserService } from '../user/service/user.service';
 import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
+import { Router,NavigationEnd } from '@angular/router';
 import { LogoutDialogComponent } from '../logout-dialog/logout-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent  implements OnInit{
+export class MenuComponent implements  AfterViewInit{
 
   registrationModalOpen = false;
   isUserConnected: boolean = false;
+
+  @ViewChild('navbarResponsive') navbarResponsive!: ElementRef;
 
   constructor(public userService: UserService,
               private cookieService: CookieService,
               private router: Router,
               private dialog: MatDialog,
-              private cdr: ChangeDetectorRef) { }
+              private renderer: Renderer2) { }
 
-  ngOnInit() {
+    ngAfterViewInit() {
+        // Écouter les changements de route et fermer le menu après navigation
+        this.router.events.pipe(
+          filter(event => event instanceof NavigationEnd)
+        ).subscribe(() => {
+            console.log('Navigation détectée', event);
+          this.fermerMenu();
+        });
+    }
 
+  fermerMenu() {
+    if (this.navbarResponsive) {
+      const navbarElement = this.navbarResponsive.nativeElement;
 
+      // Retirer la classe 'show' immédiatement si elle est présente
+      setTimeout(() => {
+        if (navbarElement.classList.contains('show')) {
+          this.renderer.removeClass(navbarElement, 'show');
+        }
+      }, 100);
+    }
   }
+
+
 
 
   openLogoutDialog(event: Event): void {
