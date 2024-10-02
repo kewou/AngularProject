@@ -83,7 +83,7 @@ export class UserService {
 
 
   getUserInfo(): Observable<any>{
-      return this.http.get(`${this.backendUrl}/users/${this.userReference}`).pipe(
+      return this.http.get(`${this.backendUrl}/users/${this.cookieService.get('userReference')}`).pipe(
         catchError((error) => {
           console.error('Error fetching user info:')
           return throwError('Failed to fetch user info');

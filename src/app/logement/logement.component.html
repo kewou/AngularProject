@@ -1,4 +1,4 @@
-<h2>Mes logements</h2>
+<h2>Mes biens immobiliers</h2>
 
 <div id="logements" *ngIf="logements.length > 0; else noLogements">
     <div *ngFor="let logement of logements" class="logement-item">
@@ -7,13 +7,19 @@
             <p>{{ logement.description }}</p>
         </div>
         <div id="actionsLogement">
-            <button class="modifier" mat-raised-button (click)="openEditLogementDialog(logement)">Modifier</button>
-            <button class="supprimer" mat-raised-button (click)="openDeleteLogementDialog(logement.reference)">
-                Supprimer
-            </button>
+            <button mat-button [matMenuTriggerFor]="menu" class="menu-button">Menu</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="viewApparts(logement.reference)">Les logements</button>
+                <hr style="margin: 0; border: none; border-top: 2px solid black;"/>
+                <button mat-menu-item (click)="openEditLogementDialog(logement)">Modifier</button>
+                <hr style="margin: 0; border: none; border-top: 2px solid black;"/>
+                <button class="supprimer-button"
+                        (click)="openDeleteLogementDialog(logement.reference)">
+                    Supprimer
+                </button>
+            </mat-menu>
         </div>
     </div>
-
 </div>
 
 
@@ -22,7 +28,7 @@
 </ng-template>
 
 <button mat-raised-button class="ajouter" color="primary" (click)="openAddLogementDialog($event)">Ajouter
-    Logement
+    un Bien
 </button>
 
 <app-add-logement-dialog *ngIf="isModalOpen" [logement]="logement" (close)="closeModal()"

@@ -23,7 +23,7 @@ export class AddAppartDialogComponent {
       ) {
               this.appartForm = this.fb.group({
                 reference: [''],
-                numero: ['', [Validators.required,Validators.min(1),Validators.max(1000),CustomValidators.noSpecialCharacters()]],
+                nom: ['', [Validators.required,CustomValidators.noSpecialCharacters()]],
                 prixLoyer: ['', [Validators.required,Validators.min(1),Validators.max(1000000),CustomValidators.noSpecialCharacters()]],
                 prixCaution: ['', [Validators.required,Validators.min(1),Validators.max(1000000) ,CustomValidators.noSpecialCharacters()]]
               });
