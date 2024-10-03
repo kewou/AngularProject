@@ -16,12 +16,14 @@ table {
 }
 
 table, th, td {
-    border: 1px solid #ddd;
+    border: 2px solid silver;
 }
 
 th, td {
     padding: 12px;
     text-align: center;
+    padding-left: 2px;
+    padding-right:2px;
 }
 
 th {
