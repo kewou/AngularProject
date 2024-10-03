@@ -120,12 +120,13 @@ export class LoyerComponent implements OnInit, OnChanges {
    }
 
      formatAmount(amount: number): string {
-       if (amount >= 1000000) {
-         return (amount / 1000000).toFixed(1) + ' M'; // Million
-       } else if (amount >= 1000) {
-         return (amount / 1000).toFixed(1) + ' K'; // Mille
+         let amountAbsolue = Math.abs(amount);
+       if (amountAbsolue >= 1000000) {
+         return (amountAbsolue / 1000000).toFixed(1) + ' M'; // Million
+       } else if (amountAbsolue >= 1000) {
+         return (amountAbsolue / 1000).toFixed(1) + ' K'; // Mille
        } else {
-         return amount.toString(); // Moins de mille
+         return amountAbsolue.toString(); // Moins de mille
        }
      }
 
