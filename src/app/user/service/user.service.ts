@@ -1,41 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Observable, of,throwError } from 'rxjs';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
 import { jwtDecode } from "jwt-decode";
 import { CookieService } from 'ngx-cookie-service';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../modele/user';
+import { HttpService } from '../../utils/httpService'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private backendUrl = environment.backendUrl;
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
   private estConnecte = false;
   private userReference = this.cookieService.get('userReference');
 
-  constructor(private http: HttpClient,
+  constructor(readonly httpService:HttpService,
               private cookieService: CookieService,private router: Router) {
 
   }
 
 
   getUsers(): Observable<any>{
-    const url = `${this.backendUrl}/users`;
-    return this.http.get(url);
+    return this.httpService.get("users");
   }
 
-  loginUser(obj: any) : Observable<any> {
-    const url = `${this.backendUrl}/authenticate`;
-    return this.http.post(url,obj);
+  loginUser(loginPassObject: any) : Observable<any> {
+    return this.httpService.post("authenticate",loginPassObject);
   }
 
   logout(): void {
@@ -79,26 +70,26 @@ export class UserService {
   }
 
 
-
-
-
   getUserInfo(): Observable<any>{
-      return this.http.get(`${this.backendUrl}/users/${this.cookieService.get('userReference')}`).pipe(
-        catchError((error) => {
-          console.error('Error fetching user info:')
-          return throwError('Failed to fetch user info');
-        })
-      );
+      let endpointUrl = `users/${this.cookieService.get('userReference')}`;
+      return this.httpService.get(endpointUrl)
+                .pipe(
+                      catchError((error) => {
+                        console.error('Error fetching user info:')
+                        return throwError('Failed to fetch user info');
+                      })
+                  );
   }
 
   updateUser(updatedUser:User) : Observable<any>{
-            return this.http.put(`${this.backendUrl}/users/${this.userReference}`,updatedUser,this.httpOptions).pipe(
-              catchError((error) => {
-                console.error('Error fetching update user:')
-                return throwError('Failed to update user ');
-              })
+      let endpointUrl = `users/${this.cookieService.get('userReference')}`;
+      return this.httpService.put(endpointUrl,updatedUser)
+              .pipe(
+                  catchError((error) => {
+                    console.error('Error fetching update user:')
+                    return throwError('Failed to update user ');
+                  })
             );
-
       }
 
 
@@ -119,7 +110,5 @@ export class UserService {
         return false;
       }
     }
-
-
 
 }
