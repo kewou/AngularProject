@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of ,throwError} from 'rxjs';
-import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserService } from '../../user/service/user.service';
-import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError } from 'rxjs/operators';
 import { Transaction } from '../modele/transaction';

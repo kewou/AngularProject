@@ -44,7 +44,7 @@
 }
 
 .accueilRight img{
-  width:100%;
+  width:90%;
 }
 
 button.button {
@@ -55,7 +55,7 @@ button.button {
     width:20%;
     font-size:16px;
     height:55px;
-    width:65%;
+    width: 65%;
 }
 
 button.button:hover{
@@ -104,7 +104,12 @@ li {
 
     ol li p{margin-top:15px}
 
-    button.button{
-        width:100%}
+    button.button{width:100%}
+
+    .accueilRight img{
+      height:230px;
+      margin-bottom:20px;
+      width: 100%;
+    }
 }
 

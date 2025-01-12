@@ -46,7 +46,7 @@ export class ContactComponent {
             }
           }
           if (error.status == 500 || error.status == 0) {
-            this.errorMessages.push("Erreur survenue lors de l'envoi du mail")
+            this.errorMessages.push("Erreur survenue lors de l'envoi du mail, nous allons résoudre ce problème dans les plus bref délais")
           }
           this.router.navigate(['/contact']);
         });

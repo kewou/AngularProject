@@ -64,7 +64,7 @@ export class InscriptionComponent {
                     }
                   }
                   if (error.status == 500 || error.status == 0) {
-                    this.errorMessages.push("Une erreur s'est produite durant l'inscription")
+                    this.errorMessages.push("Une erreur s'est produite durant l'inscription, veuillez envoyer un message svp !")
                   }
                 }
             );

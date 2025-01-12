@@ -59,6 +59,12 @@
                         </div>
                     </div>
 
+                    <div class="error-message">
+                        <ul>
+                            <li *ngFor="let error of errorMessages">{{error}}</li>
+                        </ul>
+                    </div>
+
                     <!-- Submit Button-->
                     <button mat-raised-button color="primary" type="submit" [disabled]="!contactForm.form.valid">
                         Envoyer
