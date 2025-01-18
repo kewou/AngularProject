@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { UserService } from '../user/service/user.service';
 import { CookieService } from 'ngx-cookie-service';
+import { HttpService } from '../utils/httpService';
 
 @Component({
     selector: 'app-connexion',
@@ -27,6 +28,7 @@ export class ConnexionComponent implements OnInit{
     };
 
     constructor(private http: HttpClient,private router: Router,private userService: UserService,private cookieService: CookieService,
+        readonly httpService:HttpService
     ) {
 
     }
@@ -57,9 +59,7 @@ export class ConnexionComponent implements OnInit{
 
             },
             (error:HttpErrorResponse) => {
-                if(error.status === 401){
-                    this.errorMessage="Login ou mot de passe incorrect !";
-                }
+                this.errorMessage = this.httpService.getErrorMessage(error.status);
             }
         );
     }

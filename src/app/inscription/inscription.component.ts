@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpService } from '../utils/httpService'
+import { HttpService } from '../utils/httpService';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class InscriptionComponent {
   showPass: boolean = false
   showConfirmPass: boolean = false
 
-  constructor(readonly httpService:HttpService ,private router: Router) {
+  constructor(readonly httpService:HttpService, private router: Router) {
   }
 
   showPassword() {
@@ -63,9 +63,7 @@ export class InscriptionComponent {
                       }
                     }
                   }
-                  if (error.status == 500 || error.status == 0) {
-                    this.errorMessages.push("Une erreur s'est produite durant l'inscription, veuillez envoyer un message svp !")
-                  }
+                  this.errorMessages.push(this.httpService.getErrorMessage(error.status));
                 }
             );
   }
