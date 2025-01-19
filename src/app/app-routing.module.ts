@@ -21,9 +21,9 @@ const routes: Routes = [
   { path: 'a-propos', component: AProposComponent},
   { path: 'confirmation-inscription', component: ConfirmationRegisterComponent},
   { path: 'compte-user', component: CompteUserComponent,canActivate: [AuthGuard] },
-  { path: 'logements', component: LogementComponent,canActivate: [AuthGuard], data: { breadcrumb: 'Mes logements' } },
-  { path: 'logements/:logementRef/apparts', component: AppartComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Mes appartements' } },
-  { path: 'logements/:logementRef/apparts/:appartRef', component: LoyerComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Historique des loyers' }},
+  { path: 'bailleur/logements', component: LogementComponent,canActivate: [AuthGuard], data: { breadcrumb: 'Mes logements' } },
+  { path: 'bailleur/logements/:logementRef/apparts', component: AppartComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Mes appartements' } },
+  { path: 'bailleur/logements/:logementRef/apparts/:appartRef', component: LoyerComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Historique des loyers' }},
   { path: '**', component: NotFoundComponent }
 ];
 

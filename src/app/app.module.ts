@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -7,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
@@ -99,7 +100,8 @@ registerLocaleData(localeFr);
     ReactiveFormsModule,
     MatTableModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatRadioModule
 
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' },UserService,AuthGuard,CookieService],

@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { UserService } from '../user/service/user.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpService } from '../utils/httpService';
+import { jwtDecode } from "jwt-decode";
 
 @Component({
     selector: 'app-connexion',
@@ -33,6 +34,28 @@ export class ConnexionComponent implements OnInit{
 
     }
 
+   getUserAuthority(tokenJwt:string): string{
+      const decodedToken:any = jwtDecode(tokenJwt);
+      if (decodedToken.roles.length > 0) {
+        return decodedToken.roles[0].authority; // Retourne le premier rôle
+      }
+      return "";
+   }
+
+    redirectToRoleBasedPage(userAuthority:string): void {
+
+       if (userAuthority === 'ADMIN') {
+         this.router.navigate(['/bailleur/logements']);
+       } else if (userAuthority === 'BAILLEUR') {
+         this.router.navigate(['/bailleur/logements']);
+       } else if (userAuthority === 'LOCATAIRE') {
+         this.router.navigate(['/locataire/logements/appart']);
+       } else {
+         console.error('Rôle utilisateur inconnu');
+         this.router.navigate(['/unauthorized']); // Redirection en cas de rôle non identifié
+       }
+    }
+
     loginSubmit() {
         this.errorMessage = null;
         if (this.loginObj.username==='' || this.loginObj.password==='') {
@@ -55,7 +78,9 @@ export class ConnexionComponent implements OnInit{
                 this.cookieService.set('jwtToken', response.jwtToken, undefined, undefined, undefined, true, 'Lax');
                 const userReference = this.userService.getCurrentUserReference(response.jwtToken)
                 this.cookieService.set('userReference', userReference, undefined, undefined, undefined, true, 'Lax');
-                this.router.navigate(['logements']);
+
+                this.redirectToRoleBasedPage(this.getUserAuthority(response.jwtToken));
+                //this.router.navigate(['logements']);
 
             },
             (error:HttpErrorResponse) => {

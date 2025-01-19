@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../utils/httpService';
+import { UserInscriptionDto } from './userInscriptionDto';
+
+
 
 
 @Component({
@@ -10,8 +13,7 @@ import { HttpService } from '../utils/httpService';
 })
 export class InscriptionComponent {
 
-  user: UserInscriptionDto = { firstName: "", lastName: "", email: "", phone: "", password: "", confirmPassword: ""  };
-
+  user: UserInscriptionDto = { firstName: "", lastName: "", email: "", phone: "", role: "", password: "", confirmPassword: ""  };
   errorMessage: string | null = null;
 
   errorMessages: any[] = [];
@@ -30,20 +32,10 @@ export class InscriptionComponent {
     this.showConfirmPass = !this.showConfirmPass
   }
 
-  registerLocataire()  {
-    return this.registerSubmit("users/create-locataire")
-  }
 
-  registerBailleur()  {
-    return this.registerSubmit("users/create-bailleur")
-  }
-
-  registerAdmin()  {
-    return this.registerSubmit("users/create-admin")
-  }
-
-  registerSubmit(url: string = "users/create-bailleur") {
+  registerUser() {
     this.errorMessages = []
+    let url = this.getUrlByRole(this.user.role);
     let userToSubmit = {name: this.user.firstName, lastName: this.user.lastName, email: this.user.email, phone: this.user.phone, password: this.user.password}
     this.httpService.post(url,userToSubmit)
             .subscribe(
@@ -68,15 +60,19 @@ export class InscriptionComponent {
             );
   }
 
+  getUrlByRole(role:string) : string {
+      if (this.user.role === 'BAILLEUR') {
+        return "users/create-bailleur";
+      } else if (this.user.role === 'LOCATAIRE') {
+        return "users/create-locataire";
+      } else {
+         console.error('Rôle utilisateur non valide');
+         return "";
+
+      }
+  }
+
 }
 
-export interface UserInscriptionDto {
-  firstName: string,
-  lastName: string,
-  email: string,
-  phone: string,
-  password: string,
-  confirmPassword: string,
-}
 
 
