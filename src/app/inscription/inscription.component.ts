@@ -13,7 +13,7 @@ import { UserInscriptionDto } from './userInscriptionDto';
 })
 export class InscriptionComponent {
 
-  user: UserInscriptionDto = { firstName: "", lastName: "", email: "", phone: "", role: "", password: "", confirmPassword: ""  };
+  user: UserInscriptionDto = { firstName: "", lastName: "", email: "", role: "", password: "", confirmPassword: ""  };
   errorMessage: string | null = null;
 
   errorMessages: any[] = [];
@@ -22,6 +22,7 @@ export class InscriptionComponent {
   showConfirmPass: boolean = false
 
   constructor(readonly httpService:HttpService, private router: Router) {
+      this.user.role = "BAILLEUR"
   }
 
   showPassword() {
@@ -36,7 +37,7 @@ export class InscriptionComponent {
   registerUser() {
     this.errorMessages = []
     let url = this.getUrlByRole(this.user.role);
-    let userToSubmit = {name: this.user.firstName, lastName: this.user.lastName, email: this.user.email, phone: this.user.phone, password: this.user.password}
+    let userToSubmit = {name: this.user.firstName, lastName: this.user.lastName, email: this.user.email, password: this.user.password}
     this.httpService.post(url,userToSubmit)
             .subscribe(
                 response => {

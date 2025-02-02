@@ -36,17 +36,7 @@
                 <span *ngIf="email.errors?.['required']">L'adresse e-mail est obligatoire.</span>
                 <span *ngIf="email.errors?.['email']">Le format de l'adresse e-mail est invalide</span>
             </div>
-
-            <!-- Téléphone -->
-            <mat-form-field class="form-field">
-                <input matInput type="number" placeholder="Téléphone" [(ngModel)]=user.phone name="phone"
-                       #phone="ngModel" required>
-                <mat-icon matSuffix>phone</mat-icon>
-            </mat-form-field>
-
-            <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="alert">
-                <span *ngIf="phone.errors?.['required']">Le téléphone est obligatoire.</span>
-            </div>
+            
 
             <!-- Mot de passe -->
             <mat-form-field class="form-field">
