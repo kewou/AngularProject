@@ -12,6 +12,7 @@ import { LoyerComponent } from './loyer/loyer.component';
 import { ConfirmationRegisterComponent } from './inscription/confirmation-register/confirmation-register.component';
 import { AuthGuard } from './authentication.guard';
 import {NotFoundComponent} from './not-found/not-found.component';
+import {ForbiddenComponent} from './forbidden/forbidden.component';
 
 const routes: Routes = [
   { path: '', component: AccueilComponent },
@@ -21,9 +22,11 @@ const routes: Routes = [
   { path: 'a-propos', component: AProposComponent},
   { path: 'confirmation-inscription', component: ConfirmationRegisterComponent},
   { path: 'compte-user', component: CompteUserComponent,canActivate: [AuthGuard] },
+  { path: 'locataire/logement', component: LogementComponent,canActivate: [AuthGuard] },
   { path: 'bailleur/logements', component: LogementComponent,canActivate: [AuthGuard], data: { breadcrumb: 'Mes logements' } },
   { path: 'bailleur/logements/:logementRef/apparts', component: AppartComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Mes appartements' } },
   { path: 'bailleur/logements/:logementRef/apparts/:appartRef', component: LoyerComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Historique des loyers' }},
+  { path: 'forbidden', component: ForbiddenComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

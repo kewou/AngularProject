@@ -49,7 +49,7 @@ export class ConnexionComponent implements OnInit{
        } else if (userAuthority === 'BAILLEUR') {
          this.router.navigate(['/bailleur/logements']);
        } else if (userAuthority === 'LOCATAIRE') {
-         this.router.navigate(['/locataire/logements/appart']);
+         this.router.navigate(['/locataire/logement/appart']);
        } else {
          console.error('Rôle utilisateur inconnu');
          this.router.navigate(['/unauthorized']); // Redirection en cas de rôle non identifié
