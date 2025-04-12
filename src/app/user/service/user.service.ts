@@ -16,7 +16,7 @@ export class UserService {
   private userReference = this.cookieService.get('userReference');
 
   constructor(readonly httpService:HttpService,
-              private cookieService: CookieService,private router: Router) {
+              private readonly cookieService: CookieService,private readonly router: Router) {
 
   }
 
@@ -109,6 +109,43 @@ export class UserService {
       } catch (err) {
         return false;
       }
-    }
+  }
+
+  public saveUserAuthenticationInfo(tokenJwt:string){
+    this.cookieService.set('jwtToken', tokenJwt, undefined, undefined, undefined, true, 'Lax');
+    const userReference = this.getCurrentUserReference(tokenJwt);
+    this.cookieService.set('userReference', userReference, undefined, undefined, undefined, true, 'Lax');
+  }
+
+
+  public redirectToRoleBasedPage(tokenJwt:string): void {
+      let userAuthority = '';
+      try {
+        const decodedToken: any = jwtDecode(tokenJwt);
+
+        if (decodedToken.roles && Array.isArray(decodedToken.roles) && decodedToken.roles.length > 0) {
+          userAuthority = decodedToken.roles[0].authority;
+        }
+
+        // Redirection selon le rôle
+        switch (userAuthority) {
+          case 'ADMIN':
+          case 'BAILLEUR':
+            this.router.navigate(['/bailleur/logements']);
+            break;
+          case 'LOCATAIRE':
+            this.router.navigate(['/locataire/logements/appart']);
+            break;
+          default:
+            console.error('Rôle utilisateur inconnu :', userAuthority);
+            this.router.navigate(['/unauthorized']);
+            break;
+        }
+
+      } catch (error) {
+        console.error('Erreur lors du décodage du token JWT', error);
+        this.router.navigate(['/unauthorized']);
+      }
+  }
 
 }

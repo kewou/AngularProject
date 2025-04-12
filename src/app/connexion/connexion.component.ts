@@ -34,27 +34,7 @@ export class ConnexionComponent implements OnInit{
 
     }
 
-   getUserAuthority(tokenJwt:string): string{
-      const decodedToken:any = jwtDecode(tokenJwt);
-      if (decodedToken.roles.length > 0) {
-        return decodedToken.roles[0].authority; // Retourne le premier rôle
-      }
-      return "";
-   }
 
-    redirectToRoleBasedPage(userAuthority:string): void {
-
-       if (userAuthority === 'ADMIN') {
-         this.router.navigate(['/bailleur/logements']);
-       } else if (userAuthority === 'BAILLEUR') {
-         this.router.navigate(['/bailleur/logements']);
-       } else if (userAuthority === 'LOCATAIRE') {
-         this.router.navigate(['/locataire/logements/appart']);
-       } else {
-         console.error('Rôle utilisateur inconnu');
-         this.router.navigate(['/unauthorized']); // Redirection en cas de rôle non identifié
-       }
-    }
 
     loginSubmit() {
         this.errorMessage = null;
@@ -67,21 +47,15 @@ export class ConnexionComponent implements OnInit{
         const userReference = this.cookieService.get('userReference');
         if(token){
             this.cookieService.delete('jwtToken');
-
         }
         if(userReference){
             this.cookieService.delete('jwtToken');
-            }
+        }
         this.userService.loginUser(this.loginObj).subscribe(
             (response:any) => {
                 console.log("response",response);
-                this.cookieService.set('jwtToken', response.jwtToken, undefined, undefined, undefined, true, 'Lax');
-                const userReference = this.userService.getCurrentUserReference(response.jwtToken)
-                this.cookieService.set('userReference', userReference, undefined, undefined, undefined, true, 'Lax');
-
-                this.redirectToRoleBasedPage(this.getUserAuthority(response.jwtToken));
-                //this.router.navigate(['logements']);
-
+                this.userService.saveUserAuthenticationInfo(response.jwtToken);
+                this.userService.redirectToRoleBasedPage(response.jwtToken);
             },
             (error:HttpErrorResponse) => {
                 this.errorMessage = this.httpService.getErrorMessage(error.status);
@@ -89,13 +63,13 @@ export class ConnexionComponent implements OnInit{
         );
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.href = this.router.url
         if (this.href.includes('#')) {
             let queryParams = this.href.split("#")
             let infos = queryParams[1].split("/")
             let accountParams={"reference": infos[0], "verificationToken": infos[1]}
-            this.http.post(`${this.backendUrl}/users/verify-account`, accountParams, this.httpOptions).subscribe(
+            this.httpService.post(`users/verify-account`, accountParams).subscribe(
                 (response: any) => {
                     this.cookieService.set('jwtToken', response.jwtToken, undefined, undefined, undefined, true, 'Lax');
                     this.router.navigate(['connexion']);
@@ -106,6 +80,11 @@ export class ConnexionComponent implements OnInit{
                 }
             )
         }
+    }
+
+    loginWithGoogle() {
+      const redirectUri = encodeURIComponent('http://localhost:4200/beezyApi/login/success');
+      window.location.href = `http://localhost:8090/beezyApi/oauth2/authorize/google?redirect_uri=${redirectUri}`;
     }
 
 }
