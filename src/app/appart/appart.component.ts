@@ -164,7 +164,7 @@ export class AppartComponent implements OnInit{
              this.route.paramMap.subscribe(params => {
                  this.logementRef = params.get('logementRef') as string;
                      if(this.logementRef){
-                         this.router.navigate([`/logements/${this.logementRef}/apparts/${appartRef}`]);
+                         this.router.navigate([`/bailleur/logements/${this.logementRef}/apparts/${appartRef}`]);
                      }
             })
          }

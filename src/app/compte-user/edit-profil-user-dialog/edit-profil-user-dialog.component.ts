@@ -30,16 +30,13 @@ export class EditProfilUserDialogComponent {
     onConfirm(): void {
 
       if(this.userForm.valid){
-          alert("test");
                 const updatedUser: User = {
                   ...this.data.user,
                   ...this.userForm.value
                 };
           this.userUpdated.emit(updatedUser);
           this.dialogRef.close('confirm');
-          }else{
-            alert("fuck");
-            }
+          }
     }
 
     onCancel(): void {

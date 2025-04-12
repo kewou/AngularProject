@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { UserService } from '../user/service/user.service';
 import { CookieService } from 'ngx-cookie-service';
+import { HttpService } from '../utils/httpService';
+import { jwtDecode } from "jwt-decode";
 
 @Component({
     selector: 'app-connexion',
@@ -27,9 +29,12 @@ export class ConnexionComponent implements OnInit{
     };
 
     constructor(private http: HttpClient,private router: Router,private userService: UserService,private cookieService: CookieService,
+        readonly httpService:HttpService
     ) {
 
     }
+
+
 
     loginSubmit() {
         this.errorMessage = null;
@@ -42,35 +47,29 @@ export class ConnexionComponent implements OnInit{
         const userReference = this.cookieService.get('userReference');
         if(token){
             this.cookieService.delete('jwtToken');
-
         }
         if(userReference){
             this.cookieService.delete('jwtToken');
-            }
+        }
         this.userService.loginUser(this.loginObj).subscribe(
             (response:any) => {
                 console.log("response",response);
-                this.cookieService.set('jwtToken', response.jwtToken, undefined, undefined, undefined, true, 'Lax');
-                const userReference = this.userService.getCurrentUserReference(response.jwtToken)
-                this.cookieService.set('userReference', userReference, undefined, undefined, undefined, true, 'Lax');
-                this.router.navigate(['logements']);
-
+                this.userService.saveUserAuthenticationInfo(response.jwtToken);
+                this.userService.redirectToRoleBasedPage(response.jwtToken);
             },
             (error:HttpErrorResponse) => {
-                if(error.status === 401){
-                    this.errorMessage="Login ou mot de passe incorrect !";
-                }
+                this.errorMessage = this.httpService.getErrorMessage(error.status);
             }
         );
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.href = this.router.url
         if (this.href.includes('#')) {
             let queryParams = this.href.split("#")
             let infos = queryParams[1].split("/")
             let accountParams={"reference": infos[0], "verificationToken": infos[1]}
-            this.http.post(`${this.backendUrl}/users/verify-account`, accountParams, this.httpOptions).subscribe(
+            this.httpService.post(`users/verify-account`, accountParams).subscribe(
                 (response: any) => {
                     this.cookieService.set('jwtToken', response.jwtToken, undefined, undefined, undefined, true, 'Lax');
                     this.router.navigate(['connexion']);
@@ -81,6 +80,11 @@ export class ConnexionComponent implements OnInit{
                 }
             )
         }
+    }
+
+    loginWithGoogle() {
+      const redirectUri = encodeURIComponent('http://localhost:4200/beezyApi/login/success');
+      window.location.href = `http://localhost:8090/beezyApi/oauth2/authorize/google?redirect_uri=${redirectUri}`;
     }
 
 }

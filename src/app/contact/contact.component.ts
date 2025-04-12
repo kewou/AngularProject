@@ -1,15 +1,13 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {environment} from "../../environments/environment";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Component, inject} from '@angular/core';
 import {Router} from "@angular/router";
+import { HttpService } from '../utils/httpService'
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })
-export class ContactComponent implements OnInit {
-  private backendUrl = environment.backendUrl;
+export class ContactComponent {
 
   message : MessageDto = {"senderName": "", "senderMail": "", "senderMessage": ""}
 
@@ -18,23 +16,14 @@ export class ContactComponent implements OnInit {
   successMessage: string | null = null;
 
   errorMessages: any[] = [];
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  };
 
-  constructor(private http: HttpClient,private router: Router) {
-  }
-
-  ngOnInit(): void {
+  constructor(readonly httpService:HttpService, private router: Router) {
   }
 
   sendContactMessage() {
-    const url = `${this.backendUrl}/contact`;
     this.errorMessages = []
     let sendMessage = {"senderName": this.message.senderName, "senderMail": this.message.senderMail, "message": this.message.senderMessage}
-    this.http.post(url, sendMessage,this.httpOptions).subscribe(
+    this.httpService.post("contact", sendMessage).subscribe(
         response => {
           console.log('Réponse du serveur :', response);
           // Simuler l'envoi réussi du message
@@ -51,13 +40,13 @@ export class ContactComponent implements OnInit {
           if (errorResponse) {
             let formErrors = errorResponse.errors;
             if (formErrors != null) {
-              for (let i = 0; i < formErrors.length; i++) {
-                this.errorMessages.push(formErrors[i].defaultMessage);
+              for (const element of formErrors) {
+                this.errorMessages.push(element.defaultMessage);
               }
             }
           }
           if (error.status == 500 || error.status == 0) {
-            this.errorMessages.push("Erreur survenue lors de l'envoi du mail")
+            this.errorMessages.push("Erreur survenue lors de l'envoi du mail, nous allons résoudre ce problème dans les plus bref délais")
           }
           this.router.navigate(['/contact']);
         });

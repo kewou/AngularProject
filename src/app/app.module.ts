@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -7,6 +7,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
@@ -39,6 +40,7 @@ import { DeleteAppartDialogComponent } from './appart/delete-appart-dialog/delet
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { LoyerComponent } from './loyer/loyer.component';
+import { LoginSuccessComponent } from './connexion/login-success.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
@@ -81,6 +83,7 @@ registerLocaleData(localeFr);
     NotFoundComponent,
     EditProfilUserDialogComponent,
     ConfirmationRegisterComponent,
+    LoginSuccessComponent
   ],
   imports: [
     BrowserModule,
@@ -99,7 +102,8 @@ registerLocaleData(localeFr);
     ReactiveFormsModule,
     MatTableModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatRadioModule
 
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' },UserService,AuthGuard,CookieService],

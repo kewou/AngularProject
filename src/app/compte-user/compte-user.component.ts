@@ -13,7 +13,7 @@ import { EditProfilUserDialogComponent } from './edit-profil-user-dialog/edit-pr
 })
 export class CompteUserComponent implements OnInit{
 
-  user: User = { name: "", lastName: "", email: "", phone: "", password: ""  };
+  user: User = { name: "", lastName: "", email: "", phone: "", password: "",role: ""  };
 
   constructor(private route: ActivatedRoute,private userService: UserService,
       private dialog: MatDialog,private router: Router) {

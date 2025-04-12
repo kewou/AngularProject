@@ -135,7 +135,7 @@ export class LogementComponent implements OnInit{
 
 
       viewApparts(logementRef: string): void {
-        this.router.navigate([`/logements/${logementRef}/apparts`]);
+        this.router.navigate([`/bailleur/logements/${logementRef}/apparts`]);
       }
 
 
