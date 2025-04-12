@@ -40,6 +40,7 @@ import { DeleteAppartDialogComponent } from './appart/delete-appart-dialog/delet
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
 import { LoyerComponent } from './loyer/loyer.component';
+import { LoginSuccessComponent } from './connexion/login-success.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
@@ -82,6 +83,7 @@ registerLocaleData(localeFr);
     NotFoundComponent,
     EditProfilUserDialogComponent,
     ConfirmationRegisterComponent,
+    LoginSuccessComponent
   ],
   imports: [
     BrowserModule,
