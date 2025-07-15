@@ -83,7 +83,7 @@ export class ConnexionComponent implements OnInit{
     }
 
     loginWithGoogle() {
-      const redirectUri = encodeURIComponent('https://beezyweb.net/beezyApi/login/success');
+      const redirectUri = encodeURIComponent('https://beezyweb.net/login/success');
       window.location.href = `https://api.beezyweb.net/beezyApi/oauth2/authorize/google?redirect_uri=${redirectUri}`;
     }
 
