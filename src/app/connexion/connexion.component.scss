@@ -216,6 +216,14 @@ form button[type="submit"]:hover {
   font-size: 14px;
 }
 
+.btn-primary[disabled] {
+  background-color: #e13652 !important;
+  color: #444 !important;
+  opacity: 0.7;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+
 /* Responsive */
 @media (max-width: 420px) {
   .form-actions { flex-direction: column; align-items: stretch; }
