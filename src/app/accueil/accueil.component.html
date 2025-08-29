@@ -62,28 +62,41 @@
 
 
 <ng-template #guestContent>
-    <div class="accueil">
-        <div class="accueilLeft">
-            <section>
-                <h2>Pourquoi choisir Beezyweb ?</h2>
-                <ol>
-                    <li>
-                        <strong>Suivi Simplifié</strong>
-                        <p>Notre plateforme offre un suivi simplifié de toutes vos locations en un seul endroit.</p>
-                        <p>Plus de tracas liés à la gestion dispersée de vos biens immobiliers. Avec Beezyweb, la
-                            gestion
-                            locative devient un jeu d'enfant.</p>
-                    </li>
-                    <li>
-                        <strong>Inscrivez-vous gratuitement:</strong>
-                        <p>Créez votre compte en quelques étapes simples.</p>
-                    </li>
-                </ol>
-                <button class="button" routerLink="/login" mat-raised-button>Connection / Inscription</button>
-            </section>
+    <section class="hero">
+        <div class="hero__content">
+            <h1 class="hero__title">Gérez vos locations sans prise de tête</h1>
+            <p class="hero__subtitle">
+                Avec <strong>Beezyweb</strong>, centralisez vos biens, suivez vos loyers et automatisez vos tâches au
+                quotidien.
+            </p>
+
+            <div class="hero__list">
+                <div class="hero__item">
+                    <h3>Suivi simplifié</h3>
+                    <p>
+                        Accédez en un coup d’œil à l’ensemble de vos locations. Tout est réuni, clair et à jour : plus
+                        de dispersion.
+                    </p>
+                    <p>
+                        La gestion locative devient fluide : tableaux de bord, rappels et documents au même endroit.
+                    </p>
+                </div>
+
+                <div class="hero__item">
+                    <h3>Inscription gratuite</h3>
+                    <p>
+                        Créez votre compte en quelques étapes et commencez à piloter vos locations, dès maintenant.
+                    </p>
+                </div>
+            </div>
+
+            <button class="btn btn--primary" routerLink="/login" mat-raised-button>
+                Connexion / Inscription
+            </button>
         </div>
-        <div class="accueilRight">
-            <img src="./assets/css/images/immeuble.jpg" alt="Un immeuble">
+
+        <div class="hero__media">
+            <img src="./assets/css/images/immeuble.jpg" alt="Immeuble moderne illustrant la gestion locative"/>
         </div>
-    </div>
+    </section>
 </ng-template>
