@@ -8,6 +8,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatRadioModule } from '@angular/material/radio';
+import { SharedModule } from '../modules/shared.module';
 
 import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
@@ -103,7 +104,8 @@ registerLocaleData(localeFr);
     MatTableModule,
     MatSelectModule,
     MatMenuModule,
-    MatRadioModule
+    MatRadioModule,
+    SharedModule
 
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'fr' },UserService,AuthGuard,CookieService],

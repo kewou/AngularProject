@@ -1,9 +1,65 @@
-<div class="user-card">
-    <div class="user-info">
-        <h2 class="user-name"> {{ user.lastName }} {{ user.name }} </h2>
-        <p class="user-detail">Profil : <span class="value">Propriètaire</span></p>
-        <p class="user-detail">Email : <span class="value">{{ user.email }}</span></p>
-        <p class="user-detail">Téléphone : <span class="value">{{ user.phone}}</span></p>
-        <button class="modifier" mat-raised-button (click)="openEditUserProfilDialog(user)">Modifier</button>
+<section class="profile">
+    <div class="profile__container">
+        <header class="profile__header">
+            <h1>Mon profil</h1>
+            <p>Gérez vos informations de compte et vos coordonnées.</p>
+        </header>
+
+        <article class="profile-card">
+            <div class="profile-card__top">
+                <div class="avatar" aria-hidden="true">
+                    <span>
+                      {{ (user.lastName || 'U') | slice:0:1 | uppercase }}
+                      {{ (user.name || 'N') | slice:0:1 | uppercase }}
+                    </span>
+
+                </div>
+
+                <div class="identity">
+                    <h2 class="user-name">{{ user.lastName }} {{ user.name }}</h2>
+          
+                </div>
+
+                <div class="card-actions">
+                    <button
+                            class="btn-primary"
+                            mat-raised-button
+                            (click)="openEditUserProfilDialog(user)"
+                    >
+                        Modifier
+                    </button>
+                </div>
+            </div>
+
+            <div class="profile-card__grid">
+                <div class="info-item">
+                    <div class="info-label">Email</div>
+                    <div class="info-value">{{ user.email }}</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">Téléphone</div>
+                    <div class="info-value">{{ "0"+user.phone | phoneFormat }}</div>
+                </div>
+
+                <div class="info-item">
+                    <div class="info-label">Profil</div>
+                    <div class="info-value">{{ user.role || 'Propriétaire' }}</div>
+                </div>
+
+                <!-- (Optionnel) Adresse / Ville si tu les as
+                <div class="info-item">
+                  <div class="info-label">Ville</div>
+                  <div class="info-value">{{ user.city || '—' }}</div>
+                </div>
+                -->
+            </div>
+
+            <!-- (Optionnel) liens secondaires
+            <div class="profile-card__footer">
+              <a routerLink="/password-reset" class="link">Changer de mot de passe</a>
+            </div>
+            -->
+        </article>
     </div>
-</div>
+</section>
