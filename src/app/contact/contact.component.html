@@ -1,88 +1,160 @@
-<section class="page-section" id="contact">
-    <div class="container">
-        <!-- Contact Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contactez NOUS</h2>
-        <!-- Icon Divider-->
-        <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
-        <!-- Contact Section Form-->
-        <div class="row justify-content-center">
-            <div class="col-lg-8 col-xl-7">
-                <form *ngIf="!isMessageSent" (ngSubmit)="sendContactMessage()" #contactForm="ngForm" name="contactForm"
-                      class="contact-form"
-                      id="contactForm">
-                    <!-- Name input-->
-                    <div class="form-floating mb-3">
-                        <input matInput class="form-control" id="name" type="text"
-                               placeholder="Entrez votre nom complet"
-                               [(ngModel)]="message.senderName" name="senderName" #senderName="ngModel" required
-                               maxlength="50"/>
-                        <label for="name">Nom complet</label>
-                        <!-- Message d'erreur pour le nom -->
-                        <div *ngIf="senderName.invalid && senderName.touched" class="text-danger">
-                            Le nom est obligatoire.
-                        </div>
-                    </div>
+<section id="contact" class="contact">
+    <div class="contact__container">
+        <!-- Titre -->
+        <header class="contact__header">
+            <h1>Contactez-nous</h1>
+        </header>
 
-                    <!-- Email address input-->
-                    <div class="form-floating mb-3">
-                        <input matInput class="form-control" id="email" type="email" [(ngModel)]="message.senderMail"
-                               name="senderMail"
-                               placeholder="name@example.com" #senderMail="ngModel" required email/>
-                        <label for="email">Adresse Email</label>
-                        <!-- Message d'erreur pour l'email obligatoire -->
-                        <div *ngIf="senderMail.errors?.['required'] && senderMail.touched" class="text-danger">
+        <div class="contact__grid">
+            <!-- ====== Formulaire ====== -->
+            <article class="contact-card">
+                <h2 class="contact-card__title">Envoyer un message</h2>
+
+                <form
+                        *ngIf="!isMessageSent"
+                        (ngSubmit)="sendContactMessage()"
+                        #contactForm="ngForm"
+                        name="contactForm"
+                        class="contact-form"
+                        id="contactForm"
+                        novalidate
+                        aria-label="Formulaire de contact"
+                >
+                    <!-- Nom -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Nom complet</mat-label>
+                        <input
+                                matInput
+                                id="name"
+                                type="text"
+                                placeholder="Votre nom et prénom"
+                                [(ngModel)]="message.senderName"
+                                name="senderName"
+                                #senderName="ngModel"
+                                required
+                                maxlength="50"
+                                aria-required="true"
+                        />
+                        <mat-hint align="start">Max. 50 caractères</mat-hint>
+                        <mat-error *ngIf="senderName.invalid && senderName.touched">Le nom est obligatoire.</mat-error>
+                    </mat-form-field>
+
+                    <!-- Email -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Adresse email</mat-label>
+                        <input
+                                matInput
+                                id="email"
+                                type="email"
+                                placeholder="name@example.com"
+                                [(ngModel)]="message.senderMail"
+                                name="senderMail"
+                                #senderMail="ngModel"
+                                required
+                                email
+                                aria-required="true"
+                        />
+                        <mat-error *ngIf="senderMail.errors?.['required'] && senderMail.touched">
                             L'email est obligatoire.
-                        </div>
-                        <!-- Message d'erreur pour l'email invalide -->
-                        <div *ngIf="senderMail.errors?.['email'] && senderMail.touched" class="text-danger">
+                        </mat-error>
+                        <mat-error *ngIf="senderMail.errors?.['email'] && senderMail.touched">
                             L'email doit être valide.
-                        </div>
-                    </div>
+                        </mat-error>
+                    </mat-form-field>
 
-                    <!-- Message input-->
-                    <div class="form-floating mb-3">
-                        <textarea matInput class="form-control" id="message" placeholder="Tapez votre message"
-                                  style="height: 10rem"
-                                  [(ngModel)]="message.senderMessage" name="senderMessage" #senderMessage="ngModel"
-                                  required minlength="10" maxlength="5000"></textarea>
-                        <label for="message">Message</label>
-                        <!-- Message d'erreur pour le message -->
-                        <div *ngIf="senderMessage.errors?.['required'] && senderMessage.touched" class="text-danger">
+                    <!-- Message -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Message</mat-label>
+                        <textarea
+                                matInput
+                                id="message"
+                                placeholder="Votre message"
+                                rows="6"
+                                [(ngModel)]="message.senderMessage"
+                                name="senderMessage"
+                                #senderMessage="ngModel"
+                                required
+                                minlength="10"
+                                maxlength="5000"
+                                aria-required="true"
+                        ></textarea>
+                        <mat-hint align="start">Min. 10 caractères</mat-hint>
+                        <mat-error *ngIf="senderMessage.errors?.['required'] && senderMessage.touched">
                             Le message est obligatoire.
-                        </div>
-                        <div *ngIf="senderMessage.errors?.['minlength'] && senderMessage.touched" class="text-danger">
+                        </mat-error>
+                        <mat-error *ngIf="senderMessage.errors?.['minlength'] && senderMessage.touched">
                             Le message doit contenir au moins 10 caractères.
-                        </div>
-                    </div>
+                        </mat-error>
+                    </mat-form-field>
 
-                    <div class="error-message">
+                    <!-- Erreurs globales -->
+                    <div class="form-errors" *ngIf="errorMessages?.length">
                         <ul>
-                            <li *ngFor="let error of errorMessages">{{error}}</li>
+                            <li *ngFor="let error of errorMessages">{{ error }}</li>
                         </ul>
                     </div>
 
-                    <!-- Submit Button-->
-                    <button mat-raised-button color="primary" type="submit" [disabled]="!contactForm.form.valid">
+                    <!-- Submit -->
+                    <button
+                            mat-raised-button
+                            color="primary"
+                            type="submit"
+                            [disabled]="!contactForm.form.valid"
+                            aria-label="Envoyer le message"
+                    >
                         Envoyer
                     </button>
                 </form>
-                <!-- Message de confirmation après l'envoi -->
-                <div class="contactMessageSent" *ngIf="isMessageSent">
-                    <h2>Message envoyé !</h2>
-                    <p>
-                        Votre message a bien été envoyé !
-                        <br/>
-                    </p>
-                    <p>
-                        Nous allons y répondre dans les plus brefs délais.
-                    </p>
-                </div>
 
-            </div>
+                <!-- Message de confirmation -->
+                <div class="contact-success" *ngIf="isMessageSent" role="status" aria-live="polite">
+                    <h3>Message envoyé ✅</h3>
+                    <p>Merci ! Votre message a bien été transmis. Nous revenons vers vous rapidement.</p>
+                </div>
+            </article>
+
+            <!-- ====== Infos de contact ====== -->
+            <aside class="contact-card contact-info">
+                <h2 class="contact-card__title">Infos & support</h2>
+
+                <ul class="info-list">
+                    <li>
+                        <span class="info-emoji" aria-hidden="true">📧</span>
+                        <div>
+                            <strong>Support</strong>
+                            <p>Écrivez-nous via le formulaire ci-contre.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="info-emoji" aria-hidden="true">📍</span>
+                        <div>
+                            <strong>Nous situer</strong>
+                            <p>Paris, France</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="info-emoji" aria-hidden="true">🕒</span>
+                        <div>
+                            <strong>Horaires</strong>
+                            <p>Lun → Ven, 9h – 18h (CET)</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="tips">
+                    <h3>Conseils pour une réponse rapide</h3>
+                    <ul>
+                        <li>Décrivez votre besoin en quelques phrases.</li>
+                        <li>Indiquez, si possible, votre navigateur / page concernée.</li>
+                        <li>Ajoutez des captures d’écran en cas d’erreur.</li>
+                    </ul>
+                    <div class="divider-custom">
+                        <div class="divider-custom-line"></div>
+                        <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                        <div class="divider-custom-line"></div>
+                    </div>
+                </div>
+            </aside>
         </div>
     </div>
 </section>
