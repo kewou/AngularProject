@@ -232,7 +232,6 @@ button.back{
 .rents-card {
   max-width: 1200px;
   margin: 0 auto 16px;
-  background: white;
   border: 1px solid #eef2f7;
   border-radius: 16px;
   box-shadow: var(--shadow);
@@ -315,6 +314,7 @@ button.back{
   max-width: 480px;
   margin: 24px auto;   /* centre horizontalement sous le tableau */
   text-align: center;
+  background: white;
 }
 .rents-card--pay h2 {
   margin: 0 0 12px;
