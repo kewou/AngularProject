@@ -1,87 +1,175 @@
-<mat-card>
-    <mat-card-content>
-        <form #inscriptionForm="ngForm"
-              [appMatchPassword]="['password', 'confirmPassword']"
-              (submit)="registerUser()">
+<section class="register">
+    <div class="register__container">
+        <mat-card class="register-card">
+            <mat-card-content>
+                <form
+                        #inscriptionForm="ngForm"
+                        [appMatchPassword]="['password', 'confirmPassword']"
+                        (ngSubmit)="registerUser()"
+                        class="register-form"
+                        novalidate
+                        aria-label="Formulaire d'inscription"
+                >
+                    <!-- Prénom -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Prénom</mat-label>
+                        <input
+                                matInput
+                                placeholder="Votre prénom"
+                                [(ngModel)]="user.firstName"
+                                name="firstName"
+                                #firstName="ngModel"
+                                required minlength="2" maxlength="50"
+                                aria-required="true"
+                        />
+                        <mat-hint align="start">Min. 2 – Max. 50 caractères</mat-hint>
+                        <mat-error *ngIf="firstName.errors?.['required'] && (firstName.dirty || firstName.touched)">
+                            Le prénom est obligatoire.
+                        </mat-error>
+                        <mat-error *ngIf="firstName.errors?.['minlength'] && (firstName.dirty || firstName.touched)">
+                            Le prénom doit avoir au moins 2 caractères.
+                        </mat-error>
+                        <mat-error *ngIf="firstName.errors?.['maxlength'] && (firstName.dirty || firstName.touched)">
+                            Le prénom doit avoir au plus 50 caractères.
+                        </mat-error>
+                    </mat-form-field>
 
-            <!-- Prénom -->
-            <mat-form-field class="form-field">
-                <input matInput placeholder="Prénom" [(ngModel)]="user.firstName" name="firstName" #firstName="ngModel"
-                       required minlength="2" maxlength="50">
-            </mat-form-field>
-            <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" class="alert">
-                <span *ngIf="firstName.errors?.['required']">Le prénom est obligatoire.</span>
-                <span *ngIf="firstName.errors?.['minlength']">Le prénom doit avoir au moins 2 caractères.</span>
-                <span *ngIf="firstName.errors?.['maxlength']">Le prénom doit avoir au plus 50 caractères.</span>
-            </div>
+                    <!-- Nom -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Nom</mat-label>
+                        <input
+                                matInput
+                                placeholder="Votre nom"
+                                [(ngModel)]="user.lastName"
+                                name="lastName"
+                                #lastName="ngModel"
+                                required minlength="2" maxlength="50"
+                                aria-required="true"
+                        />
+                        <mat-error *ngIf="lastName.errors?.['required'] && (lastName.dirty || lastName.touched)">
+                            Le nom est obligatoire.
+                        </mat-error>
+                        <mat-error *ngIf="lastName.errors?.['minlength'] && (lastName.dirty || lastName.touched)">
+                            Le nom doit avoir au moins 2 caractères.
+                        </mat-error>
+                        <mat-error *ngIf="lastName.errors?.['maxlength'] && (lastName.dirty || lastName.touched)">
+                            Le nom doit avoir au plus 50 caractères.
+                        </mat-error>
+                    </mat-form-field>
 
-            <!-- Nom -->
-            <mat-form-field class="form-field">
-                <input matInput placeholder="Nom" [(ngModel)]="user.lastName" name="lastName" #lastName="ngModel"
-                       required
-                       minlength="2" maxlength="50">
-            </mat-form-field>
-            <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" class="alert">
-                <span *ngIf="lastName.errors?.['required']">Le nom est obligatoire.</span>
-                <span *ngIf="lastName.errors?.['minlength']">Le nom doit avoir au moins 2 caractères.</span>
-                <span *ngIf="lastName.errors?.['maxlength']">Le nom doit avoir au plus 50 caractères.</span>
-            </div>
+                    <!-- Email -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Email</mat-label>
+                        <input
+                                matInput
+                                type="email"
+                                placeholder="name@example.com"
+                                [(ngModel)]="user.email"
+                                name="email"
+                                #email="ngModel"
+                                required email
+                                aria-required="true"
+                        />
+                        <mat-error *ngIf="email.errors?.['required'] && (email.dirty || email.touched)">
+                            L'adresse e-mail est obligatoire.
+                        </mat-error>
+                        <mat-error *ngIf="email.errors?.['email'] && (email.dirty || email.touched)">
+                            Le format de l'adresse e-mail est invalide.
+                        </mat-error>
+                    </mat-form-field>
 
-            <!-- Email -->
-            <mat-form-field class="form-field">
-                <input matInput type="email" placeholder="Email" [(ngModel)]="user.email" name="email" #email="ngModel"
-                       required>
-            </mat-form-field>
-            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
-                <span *ngIf="email.errors?.['required']">L'adresse e-mail est obligatoire.</span>
-                <span *ngIf="email.errors?.['email']">Le format de l'adresse e-mail est invalide</span>
-            </div>
-            
+                    <!-- Mot de passe -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Mot de passe</mat-label>
+                        <input
+                                matInput
+                                [type]="showPass ? 'text' : 'password'"
+                                placeholder="Créez un mot de passe"
+                                [(ngModel)]="user.password"
+                                name="password"
+                                #password="ngModel"
+                                required
+                                aria-required="true"
+                        />
+                        <button
+                                mat-icon-button
+                                matSuffix
+                                type="button"
+                                (click)="showPassword()"
+                                [attr.aria-label]="showPass ? 'Masquer le mot de passe' : 'Afficher le mot de passe'"
+                        >
+                            <mat-icon>{{ showPass ? 'visibility_off' : 'visibility' }}</mat-icon>
+                        </button>
+                        <mat-hint align="start">8+ caractères recommandés</mat-hint>
+                        <mat-error *ngIf="password.errors?.['required'] && (password.dirty || password.touched)">
+                            Le mot de passe est obligatoire.
+                        </mat-error>
+                    </mat-form-field>
 
-            <!-- Mot de passe -->
-            <mat-form-field class="form-field">
-                <input matInput [type]="showPass ? 'text':'password'" placeholder="Mot de passe"
-                       [(ngModel)]="user.password" name="password" #password="ngModel" required>
-                <mat-icon matSuffix (click)="showPassword()">visibility</mat-icon>
-            </mat-form-field>
-            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
-                <span *ngIf="password.errors?.['required']">Le mot de passe est obligatoire.</span>
-            </div>
+                    <!-- Confirmation -->
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Confirmer le mot de passe</mat-label>
+                        <input
+                                matInput
+                                [type]="showConfirmPass ? 'text' : 'password'"
+                                placeholder="Répétez le mot de passe"
+                                [(ngModel)]="user.confirmPassword"
+                                name="confirmPassword"
+                                #confirmPassword="ngModel"
+                                required
+                                aria-required="true"
+                        />
+                        <button
+                                mat-icon-button
+                                matSuffix
+                                type="button"
+                                (click)="showConfirmPassword()"
+                                [attr.aria-label]="showConfirmPass ? 'Masquer le mot de passe' : 'Afficher le mot de passe'"
+                        >
+                            <mat-icon>{{ showConfirmPass ? 'visibility_off' : 'visibility' }}</mat-icon>
+                        </button>
+                        <mat-error
+                                *ngIf="confirmPassword.errors?.['required'] && (confirmPassword.dirty || confirmPassword.touched)">
+                            La confirmation est obligatoire.
+                        </mat-error>
+                        <mat-error
+                                *ngIf="confirmPassword.errors?.['matching'] && (confirmPassword.dirty || confirmPassword.touched)">
+                            Les mots de passe ne correspondent pas.
+                        </mat-error>
+                    </mat-form-field>
 
-            <!-- Confirmation du mot de passe -->
-            <mat-form-field class="form-field">
-                <input matInput [type]="showConfirmPass ? 'text':'password'" placeholder="Confirmer le mot de passe"
-                       [(ngModel)]="user.confirmPassword" name="confirmPassword" #confirmPassword="ngModel" required>
-                <mat-icon matSuffix (click)="showConfirmPassword()">visibility</mat-icon>
-            </mat-form-field>
-            <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)" class="alert">
-                <span *ngIf="confirmPassword.errors?.['required']">Le champ Confirmer le mot de passe est obligatoire</span>
-                <span *ngIf="confirmPassword.errors?.['matching']">Les deux champs mot de passe ne sont pas identiques</span>
-            </div>
+                    <!-- Rôle -->
+                    <div class="role-group">
+                        <label class="role-label">Votre rôle</label>
+                        <mat-radio-group [(ngModel)]="user.role" name="role" required>
+                            <mat-radio-button value="BAILLEUR">Bailleur</mat-radio-button>
+                            <mat-radio-button value="LOCATAIRE">Locataire</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="form-error" *ngIf="!user.role && (inscriptionForm.submitted)">
+                        Le rôle est obligatoire.
+                    </div>
 
-            <!-- Choix du rôle -->
-            <div>
+                    <!-- Erreurs globales -->
+                    <div class="form-error" *ngIf="errorMessages?.length">
+                        <ul>
+                            <li *ngFor="let error of errorMessages">{{ error }}</li>
+                        </ul>
+                    </div>
 
-                <mat-radio-group [(ngModel)]="user.role" name="role" required>
-                    <mat-radio-button value="BAILLEUR">Bailleur</mat-radio-button>
-                    <mat-radio-button value="LOCATAIRE">Locataire</mat-radio-button>
-                </mat-radio-group>
-            </div>
-            <div *ngIf="!user.role" class="alert">
-                <span>Le rôle est obligatoire.</span>
-            </div>
+                    <!-- CTA -->
+                    <button
+                            mat-raised-button
+                            color="primary"
+                            type="submit"
+                            class="btn-primary"
+                            [disabled]="!inscriptionForm.form.valid"
+                    >
+                        INSCRIPTION
+                    </button>
 
-            <div class="error-message">
-                <ul>
-                    <li *ngFor="let error of errorMessages">{{error}}</li>
-                </ul>
-            </div>
-
-
-            <!-- Bouton d'inscription -->
-            <button mat-raised-button color="primary" type="submit" [disabled]="!inscriptionForm.form.valid">
-                INSCRIPTION
-            </button>
-        </form>
-    </mat-card-content>
-</mat-card>
+                </form>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</section>

@@ -52,3 +52,105 @@ form button[type="submit"]:hover {
 .error-message {
     color: red;
 }
+/* ===== Register (Inscription) ===== */
+.register {
+  background:
+    radial-gradient(60% 100% at 0% 0%, rgba(225,54,82,0.05) 0%, transparent 60%),
+    radial-gradient(50% 70% at 100% 100%, rgba(110,198,84,0.06) 0%, transparent 60%),
+    var(--bg);
+  padding: clamp(24px, 6vw, 64px) 16px;
+}
+
+.register__container {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.register__header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+.register__header h1 {
+  margin: 0 0 6px;
+  color: var(--text);
+  font-weight: 800;
+  font-size: clamp(24px, 4vw, 32px);
+  letter-spacing: -0.02em;
+}
+.register__header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+
+.register-card {
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  border: 1px solid #eef2f7;
+  overflow: hidden;
+}
+
+.register-form {
+  display: grid;
+  gap: 12px;
+}
+.w-full { width: 100%; }
+
+/* Rôle */
+.role-group {
+  display: grid;
+  gap: 6px;
+  margin-top: 6px;
+}
+.role-label {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Bouton principal — garde ta charte (#e13652 / #6ec654) */
+.btn-primary {
+  background-color: #e13652 !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 18px rgba(225,54,82,0.25) !important;
+  transition: transform .08s ease, box-shadow .2s ease, background .2s ease !important;
+}
+.btn-primary:hover {
+  background-color: #6ec654 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(110,198,84,0.25) !important;
+}
+
+/* Erreurs */
+.form-error {
+  background: #fff5f5;
+  border: 1px solid #ffd0d0;
+  color: #a30000;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+/* Liens */
+.link {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 700;
+}
+.link:hover { text-decoration: underline; }
+
+.register__hint {
+  text-align: center;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.btn-primary[disabled] {
+  background-color: #e13652 !important;
+  color: #444 !important;
+  opacity: 0.7;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}
+
