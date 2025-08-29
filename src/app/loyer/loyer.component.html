@@ -1,57 +1,104 @@
-<div>
-    <button mat-raised-button class="back" color="primary" (click)="goBack()">Retour</button>
-</div>
+<section class="rents">
+    <!-- Barre titre + retour -->
+    <div class="rents__bar">
+        <button mat-stroked-button class="btn-back" (click)="goBack()">
+            <mat-icon>arrow_back</mat-icon>
+            Retour
+        </button>
+        <h1 class="rents__title">Historique des loyers – {{ appart.nom }}</h1>
+        <!-- espace réservé pour équilibrer la ligne -->
+        <span class="rents__spacer" aria-hidden="true"></span>
+    </div>
 
-<h2>Historique des loyers de l'appart : {{appart.nom}}</h2>
+    <!-- Carte : tableau historique -->
+    <article class="rents-card rents-card--table">
+        <div class="table-wrap">
+            <table class="rents-table">
+                <thead>
+                <tr>
+                    <th>Mois</th>
+                    <th>Loyer</th>
+                    <th>État</th>
+                    <th>Solde</th>
+                    <th>Arriéré</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let loyer of appart.loyers">
+                    <td [attr.data-label]="'Mois'">
+                        {{ loyer.dateLoyer | date: 'MMMM yyyy' }}
+                    </td>
 
+                    <td [attr.data-label]="'Loyer'">
+                        {{ formatAmount(appart.prixLoyer) }}
+                    </td>
 
-<table>
-    <thead>
-    <tr>
-        <th>Mois</th>
-        <th>Prix loyer</th>
-        <th>Etat</th>
-        <th>Solde</th>
-        <th>Arriéré</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let loyer of appart.loyers">
-        <td>{{ loyer.dateLoyer | date: 'MMMM yyyy' }}</td>
-        <td>{{ formatAmount(appart.prixLoyer) }}</td>
-        <td [ngClass]="{ 'ok': loyer.isOk, 'ko': !loyer.isOk }">{{ loyer.isOk ? 'ok' : 'ko' }}</td>
-        <td [ngClass]="{ 'ok': loyer.isOk, 'ko': !loyer.isOk }">{{ formatAmount(loyer.solde) }}</td>
-        <td [ngClass]="{ 'ok': loyer.isOk, 'ko': !loyer.isOk }">{{ loyer.isOk ? '0' : loyer.solde/appart.prixLoyer*-1 }}
-            mois
-        </td>
-    </tr>
-    </tbody>
-</table>
+                    <td [attr.data-label]="'État'">
+              <span class="status" [class.status--ok]="loyer.isOk" [class.status--ko]="!loyer.isOk">
+                {{ loyer.isOk ? 'Payé' : 'En retard' }}
+              </span>
+                    </td>
 
-<div id="versement">
-    <p>Effectuer un versement</p>
-    <div mat-dialog-content id="transactionForm">
-        <form [formGroup]="transactionForm">
-            <mat-form-field class="form-field">
+                    <td [attr.data-label]="'Solde'" [class.text-ok]="loyer.isOk" [class.text-ko]="!loyer.isOk">
+                        {{ formatAmount(loyer.solde) }}
+                    </td>
+
+                    <td [attr.data-label]="'Arriéré'" [class.text-ok]="loyer.isOk" [class.text-ko]="!loyer.isOk">
+                        <ng-container *ngIf="!loyer.isOk; else noArrears">
+                            <!-- Montant de retard (positif) + nombre de mois -->
+                            {{ formatAmount(loyer.solde * -1) }}
+                            <span class="muted"> ({{ (loyer.solde / appart.prixLoyer * -1) | number:'1.0-1' }} mois) </span>
+                        </ng-container>
+                        <ng-template #noArrears>—</ng-template>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+
+    <!-- Carte : versement (placée en dessous) -->
+    <aside class="rents-card rents-card--pay">
+        <h2>Effectuer un versement</h2>
+
+        <form [formGroup]="transactionForm" class="pay-form" novalidate>
+            <mat-form-field appearance="outline" class="w-full">
                 <mat-label>Montant</mat-label>
-                <input matInput type="number" placeholder="Montant du versement" formControlName="montantVerser">
+                <input
+                        matInput
+                        type="number"
+                        placeholder="Montant du versement"
+                        formControlName="montantVerser"
+                        aria-required="true"
+                />
+                <mat-hint align="start">Multiple conseillé du loyer ({{ appart.prixLoyer }} )</mat-hint>
+
                 <mat-error *ngIf="transactionForm.get('montantVerser')?.hasError('required')">
                     Le montant à verser est obligatoire.
                 </mat-error>
                 <mat-error *ngIf="transactionForm.get('montantVerser')?.hasError('notMultipleOf')">
-                    Saississez un multiple de {{ appart.prixLoyer }} : Prix d'un loyer.
+                    Saisissez un multiple de {{ appart.prixLoyer }} (prix d’un loyer).
                 </mat-error>
                 <mat-error *ngIf="transactionForm.get('montantVerser')?.hasError('noSpecialCharacters')">
-                    Les caractères spéciaux ne sont pas autorisés
+                    Les caractères spéciaux ne sont pas autorisés.
                 </mat-error>
             </mat-form-field>
+
+            <button
+                    mat-raised-button
+                    color="primary"
+                    class="btn-primary"
+                    type="button"
+                    (click)="openVersementDialog()"
+                    [disabled]="transactionForm.invalid"
+            >
+                Verser ce montant
+            </button>
         </form>
-    </div>
-    <div id="verser">
-        <button mat-raised-button color="primary" (click)="openVersementDialog()">Verser ce montant</button>
-    </div>
-</div>
 
-
-
-
+        <p class="pay-note">
+            Astuce : vous pouvez verser 1, 2 ou 3 mois d’un coup (ex. {{ appart.prixLoyer }} €, {{ appart.prixLoyer * 2
+            }} , {{ appart.prixLoyer * 3 }} ).
+        </p>
+    </aside>
+</section>

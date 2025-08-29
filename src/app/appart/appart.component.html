@@ -1,40 +1,92 @@
-<div>
-    <button mat-raised-button class="back" color="primary" (click)="goBack()">Retour</button>
-</div>
-<h2>Les logements du bien : {{descriptionLogement}}</h2>
-<div id="apparts" *ngIf="apparts.length > 0; else noApparts">
-    <div *ngFor="let appart of apparts" class="appart-item">
-        <div class="appart-info">
-            <button mat-button [matMenuTriggerFor]="menu" class="menu-button">Menu</button>
-            <div (click)="viewLoyers(appart.reference)">
-                <p>Nom : <span class="value">{{ appart.nom }}</span></p>
-                <p>Prix Loyer : <span class="value">{{ appart.prixLoyer }} €</span></p>
-                <p>Prix Caution : <span class="value">{{ appart.prixCaution }} €</span></p>
-            </div>
-        </div>
-        <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="viewLoyers(appart.reference)">Historique</button>
-            <hr style="margin: 0; border: none; border-top: 2px solid black;"/>
-            <button mat-menu-item (click)="openEditAppartDialog(appart)">Modifier</button>
-            <hr style="margin: 0; border: none; border-top: 2px solid black;"/>
-            <button class="supprimer-button"
-                    mat-menu-item (click)="openDeleteAppartDialog(appart.reference)">
-                Supprimer
+<section class="units">
+    <div class="units__bar">
+        <h1 class="units__title">Les logements du bien : {{ descriptionLogement }}</h1>
+
+        <div class="units__actions">
+            <button mat-stroked-button class="btn-back" (click)="goBack()">
+                <mat-icon>arrow_back</mat-icon>
+                Retour
             </button>
-        </mat-menu>
+
+            <button
+                    mat-raised-button
+                    color="primary"
+                    class="btn-primary"
+                    (click)="openAddAppartDialog()"
+            >
+                ➕ Ajouter un appartement
+            </button>
+        </div>
     </div>
-</div>
 
+    <ng-container *ngIf="apparts?.length; else noApparts">
+        <div class="units__grid">
+            <article class="unit-card" *ngFor="let appart of apparts">
+                <header class="unit-card__head" (click)="viewLoyers(appart.reference)">
+                    <div class="unit-card__title">
+                        <h3>{{ appart.nom }}</h3>
+                        <span class="chip">Ref: {{ appart.reference }}</span>
+                    </div>
 
-<ng-template #noApparts>
-    <p id="noAppart">Aucun appartement trouvé pour ce bien</p>
-</ng-template>
+                    <!-- menu -->
+                    <button
+                            mat-icon-button
+                            class="unit-card__menu"
+                            [matMenuTriggerFor]="menu"
+                            (click)="$event.stopPropagation()"
+                            aria-label="Actions appartement"
+                    >
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="viewLoyers(appart.reference)">
+                            <mat-icon>history</mat-icon>
+                            <span>Historique</span>
+                        </button>
+                        <button mat-menu-item (click)="openEditAppartDialog(appart)">
+                            <mat-icon>edit</mat-icon>
+                            <span>Modifier</span>
+                        </button>
+                        <button mat-menu-item class="menu-danger" (click)="openDeleteAppartDialog(appart.reference)">
+                            <mat-icon>delete</mat-icon>
+                            <span>Supprimer</span>
+                        </button>
+                    </mat-menu>
+                </header>
 
-<button class="ajouter" mat-raised-button color="primary" (click)="openAddAppartDialog()">
-    Ajouter Appartement
-</button>
+                <div class="unit-card__content" (click)="viewLoyers(appart.reference)">
+                    <div class="price-badges">
+            <span class="badge">
+              Loyer&nbsp;: <strong>{{ appart.prixLoyer }} €</strong>
+            </span>
+                        <span class="badge badge--muted">
+              Caution&nbsp;: <strong>{{ appart.prixCaution }} €</strong>
+            </span>
+                    </div>
+                </div>
 
+                <footer class="unit-card__footer">
+                    <button mat-stroked-button color="primary" (click)="viewLoyers(appart.reference)">
+                        Ouvrir
+                    </button>
+                    <div class="unit-card__actions">
+                        <button mat-button (click)="openEditAppartDialog(appart)">Modifier</button>
+                        <button mat-button class="text-danger" (click)="openDeleteAppartDialog(appart.reference)">
+                            Supprimer
+                        </button>
+                    </div>
+                </footer>
+            </article>
+        </div>
+    </ng-container>
 
-
-
-
+    <ng-template #noApparts>
+        <div class="units-empty">
+            <h3>Aucun appartement trouvé pour ce bien</h3>
+            <p>Ajoutez votre premier appartement pour démarrer le suivi.</p>
+            <button mat-raised-button color="primary" class="btn-primary" (click)="openAddAppartDialog()">
+                ➕ Ajouter un appartement
+            </button>
+        </div>
+    </ng-template>
+</section>

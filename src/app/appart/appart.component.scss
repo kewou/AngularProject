@@ -192,3 +192,194 @@ button.ajouter{
     }
 
 }
+/* ===== Units (Appartements d’un bien) ===== */
+.units {
+  padding: clamp(20px, 5vw, 36px);
+  background:
+    radial-gradient(60% 100% at 0% 0%, rgba(225,54,82,0.05) 0%, transparent 60%),
+    radial-gradient(50% 70% at 100% 100%, rgba(110,198,84,0.06) 0%, transparent 60%),
+    var(--bg);
+}
+
+/* ---------- Barre supérieure ---------- */
+.units__bar {
+  max-width: 1200px;
+  margin: 0 auto 20px;
+  display: flex;
+  flex-direction: column; /* Titre sur sa propre ligne */
+  gap: 12px;
+}
+
+.units__title {
+  text-align: center;
+  margin: 0;
+  color: var(--text);
+  font-weight: 800;
+  font-size: clamp(20px, 3.6vw, 28px);
+  letter-spacing: -0.01em;
+}
+
+/* Ligne boutons (Retour / Ajouter) sous le titre */
+.units__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Bouton retour (sobre, Material) */
+.btn-back {
+  justify-self: start;
+  border-radius: 10px;
+  gap: 6px;
+}
+
+/* CTA principal – charte */
+.btn-primary {
+  justify-self: end;
+  background-color: #e13652 !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 18px rgba(225,54,82,0.25) !important;
+  transition: transform .08s ease, box-shadow .2s ease, background .2s ease !important;
+}
+.btn-primary:hover {
+  background-color: #6ec654 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 24px rgba(110,198,84,0.25) !important;
+}
+
+/* ---------- Grille de cartes ---------- */
+/* 2 colonnes sur desktop pour des cartes plus larges */
+.units__grid {
+  max-width: 1200px;
+  margin: 20px auto 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* ---------- Carte appartement ---------- */
+.unit-card {
+  background: white;
+  border: 1px solid #eef2f7;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 14px;
+  display: grid;
+  gap: 10px;
+  transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+  cursor: pointer;
+}
+.unit-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(2,8,23,0.12);
+  background: #FAF0E6; /* clin d’œil à ton ancien hover */
+}
+
+/* En-tête */
+.unit-card__head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 8px;
+}
+.unit-card__title h3 {
+  margin: 0;
+  color: var(--text);
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: -0.01em;
+}
+.chip {
+  display: inline-block;
+  margin-top: 4px;
+  color: #3498db;
+  background: rgba(52,152,219,0.08);
+  border: 1px solid rgba(52,152,219,0.25);
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.unit-card__menu { margin: -6px -6px 0 0; }
+
+/* Contenu (prix) */
+.unit-card__content { margin-top: 2px; }
+.price-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  background: #fff;
+  border: 1px solid #eef2f7;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 13.5px;
+  color: var(--text);
+}
+.badge strong { font-weight: 800; }
+.badge--muted {
+  background: #f8fafc;
+  color: #475569;
+}
+
+/* Pied de carte */
+.unit-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 2px;
+}
+.unit-card__actions { display: flex; gap: 6px; }
+
+/* ---------- Menu contextuel ---------- */
+.menu-danger .mat-icon,
+.text-danger { color: #dc143c !important; }
+.menu-danger { color: #dc143c !important; }
+
+/* ---------- État vide ---------- */
+.units-empty {
+  max-width: 760px;
+  margin: 28px auto 0;
+  text-align: center;
+  background: var(--card);
+  border: 1px solid #eef2f7;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.units-empty h3 {
+  margin: 0 0 6px;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 800;
+}
+.units-empty p {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1080px) {
+  .units__grid { grid-template-columns: 1fr; } /* 1 colonne sur tablettes & + petites */
+}
+
+@media (max-width: 720px) {
+  .units__bar {
+    gap: 10px;
+  }
+  .units__actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .btn-back,
+  .btn-primary {
+    width: 100%;
+    max-width: 360px;
+  }
+}
