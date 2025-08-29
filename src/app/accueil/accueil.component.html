@@ -1,63 +1,57 @@
 <div *ngIf="isLoggedIn; else guestContent">
-    <div class="accueil">
-        <div>
-            <h2>Simplifiez la gestion de vos biens immobiliers à laide de ces fonctionnalités :</h2>
-            <section>
-                <h4>Gestion des Logements</h4>
-                <ul>
-                    <li><p><strong>Déclarer vos logements</strong> : Ajoutez facilement tous vos logements à
-                        l'application
-                        pour une gestion centralisée.</p>
-                    </li>
-                    <li><p><strong>Modifier et Supprimer</strong> : Mettez à jour les informations de vos logements à
-                        tout
-                        moment ou supprimez-les si nécessaire.</p>
-                    </li>
-                    <li><p><strong>Visualisation Claire</strong> : Consultez rapidement tous vos logements enregistrés
-                        avec
-                        des détails précis.</p>
-                    </li>
-                    <li><p><strong>Organisation Structurée</strong> : Gérez chaque appartement séparément pour une
-                        organisation optimale.</p>
-                    </li>
-                </ul>
-            </section>
+    <section class="hero hero--auth">
+        <div class="hero__content">
+            <p class="hero__subtitle">
+                Pilotez vos biens, vos locataires et vos paiements en un clin d’œil. Tout est centralisé,
+                sécurisé et prêt pour l’action.
+            </p>
 
-
-            <section>
-                <h4>Historique des Paiements</h4>
-                <ul>
-                    <li><p><strong>Suivi des Paiements des Locataires</strong> : Consultez l'historique des paiements de
-                        chaque locataire pour un logement donné.</p>
-                    </li>
-                    <li><p><strong>Détails Complets</strong> : Accédez aux détails des paiements, incluant la date, le
-                        prix
-                        du loyer et bien plus encore.</p>
-                    </li>
-                    <li><p><strong>Analyse et Gestion</strong> : Analysez les paiements pour une gestion financière plus
-                        précise et une planification future.</p>
-                    </li>
-                </ul>
-            </section>
-
-            <section>
-                <h4>Fonctionnalités Clés</h4>
-                <ul>
-                    <li><p><strong>Interface Intuitive</strong> : Une interface utilisateur conviviale pour une
-                        expérience
-                        de gestion simplifiée.</p>
-                    </li>
-                    <li><p><strong>Sécurité et Confidentialité</strong> : Vos données sont sécurisées et protégées pour
-                        garantir la confidentialité.</p>
-                    </li>
-                    <li><p><strong>Accessibilité</strong> : Accédez à votre application depuis n'importe quel appareil,
-                        à
-                        tout moment.</p>
-                    </li>
-                </ul>
-            </section>
+            <!-- Actions rapides -->
+            <div class="quick-actions">
+                <a class="btn btn--ghost" routerLink="/logements">➕ Déclarer un logement</a>
+                <a class="btn btn--ghost" routerLink="/paiements">💳 Enregistrer un paiement</a>
+                <a class="btn btn--ghost" routerLink="/locataires">👤 Ajouter un locataire</a>
+            </div>
         </div>
-    </div>
+
+        <div class="hero__media">
+            <img src="./assets/css/images/immeuble.jpg" alt="Tableau de bord de gestion locative"/>
+        </div>
+    </section>
+
+    <!-- Cartes fonctionnalités -->
+    <section class="features">
+        <article class="feature-card">
+            <h3>Gestion des logements</h3>
+            <ul>
+                <li><strong>Ajout simple :</strong> déclarez chaque bien en quelques secondes.</li>
+                <li><strong>Mises à jour rapides :</strong> modifiez ou supprimez à tout moment.</li>
+                <li><strong>Vue claire :</strong> liste consolidée avec détails essentiels.</li>
+                <li><strong>Organisation par lot :</strong> chaque appartement géré séparément.</li>
+            </ul>
+            <a class="card-link" routerLink="/logements">Gérer mes logements →</a>
+        </article>
+
+        <article class="feature-card">
+            <h3>Historique des paiements</h3>
+            <ul>
+                <li><strong>Suivi par locataire :</strong> consultez l’historique par logement.</li>
+                <li><strong>Détails complets :</strong> date, montant, statut, notes.</li>
+                <li><strong>Analyse :</strong> identifiez retards et tendances en un coup d’œil.</li>
+            </ul>
+            <a class="card-link" routerLink="/paiements">Voir les paiements →</a>
+        </article>
+
+        <article class="feature-card">
+            <h3>Fonctionnalités clés</h3>
+            <ul>
+                <li><strong>Interface intuitive :</strong> pensée pour aller vite.</li>
+                <li><strong>Sécurité & confidentialité :</strong> vos données sont protégées.</li>
+                <li><strong>Multi-appareils :</strong> accédez partout, à tout moment.</li>
+            </ul>
+            <a class="card-link" routerLink="/profil">Paramètres & sécurité →</a>
+        </article>
+    </section>
 </div>
 
 
