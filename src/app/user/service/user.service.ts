@@ -100,6 +100,18 @@ export class UserService {
   }
 
 
+      reinitPassword(email: string) : Observable<any>{
+        let endpointUrl = `users/reset-password`;
+        return this.httpService.post(endpointUrl,email)
+                .pipe(
+                    catchError((error) => {
+                      console.error('Error fetching reinit password:')
+                      return throwError('Failed to reinit password ');
+                    })
+              );
+          }
+
+
   private handleForbidden(message: string): void {
     console.error(message);
     this.router.navigate(['']);

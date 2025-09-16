@@ -13,6 +13,8 @@ import { AuthGuard } from './authentication.guard';
 import {NotFoundComponent} from './not-found/not-found.component';
 import { LoginSuccessComponent } from './connexion/login-success.component';
 import { HistoriqueComponent } from './historique/historique.component';
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
+import {ConfirmationSentMailResetPasswordComponent} from "./reset-password/confirmation-sent-mail-reset-password/confirmation-sent-mail-reset-password.component";
 
 const routes: Routes = [
   { path: '', component: AccueilComponent },
@@ -20,6 +22,8 @@ const routes: Routes = [
   { path: 'login', component: LoginRegisterComponent },
   { path: 'connexion', component: ConnexionComponent },
   { path: 'login/success', component: LoginSuccessComponent },
+  { path: 'password-reset', component: ResetPasswordComponent},
+  { path: 'confirmation-sent-mail-reset-password', component: ConfirmationSentMailResetPasswordComponent},
   { path: 'a-propos', component: AProposComponent},
   { path: 'confirmation-inscription', component: ConfirmationRegisterComponent},
   { path: 'compte-user', component: CompteUserComponent,canActivate: [AuthGuard] },
