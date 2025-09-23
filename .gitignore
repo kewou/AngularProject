@@ -36,6 +36,9 @@ lerna-debug.log*
 *.pem
 *.key
 .npmrc
+coverage/
+
+
 
 # Angular specific
 *.class
