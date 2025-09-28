@@ -1,0 +1,127 @@
+<section class="rents">
+  <!-- Barre titre + retour -->
+  <div class="rents__bar">
+    <button mat-stroked-button class="btn-back" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+      Retour
+    </button>
+    <h1 class="rents__title">Historique des loyers – {{ appart?.nom }}</h1>
+    <span class="rents__spacer" aria-hidden="true"></span>
+  </div>
+
+  <!-- Infos locataire -->
+  <article class="rents-card">
+    <ng-container *ngIf="hasBailActif; else vacant">
+      <div *ngIf="getBailActif(appart) as bail">
+        <p>
+          <mat-icon inline>person</mat-icon>
+          Locataire :
+          <strong>{{ bail.locataire.name }}</strong>
+        </p>
+        <p class="muted">
+          Entrée le {{ bail.dateEntree | date: "dd/MM/yyyy" }}
+        </p>
+      </div>
+    </ng-container>
+
+    <ng-template #vacant>
+      <p class="muted">
+        <mat-icon inline>home</mat-icon>
+        Appartement libre (aucun bail en cours)
+      </p>
+    </ng-template>
+  </article>
+
+  <!-- Tableau historique -->
+  <article class="rents-card rents-card--table">
+    <div class="table-wrap" *ngIf="loyers?.length; else noHistory">
+      <table class="rents-table">
+        <thead>
+          <tr>
+            <th>Mois</th>
+            <th>Montant attendu</th>
+            <th>Montant versé</th>
+            <th>État</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let l of loyers" [class.current-row]="l.courant">
+            <td [attr.data-label]="'Mois'" class="mois-cell">
+              <span class="month-marker" [class.visible]="l.courant">⭐</span>
+              <span class="month-label">{{ l.mois | date: "MMMM yyyy" }}</span>
+            </td>
+            <td [attr.data-label]="'Attendu'">
+              {{ formatAmount(l.montantAttendu) }}
+            </td>
+            <td [attr.data-label]="'Versé'">
+              {{ formatAmount(l.montantVerse) }}
+            </td>
+            <td [attr.data-label]="'État'">
+              <span
+                class="status"
+                [class.status--ok]="l.ok"
+                [class.status--ko]="!l.ok"
+              >
+                {{ l.ok ? "Payé" : "En retard" }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noHistory>
+      <p class="muted">Aucun historique disponible pour cet appartement.</p>
+    </ng-template>
+  </article>
+
+  <!-- Formulaire versement -->
+  <aside class="rents-card rents-card--pay" *ngIf="hasBailActif">
+    <h2>Effectuer un versement</h2>
+
+    <form
+      [formGroup]="transactionForm"
+      class="pay-form"
+      novalidate
+      (ngSubmit)="effectuerVersement()"
+    >
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Montant</mat-label>
+        <input
+          matInput
+          type="number"
+          placeholder="Montant du versement"
+          formControlName="montantVerser"
+        />
+        <mat-hint align="start">
+          Multiple conseillé du loyer ({{ appart?.prixLoyer }} )
+        </mat-hint>
+
+        <mat-error
+          *ngIf="transactionForm.get('montantVerser')?.hasError('required')"
+        >
+          Le montant à verser est obligatoire.
+        </mat-error>
+        <mat-error
+          *ngIf="transactionForm.get('montantVerser')?.hasError('min')"
+        >
+          Le montant doit être supérieur à 0.
+        </mat-error>
+        <mat-error
+          *ngIf="transactionForm.get('montantVerser')?.hasError('notMultiple')"
+        >
+          Le montant doit être un multiple du loyer ({{ appart?.prixLoyer }} €).
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="btn-primary"
+        type="submit"
+        [disabled]="transactionForm.invalid"
+      >
+        Verser ce montant
+      </button>
+    </form>
+  </aside>
+</section>

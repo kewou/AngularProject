@@ -8,11 +8,11 @@ import { CompteUserComponent } from './compte-user/compte-user.component';
 import { AProposComponent } from './a-propos/a-propos.component';
 import { LogementComponent } from './logement/logement.component';
 import { AppartComponent } from './appart/appart.component';
-import { LoyerComponent } from './loyer/loyer.component';
 import { ConfirmationRegisterComponent } from './inscription/confirmation-register/confirmation-register.component';
 import { AuthGuard } from './authentication.guard';
 import {NotFoundComponent} from './not-found/not-found.component';
 import { LoginSuccessComponent } from './connexion/login-success.component';
+import { HistoriqueComponent } from './historique/historique.component';
 
 const routes: Routes = [
   { path: '', component: AccueilComponent },
@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'compte-user', component: CompteUserComponent,canActivate: [AuthGuard] },
   { path: 'bailleur/logements', component: LogementComponent,canActivate: [AuthGuard], data: { breadcrumb: 'Mes logements' } },
   { path: 'bailleur/logements/:logementRef/apparts', component: AppartComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Mes appartements' } },
-  { path: 'bailleur/logements/:logementRef/apparts/:appartRef', component: LoyerComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Historique des loyers' }},
+  { path: 'bailleur/logements/:logementRef/apparts/:appartRef', component: HistoriqueComponent ,canActivate: [AuthGuard], data: { breadcrumb: 'Historique des loyers' }},
   { path: '**', component: NotFoundComponent }
 ];
 
