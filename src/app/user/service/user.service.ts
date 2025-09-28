@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { User } from '../modele/user';
 import { HttpService } from '../../utils/httpService'
+import { HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -90,7 +91,13 @@ export class UserService {
                     return throwError('Failed to update user ');
                   })
             );
-      }
+  }
+
+  searchLocataires(name: string): Observable<User[]>{
+    let endpointUrl = `users/${this.cookieService.get('userReference')}/search`;
+    const params = new HttpParams().set('name', name);
+    return this.httpService.get<User[]>(endpointUrl,params);
+  }
 
 
   private handleForbidden(message: string): void {

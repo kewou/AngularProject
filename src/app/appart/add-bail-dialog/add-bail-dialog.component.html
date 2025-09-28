@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>Assigner un locataire</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="form" class="form">
+    <mat-form-field appearance="fill" class="w-100">
+      <mat-label>Son nom</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="name"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option
+          *ngFor="let locataire of filteredLocataires | async"
+          [value]="locataire"
+        >
+          {{ locataire.name }} {{ locataire.lastName }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Date d’entrée</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="dateEntree" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>Date de sortie prévue</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker2"
+        formControlName="dateSortiePrevue"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Annuler</button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="save()"
+    [disabled]="form.invalid"
+  >
+    Valider
+  </button>
+</mat-dialog-actions>
