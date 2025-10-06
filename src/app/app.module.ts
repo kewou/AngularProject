@@ -38,21 +38,14 @@ import { AddLogementDialogComponent } from './logement/add-logement-dialog/add-l
 import { AddAppartDialogComponent } from './appart/add-appart-dialog/add-appart-dialog.component';
 import { EditAppartDialogComponent } from './appart/edit-appart-dialog/edit-appart-dialog.component';
 import { DeleteAppartDialogComponent } from './appart/delete-appart-dialog/delete-appart-dialog.component';
-import { MatTableModule } from '@angular/material/table';
+
 import { MatSelectModule } from '@angular/material/select';
-import { LoyerComponent } from './loyer/loyer.component';
 import { LoginSuccessComponent } from './connexion/login-success.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { LOCALE_ID } from '@angular/core';
-import { VersementDialogComponent } from './loyer/versement/versement-dialog.component';
 
 import { MatTableModule } from "@angular/material/table";
-import { MatSelectModule } from "@angular/material/select";
-import { LoginSuccessComponent } from "./connexion/login-success.component";
-import { registerLocaleData } from "@angular/common";
-import localeFr from "@angular/common/locales/fr";
-import { LOCALE_ID } from "@angular/core";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatNativeDateModule } from "@angular/material/core";
 
@@ -97,7 +90,7 @@ registerLocaleData(localeFr);
     EditProfilUserDialogComponent,
     ConfirmationRegisterComponent,
     LoginSuccessComponent,
-    ConfirmationSentMailResetPasswordComponent
+    ConfirmationSentMailResetPasswordComponent,
     LoginSuccessComponent,
     HistoriqueComponent,
     AddBailDialogComponent,
