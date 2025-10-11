@@ -1,7 +1,22 @@
 <div mat-dialog-content>
-  <p>Êtes-vous sûr ?</p>
+  <div class="logout-dialog-content">
+    <mat-icon class="warning-icon">warning</mat-icon>
+    <h3>Confirmer la déconnexion</h3>
+    <p>Êtes-vous sûr de vouloir vous déconnecter ?</p>
+  </div>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Annuler</button>
-  <button mat-button color="accent" (click)="onConfirm()">Déconnexion</button>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()" [disabled]="isLoggingOut">
+    Annuler
+  </button>
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="onConfirm()"
+    [disabled]="isLoggingOut"
+    class="logout-button"
+  >
+    <mat-icon *ngIf="isLoggingOut" class="spinning">refresh</mat-icon>
+    <span>{{ isLoggingOut ? "Déconnexion..." : "Déconnexion" }}</span>
+  </button>
 </div>

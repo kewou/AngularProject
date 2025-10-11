@@ -1,13 +1,27 @@
 /* Styles pour la navigation */
 
-
-
+.logout-link {
+  display: flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  
+  mat-icon {
+    font-size: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  
+  &:hover {
+    background-color: rgba(244, 67, 54, 0.1) !important;
+    color: #f44336 !important;
+  }
+}
 
 #bannerMenu {
   background: linear-gradient(to left, #2276ad, #6ec654);
   text-align: center;
   padding: 1%;
-
 }
 
 #bannerMenu h1{
