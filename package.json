@@ -4,7 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:debug": "ng serve --configuration=development --port=4200 --host=0.0.0.0 --disable-host-check",
+    "start:dev": "ng serve --configuration=development --port=4200 --open",
+    "start:prod": "ng serve --configuration=production --port=4200",
     "build": "ng build",
+    "build:debug": "ng build --configuration=development --source-map=true",
+    "build:prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test:watch": "jest --watch",
