@@ -38,6 +38,13 @@ export class BailService {
       .pipe(catchError((err) => throwError(() => err)));
   }
 
+  getTransactions(bailId: number): Observable<Transaction[]> {
+    const url = `baux/${bailId}/transactions`;
+    return this.httpService
+      .get<Transaction[]>(url)
+      .pipe(catchError((err) => throwError(() => err)));
+  }
+
   sortirLocataire(bailId: number): Observable<any> {
     return this.httpService.put(`baux/${bailId}/sortie`, {}).pipe(
       catchError((err) => {

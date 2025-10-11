@@ -1,83 +1,106 @@
 <section class="estate">
-    <header class="estate__header">
-        <h1>Mes biens immobiliers</h1>
-        <button
-                mat-raised-button
-                color="primary"
-                class="btn-primary"
-                (click)="openAddLogementDialog($event)"
+  <header class="estate__header">
+    <h1>Mes biens immobiliers</h1>
+    <button
+      mat-raised-button
+      color="primary"
+      class="btn-primary"
+      (click)="openAddLogementDialog($event)"
+    >
+      ➕ Ajouter un bien
+    </button>
+  </header>
+
+  <ng-container *ngIf="logements?.length; else noLogements">
+    <div class="estate__grid">
+      <article class="estate-card" *ngFor="let logement of logements">
+        <div
+          class="estate-card__head"
+          (click)="viewApparts(logement.reference)"
         >
-            ➕ Ajouter un bien
-        </button>
-    </header>
+          <div class="estate-card__title">
+            <h3>{{ logement.quartier }}, {{ logement.ville }}</h3>
+            <span class="chip">Ref: {{ logement.reference }}</span>
+          </div>
 
-    <ng-container *ngIf="logements?.length; else noLogements">
-        <div class="estate__grid">
-            <article class="estate-card" *ngFor="let logement of logements">
-                <div class="estate-card__head" (click)="viewApparts(logement.reference)">
-                    <div class="estate-card__title">
-                        <h3>{{ logement.quartier }}, {{ logement.ville }}</h3>
-                        <span class="chip">Ref: {{ logement.reference }}</span>
-                    </div>
-
-                    <!-- Actions -->
-                    <button
-                            mat-icon-button
-                            [matMenuTriggerFor]="menu"
-                            aria-label="Actions logement"
-                            class="estate-card__menu"
-                            (click)="$event.stopPropagation()"
-                    >
-                        <mat-icon>more_vert</mat-icon>
-                    </button>
-                    <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="viewApparts(logement.reference)">
-                            <mat-icon>home</mat-icon>
-                            <span>Voir les logements</span>
-                        </button>
-                        <button mat-menu-item (click)="openEditLogementDialog(logement)">
-                            <mat-icon>edit</mat-icon>
-                            <span>Modifier</span>
-                        </button>
-                        <button mat-menu-item class="menu-danger"
-                                (click)="openDeleteLogementDialog(logement.reference)">
-                            <mat-icon>delete</mat-icon>
-                            <span>Supprimer</span>
-                        </button>
-                    </mat-menu>
-                </div>
-
-                <p class="estate-card__desc" (click)="viewApparts(logement.reference)">
-                    {{ logement.description || 'Aucune description fournie.' }}
-                </p>
-
-                <div class="estate-card__footer">
-                    <button mat-stroked-button color="primary" (click)="viewApparts(logement.reference)">
-                        Ouvrir
-                    </button>
-                    <div class="estate-card__actions">
-                        <button mat-button (click)="openEditLogementDialog(logement)">Modifier</button>
-                        <button mat-button class="text-danger" (click)="openDeleteLogementDialog(logement.reference)">
-                            Supprimer
-                        </button>
-                    </div>
-                </div>
-            </article>
-        </div>
-    </ng-container>
-
-    <ng-template #noLogements>
-        <div class="estate-empty">
-            <h3>Vous n’avez pas encore déclaré de bien</h3>
-            <p>Ajoutez votre premier logement pour démarrer la gestion locative.</p>
-            <button
-                    mat-raised-button
-                    color="primary"
-                    class="btn-primary"
-                    (click)="openAddLogementDialog($event)"
-            >
-                ➕ Ajouter un bien
+          <!-- Actions -->
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Actions logement"
+            class="estate-card__menu"
+            (click)="$event.stopPropagation()"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="viewApparts(logement.reference)">
+              <mat-icon>home</mat-icon>
+              <span>Voir les logements</span>
             </button>
+            <button
+              mat-menu-item
+              (click)="viewTransactions(logement.reference)"
+            >
+              <mat-icon>account_balance_wallet</mat-icon>
+              <span>Voir les transactions</span>
+            </button>
+            <button mat-menu-item (click)="openEditLogementDialog(logement)">
+              <mat-icon>edit</mat-icon>
+              <span>Modifier</span>
+            </button>
+            <button
+              mat-menu-item
+              class="menu-danger"
+              (click)="openDeleteLogementDialog(logement.reference)"
+            >
+              <mat-icon>delete</mat-icon>
+              <span>Supprimer</span>
+            </button>
+          </mat-menu>
         </div>
-    </ng-template>
+
+        <p class="estate-card__desc" (click)="viewApparts(logement.reference)">
+          {{ logement.description || "Aucune description fournie." }}
+        </p>
+
+        <div class="estate-card__footer">
+          <button
+            mat-stroked-button
+            color="primary"
+            (click)="viewApparts(logement.reference)"
+          >
+            Ouvrir
+          </button>
+          <div class="estate-card__actions">
+            <button mat-button (click)="openEditLogementDialog(logement)">
+              Modifier
+            </button>
+            <button
+              mat-button
+              class="text-danger"
+              (click)="openDeleteLogementDialog(logement.reference)"
+            >
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </ng-container>
+
+  <ng-template #noLogements>
+    <div class="estate-empty">
+      <h3>Vous n’avez pas encore déclaré de bien</h3>
+      <p>Ajoutez votre premier logement pour démarrer la gestion locative.</p>
+      <button
+        mat-raised-button
+        color="primary"
+        class="btn-primary"
+        (click)="openAddLogementDialog($event)"
+      >
+        ➕ Ajouter un bien
+      </button>
+    </div>
+  </ng-template>
 </section>

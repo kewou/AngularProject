@@ -1,0 +1,185 @@
+<div class="transactions-container">
+  <header class="transactions-header">
+    <div class="header-content">
+      <button mat-icon-button (click)="goBack()" class="back-button">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <div class="header-info">
+        <h1>Transactions - {{ logement?.quartier }}, {{ logement?.ville }}</h1>
+        <p class="logement-ref">Référence: {{ logementRef }}</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="transactions-content" *ngIf="!loading; else loadingTemplate">
+    <!-- Résumé global -->
+    <div class="summary-cards">
+      <mat-card class="summary-card">
+        <mat-card-content>
+          <div class="summary-item">
+            <mat-icon class="summary-icon">home</mat-icon>
+            <div class="summary-text">
+              <span class="summary-label">Appartements</span>
+              <span class="summary-value">{{ apparts.length }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="summary-card">
+        <mat-card-content>
+          <div class="summary-item">
+            <mat-icon class="summary-icon">account_balance_wallet</mat-icon>
+            <div class="summary-text">
+              <span class="summary-label">Total perçu</span>
+              <span class="summary-value">{{
+                formatAmount(getTotalTransactions())
+              }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card class="summary-card">
+        <mat-card-content>
+          <div class="summary-item">
+            <mat-icon class="summary-icon">receipt_long</mat-icon>
+            <div class="summary-text">
+              <span class="summary-label">Loyers payés</span>
+              <span class="summary-value">{{ getTotalLoyersPayes() }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!-- Liste des appartements avec leurs transactions -->
+    <div
+      class="apparts-section"
+      *ngIf="transactionsByAppart.length > 0; else noTransactions"
+    >
+      <h2>Transactions par appartement</h2>
+
+      <mat-expansion-panel
+        *ngFor="let item of transactionsByAppart"
+        class="appart-panel"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <div class="appart-header">
+              <mat-icon>apartment</mat-icon>
+              <span class="appart-name">{{ item.appart.nom }}</span>
+              <span class="appart-ref">({{ item.appart.reference }})</span>
+            </div>
+          </mat-panel-title>
+          <mat-panel-description>
+            <span class="transaction-count">
+              {{ item.transactions.length }} transaction(s)
+            </span>
+            <span class="appart-total">
+              {{ formatAmount(getAppartTotalTransactions(item.transactions)) }}
+            </span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div
+          class="transactions-list"
+          *ngIf="item.transactions.length > 0; else noAppartTransactions"
+        >
+          <mat-table
+            [dataSource]="item.transactions"
+            class="transactions-table"
+          >
+            <!-- Date de paiement -->
+            <ng-container matColumnDef="datePaiement">
+              <mat-header-cell *matHeaderCellDef
+                >Date de paiement</mat-header-cell
+              >
+              <mat-cell *matCellDef="let transaction">
+                <span class="date-cell">{{
+                  formatDate(transaction.datePaiement)
+                }}</span>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Locataire -->
+            <ng-container matColumnDef="locataire">
+              <mat-header-cell *matHeaderCellDef>Locataire</mat-header-cell>
+              <mat-cell *matCellDef="let transaction">
+                <span class="locataire-cell">{{
+                  transaction.locataireNom
+                }}</span>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Montant -->
+            <ng-container matColumnDef="montant">
+              <mat-header-cell *matHeaderCellDef>Montant</mat-header-cell>
+              <mat-cell *matCellDef="let transaction">
+                <span class="amount-cell">{{
+                  formatAmount(transaction.montant)
+                }}</span>
+              </mat-cell>
+            </ng-container>
+
+            <!-- Nombre de loyers -->
+            <ng-container matColumnDef="loyersPayes">
+              <mat-header-cell *matHeaderCellDef>Loyers payés</mat-header-cell>
+              <mat-cell *matCellDef="let transaction">
+                <mat-chip class="loyers-chip">
+                  <mat-icon>home</mat-icon>
+                  {{ transaction.loyersPayes }} loyer{{
+                    transaction.loyersPayes > 1 ? "s" : ""
+                  }}
+                </mat-chip>
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row
+              *matHeaderRowDef="[
+                'datePaiement',
+                'locataire',
+                'montant',
+                'loyersPayes',
+              ]"
+            ></mat-header-row>
+            <mat-row
+              *matRowDef="
+                let row;
+                columns: ['datePaiement', 'locataire', 'montant', 'loyersPayes']
+              "
+            ></mat-row>
+          </mat-table>
+        </div>
+
+        <ng-template #noAppartTransactions>
+          <div class="no-transactions">
+            <mat-icon>info</mat-icon>
+            <p>Aucune transaction enregistrée pour cet appartement</p>
+          </div>
+        </ng-template>
+      </mat-expansion-panel>
+    </div>
+
+    <ng-template #noTransactions>
+      <div class="no-transactions-global">
+        <mat-icon>account_balance_wallet</mat-icon>
+        <h3>Aucune transaction trouvée</h3>
+        <p>
+          Il n'y a pas encore de transactions enregistrées pour ce logement.
+        </p>
+        <button mat-raised-button color="primary" (click)="goToAppart('')">
+          <mat-icon>home</mat-icon>
+          Voir les appartements
+        </button>
+      </div>
+    </ng-template>
+  </div>
+
+  <ng-template #loadingTemplate>
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Chargement des transactions...</p>
+    </div>
+  </ng-template>
+</div>
