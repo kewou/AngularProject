@@ -1,0 +1,47 @@
+.logout-dialog-content {
+  text-align: center;
+  padding: 1rem 0;
+  
+  .warning-icon {
+    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+    color: #f44336;
+    margin-bottom: 1rem;
+  }
+  
+  h3 {
+    margin: 0 0 0.5rem;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+  }
+}
+
+.logout-button {
+  min-width: 120px;
+  
+  mat-icon {
+    margin-right: 0.5rem;
+  }
+  
+  .spinning {
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+mat-dialog-actions {
+  padding: 1rem 0 0;
+  margin: 0;
+  gap: 0.5rem;
+}
