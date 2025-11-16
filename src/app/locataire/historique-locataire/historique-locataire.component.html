@@ -1,0 +1,296 @@
+<div class="historique-container">
+    <div class="header-section">
+        <h2>📋 Mon Historique</h2>
+        <p class="subtitle">Historique de vos transactions et paiements</p>
+    </div>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+        <div class="spinner"></div>
+        <p>Chargement de votre historique...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="hasError" class="error-container">
+        <div class="error-icon">⚠️</div>
+        <h3>Erreur de chargement</h3>
+        <p>{{ errorMessage }}</p>
+        <button class="btn btn-primary" (click)="reload()">
+            <i class="fas fa-refresh"></i> Réessayer
+        </button>
+    </div>
+
+    <!-- Message quand aucun appartement n'est assigné -->
+    <div
+            *ngIf="!isLoading && !hasError && !hasAppartements"
+            class="no-appartement-container"
+    >
+        <div class="no-appartement-card">
+            <div class="info-icon">🏠</div>
+            <h2>Aucun appartement assigné</h2>
+            <p>
+                Vous n'êtes actuellement assigné à aucun appartement. Pour être assigné
+                à un logement, veuillez contacter votre bailleur.
+            </p>
+            <div class="action-buttons">
+                <button class="btn btn-primary" (click)="reload()">
+                    <i class="fas fa-refresh"></i>
+                    Actualiser
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message quand pas d'historique (mais pas d'erreur) -->
+    <div
+            *ngIf="
+      !isLoading &&
+      !hasError &&
+      hasAppartements &&
+      historique.length === 0 &&
+      !situationAppartement
+    "
+            class="no-histoire-container"
+    >
+        <div class="no-histoire-card">
+            <div class="info-icon">📋</div>
+            <h2>Aucun historique pour le moment</h2>
+            <p>
+                Vous n'avez pas encore d'historique de transactions. Votre historique
+                apparaîtra ici une fois que vous aurez effectué vos premiers paiements.
+            </p>
+            <div class="action-buttons">
+                <button class="btn btn-primary" (click)="reload()">
+                    <i class="fas fa-refresh"></i>
+                    Actualiser
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div
+            *ngIf="
+      !isLoading &&
+      !hasError &&
+      hasAppartements &&
+      (historique.length > 0 || situationAppartement)
+    "
+            class="content-section"
+    >
+        <!-- Summary Cards -->
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="card-icon">💰</div>
+                <div class="card-content">
+                    <h3>Total Payé</h3>
+                    <p class="amount">{{ formatCurrency(getTotalPaid()) }}</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="card-icon">⏳</div>
+                <div class="card-content">
+                    <h3>En Attente</h3>
+                    <p class="amount">{{ formatCurrency(getTotalPending()) }}</p>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="card-icon">📊</div>
+                <div class="card-content">
+                    <h3>Transactions</h3>
+                    <p class="count">{{ historique.length }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Situation de l'appartement -->
+        <div class="situation-container" *ngIf="situationAppartement">
+            <h3>📊 Situation de votre appartement</h3>
+            <div class="situation-table-container">
+                <table class="situation-table">
+                    <thead>
+                    <tr>
+                        <th>Élément</th>
+                        <th>Montant</th>
+                        <th>Statut</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td class="element-cell">
+                            <i class="fas fa-home"></i>
+                            Loyer mensuel
+                        </td>
+                        <td class="amount-cell">
+                            <strong>{{
+                                formatCurrency(situationAppartement.loyerMensuel)
+                                }}</strong>
+                        </td>
+                        <td class="status-cell">
+                            <span class="status-badge status-info">Mensuel</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="element-cell">
+                            <i class="fas fa-shield-alt"></i>
+                            Caution
+                        </td>
+                        <td class="amount-cell">
+                            <strong>{{
+                                formatCurrency(situationAppartement.caution)
+                                }}</strong>
+                        </td>
+                        <td class="status-cell">
+                            <span class="status-badge status-paid">Payée</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="element-cell">
+                            <i class="fas fa-check-circle"></i>
+                            Loyer payé
+                        </td>
+                        <td class="amount-cell">
+                            <strong>{{
+                                formatCurrency(situationAppartement.loyerPaye)
+                                }}</strong>
+                        </td>
+                        <td class="status-cell">
+                            <span class="status-badge status-paid">Payé</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="element-cell">
+                            <i class="fas fa-clock"></i>
+                            Loyer en attente
+                        </td>
+                        <td class="amount-cell">
+                            <strong>{{
+                                formatCurrency(situationAppartement.loyerEnAttente)
+                                }}</strong>
+                        </td>
+                        <td class="status-cell">
+                            <span class="status-badge status-pending">En attente</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="element-cell">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Loyer en retard
+                        </td>
+                        <td class="amount-cell">
+                            <strong>{{
+                                formatCurrency(situationAppartement.loyerEnRetard)
+                                }}</strong>
+                        </td>
+                        <td class="status-cell">
+                            <span class="status-badge status-overdue">En retard</span>
+                        </td>
+                    </tr>
+                    <tr class="solde-row">
+                        <td class="element-cell">
+                            <i class="fas fa-calculator"></i>
+                            <strong>Solde</strong>
+                        </td>
+                        <td class="amount-cell">
+                            <strong [ngClass]="getSoldeClass(situationAppartement.solde)">
+                                {{ formatSolde(situationAppartement.solde) }}
+                            </strong>
+                        </td>
+                        <td class="status-cell">
+                <span
+                        class="status-badge"
+                        [ngClass]="getSoldeClass(situationAppartement.solde)"
+                >
+                  {{ situationAppartement.solde < 0 ? "Crédit" : "Débit" }}
+                </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Prochain paiement -->
+            <div
+                    class="prochain-paiement"
+                    *ngIf="situationAppartement.prochainPaiement"
+            >
+                <div class="paiement-info">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span
+                    >Prochain paiement prévu :
+            <strong>{{
+              formatDate(situationAppartement.prochainPaiement)
+            }}</strong></span
+                    >
+                </div>
+                <button class="btn btn-success" disabled>
+                    <i class="fas fa-credit-card"></i>
+                    Payer le loyer (Bientôt disponible)
+                </button>
+            </div>
+        </div>
+
+        <!-- Historique Table -->
+        <div class="historique-table-container">
+            <h3>📝 Détail des transactions</h3>
+
+            <div *ngIf="historique.length === 0" class="no-data">
+                <div class="no-data-icon">📝</div>
+                <p>Aucune transaction trouvée</p>
+            </div>
+
+            <div *ngIf="historique.length > 0" class="table-responsive">
+                <table class="historique-table">
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Montant</th>
+                        <th>Statut</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let transaction of historique" class="transaction-row">
+                        <td class="date-cell">
+                            <i class="fas fa-calendar"></i>
+                            {{ formatDate(transaction.date) }}
+                        </td>
+                        <td class="type-cell">
+                <span
+                        class="type-badge"
+                        [ngClass]="
+                    'type-' + transaction.type.toLowerCase().replace(' ', '-')
+                  "
+                >
+                  {{ transaction.type }}
+                </span>
+                        </td>
+                        <td class="description-cell">
+                            {{ transaction.description }}
+                        </td>
+                        <td class="amount-cell">
+                            <strong>{{ formatCurrency(transaction.montant) }}</strong>
+                        </td>
+                        <td class="status-cell">
+                <span
+                        class="status-badge"
+                        [ngClass]="getStatusClass(transaction.statut)"
+                >
+                  {{ transaction.statut }}
+                </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions-section">
+            <button class="btn btn-secondary" (click)="reload()">
+                <i class="fas fa-refresh"></i> Actualiser
+            </button>
+        </div>
+    </div>
+</div>
