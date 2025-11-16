@@ -1,0 +1,125 @@
+<!-- En-tête de la page -->
+<section class="page-header">
+    <div class="header-content">
+        <h1 class="page-title">
+            <mat-icon class="title-icon">home</mat-icon>
+            Mon Espace Locataire
+        </h1>
+        <p class="page-subtitle" *ngIf="locataireInfo">
+            Bienvenue, {{ locataireInfo.name }}
+        </p>
+    </div>
+</section>
+
+<!-- Contenu principal -->
+<div class="main-content">
+    <!-- État de chargement -->
+    <div *ngIf="isLoading" class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Chargement de vos informations...</p>
+    </div>
+
+    <!-- État d'erreur -->
+    <div *ngIf="hasError && !isLoading" class="error-container">
+        <mat-icon class="error-icon">error</mat-icon>
+        <h3>Erreur de chargement</h3>
+        <p>{{ errorMessage }}</p>
+        <button mat-raised-button color="primary" (click)="reload()">
+            <mat-icon>refresh</mat-icon>
+            Réessayer
+        </button>
+    </div>
+
+    <!-- Contenu principal -->
+    <div *ngIf="!isLoading && !hasError">
+        <!-- Message quand aucun appartement n'est assigné -->
+        <div *ngIf="!hasAppartements" class="no-appartement-container">
+            <div class="no-appartement-card">
+                <mat-icon class="info-icon">info</mat-icon>
+                <h2>Aucun appartement assigné</h2>
+                <p>
+                    Vous n'êtes actuellement assigné à aucun appartement. Pour être
+                    assigné à un logement, veuillez contacter votre bailleur.
+                </p>
+                <div class="action-buttons">
+                    <button mat-raised-button color="primary" (click)="reload()">
+                        <mat-icon>refresh</mat-icon>
+                        Actualiser
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Liste des appartements assignés -->
+        <div *ngIf="hasAppartements" class="appartements-container">
+            <h2 class="section-title">
+                <mat-icon>apartment</mat-icon>
+                Mes Appartements
+            </h2>
+
+            <div class="appartements-grid">
+                <div *ngFor="let appartement of appartements" class="appartement-card">
+                    <div class="card-header">
+                        <h3 class="appartement-name">{{ appartement.nom }}</h3>
+                        <span class="appartement-ref">#{{ appartement.reference }}</span>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="logement-info">
+                            <h4>{{ appartement.logement.description }}</h4>
+                            <p class="adresse">
+                                <mat-icon>location_on</mat-icon>
+                                {{ appartement.logement.adresse }}
+                            </p>
+                        </div>
+
+                        <div class="bail-info">
+                            <h4>Informations du bail</h4>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <mat-icon>date_range</mat-icon>
+                                    <span
+                                    >Entrée :
+                    {{ formatDate(appartement.bail.dateEntree) }}</span
+                                    >
+                                </div>
+                                <div class="info-item">
+                                    <mat-icon>euro</mat-icon>
+                                    <span
+                                    >Loyer :
+                    {{ formatCurrency(appartement.bail.montantLoyer) }}</span
+                                    >
+                                </div>
+                                <div class="info-item">
+                                    <mat-icon>security</mat-icon>
+                                    <span
+                                    >Caution :
+                    {{ formatCurrency(appartement.bail.montantCaution) }}</span
+                                    >
+                                </div>
+                                <div class="info-item">
+                                    <mat-icon>check_circle</mat-icon>
+                                    <span
+                                    >Statut :
+                    {{ appartement.bail.actif ? "Actif" : "Inactif" }}</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-actions">
+                        <button mat-raised-button color="primary">
+                            <mat-icon>payment</mat-icon>
+                            Paiements
+                        </button>
+                        <button mat-stroked-button>
+                            <mat-icon>description</mat-icon>
+                            Documents
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

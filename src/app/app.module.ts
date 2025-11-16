@@ -64,6 +64,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ConfirmPaymentDialogComponent } from "./historique/dialog/comfirmPayment-dialog.component";
 import { LogementTransactionsComponent } from "./logement-transactions/logement-transactions.component";
 import { ConfirmationSentMailResetPasswordComponent } from "./reset-password/confirmation-sent-mail-reset-password/confirmation-sent-mail-reset-password.component";
+import { LocataireComponent } from "./locataire/locataire.component";
+import { DebugTestComponent } from "./debug-test/debug-test.component";
+import { HistoriqueLocataireComponent } from './locataire/historique-locataire/historique-locataire.component';
 
 registerLocaleData(localeFr);
 
@@ -100,6 +103,9 @@ registerLocaleData(localeFr);
     AddBailDialogComponent,
     ConfirmPaymentDialogComponent,
     LogementTransactionsComponent,
+    LocataireComponent,
+    DebugTestComponent,
+    HistoriqueLocataireComponent,
   ],
   imports: [
     BrowserModule,

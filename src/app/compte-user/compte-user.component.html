@@ -8,16 +8,14 @@
         <article class="profile-card">
             <div class="profile-card__top">
                 <div class="avatar" aria-hidden="true">
-                    <span>
-                      {{ (user.lastName || 'U') | slice:0:1 | uppercase }}
-                      {{ (user.name || 'N') | slice:0:1 | uppercase }}
-                    </span>
-
+          <span>
+            {{ user.lastName || "U" | slice: 0 : 1 | uppercase }}
+            {{ user.name || "N" | slice: 0 : 1 | uppercase }}
+          </span>
                 </div>
 
                 <div class="identity">
                     <h2 class="user-name">{{ user.lastName }} {{ user.name }}</h2>
-          
                 </div>
 
                 <div class="card-actions">
@@ -39,27 +37,27 @@
 
                 <div class="info-item">
                     <div class="info-label">Téléphone</div>
-                    <div class="info-value">{{ "0"+user.phone | phoneFormat }}</div>
+                    <div class="info-value">{{ "0" + user.phone | phoneFormat }}</div>
                 </div>
 
                 <div class="info-item">
                     <div class="info-label">Profil</div>
-                    <div class="info-value">{{ user.role || 'Propriétaire' }}</div>
+                    <div class="info-value">{{ getDisplayRole() }}</div>
                 </div>
 
                 <!-- (Optionnel) Adresse / Ville si tu les as
-                <div class="info-item">
-                  <div class="info-label">Ville</div>
-                  <div class="info-value">{{ user.city || '—' }}</div>
-                </div>
-                -->
+                        <div class="info-item">
+                          <div class="info-label">Ville</div>
+                          <div class="info-value">{{ user.city || '—' }}</div>
+                        </div>
+                        -->
             </div>
 
             <!-- (Optionnel) liens secondaires
-            <div class="profile-card__footer">
-              <a routerLink="/password-reset" class="link">Changer de mot de passe</a>
-            </div>
-            -->
+                  <div class="profile-card__footer">
+                    <a routerLink="/password-reset" class="link">Changer de mot de passe</a>
+                  </div>
+                  -->
         </article>
     </div>
 </section>

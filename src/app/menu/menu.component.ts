@@ -21,6 +21,7 @@ import { filter } from "rxjs/operators";
 export class MenuComponent implements AfterViewInit {
   registrationModalOpen = false;
   isUserConnected: boolean = false;
+  userRole: string = "";
 
   @ViewChild("navbarResponsive") navbarResponsive!: ElementRef;
 
@@ -39,7 +40,78 @@ export class MenuComponent implements AfterViewInit {
       .subscribe(() => {
         console.log("Navigation détectée", event);
         this.fermerMenu();
+        // Recharger le rôle utilisateur à chaque navigation
+        this.loadUserRole();
       });
+
+    // Initialiser le rôle utilisateur
+    this.loadUserRole();
+  }
+
+  loadUserRole(): void {
+    console.log("🔍 loadUserRole() appelée");
+    console.log(
+      "🔍 estUtilisateurConnecte():",
+      this.userService.estUtilisateurConnecte()
+    );
+
+    if (this.userService.estUtilisateurConnecte()) {
+      const token = this.cookieService.get("jwtToken");
+      console.log("🔍 Token trouvé:", token ? "Oui" : "Non");
+
+      if (token) {
+        try {
+          const decodedToken: any = this.userService.decodeJwtToken(token);
+          console.log("🔍 Token décodé:", decodedToken);
+
+          if (
+            decodedToken.roles &&
+            Array.isArray(decodedToken.roles) &&
+            decodedToken.roles.length > 0
+          ) {
+            this.userRole = decodedToken.roles[0].authority;
+            console.log("🔍 Rôle utilisateur défini:", this.userRole);
+          } else {
+            console.log("🔍 Aucun rôle trouvé dans le token");
+          }
+        } catch (error) {
+          console.error("Erreur lors du décodage du token:", error);
+          this.userRole = "";
+        }
+      }
+    } else {
+      console.log("🔍 Utilisateur non connecté");
+    }
+  }
+
+  isLocataire(): boolean {
+    const result = this.userRole === "LOCATAIRE";
+    console.log("🔍 isLocataire():", result, "(userRole:", this.userRole, ")");
+    return result;
+  }
+
+  isBailleur(): boolean {
+    const result = this.userRole === "BAILLEUR";
+    console.log("🔍 isBailleur():", result, "(userRole:", this.userRole, ")");
+    return result;
+  }
+
+  isAdmin(): boolean {
+    const result = this.userRole === "ADMIN";
+    console.log("🔍 isAdmin():", result, "(userRole:", this.userRole, ")");
+    return result;
+  }
+
+  getHomeLink(): string {
+    if (this.userService.estUtilisateurConnecte()) {
+      if (this.isLocataire()) {
+        return "/locataire";
+      }
+      if (this.isBailleur() || this.isAdmin()) {
+        return "/bailleur";
+      }
+    }
+    return "/";
   }
 
   fermerMenu() {

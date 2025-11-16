@@ -98,23 +98,29 @@ export class UserService {
     }
   }
 
-  getCurrentUserReference(tokenJwt: string) {
+  getCurrentUserReference(tokenJwt: string): string {
     try {
-      const token = this.cookieService.get("jwtToken");
-      if (!token) {
+      if (!tokenJwt) {
         throw new Error("Token is missing");
       }
-      const decodedToken: any = jwtDecode(token);
+      const decodedToken: any = jwtDecode(tokenJwt);
       const referenceUser = decodedToken.reference;
       if (!referenceUser) {
         throw new Error("Reference user information is missing in the token");
       }
       return referenceUser;
     } catch (error) {
-      this.handleForbidden("Access forbidden");
-      return throwError(
-        () => new Error((error as Error).message || "Invalid token")
-      );
+      console.error("Error getting user reference:", error);
+      return "";
+    }
+  }
+
+  decodeJwtToken(token: string): any {
+    try {
+      return jwtDecode(token);
+    } catch (error) {
+      console.error("Erreur lors du décodage du token JWT:", error);
+      return null;
     }
   }
 
@@ -187,6 +193,9 @@ export class UserService {
 
       // Récupérer et sauvegarder la référence utilisateur
       const userReference = this.getCurrentUserReference(tokenJwt);
+      if (!userReference) {
+        throw new Error("Impossible de récupérer la référence utilisateur");
+      }
       this.cookieService.set(
         "userReference",
         userReference,
@@ -231,7 +240,7 @@ export class UserService {
           this.router.navigate(["/bailleur/logements"]);
           break;
         case "LOCATAIRE":
-          this.router.navigate(["/locataire/logements/appart"]);
+          this.router.navigate(["/locataire"]);
           break;
         default:
           console.error("Rôle utilisateur inconnu :", userAuthority);
