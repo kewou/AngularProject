@@ -1,9 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, of, throwError } from "rxjs";
-import { Router } from "@angular/router";
-import { UserService } from "../../user/service/user.service";
-import { CookieService } from "ngx-cookie-service";
-import { catchError } from "rxjs/operators";
+import { Observable } from "rxjs";
 import { Appart, Bail, Loyer, Transaction } from "../modele/appart";
 import { HttpService } from "../../utils/httpService";
 
@@ -26,31 +22,20 @@ export class BailService {
 
   getHistoriqueLoyers(bailId: number): Observable<Loyer[]> {
     const url = `baux/${bailId}/historique-loyers`;
-    return this.httpService
-      .get<Loyer[]>(url)
-      .pipe(catchError((err) => throwError(() => err)));
+    return this.httpService.get<Loyer[]>(url);
   }
 
   createTransaction(bailId: number, montant: number): Observable<Transaction> {
     const url = `baux/${bailId}/transactions`;
-    return this.httpService
-      .post<Transaction>(url, { montant })
-      .pipe(catchError((err) => throwError(() => err)));
+    return this.httpService.post<Transaction>(url, { montant });
   }
 
   getTransactions(bailId: number): Observable<Transaction[]> {
     const url = `baux/${bailId}/transactions`;
-    return this.httpService
-      .get<Transaction[]>(url)
-      .pipe(catchError((err) => throwError(() => err)));
+    return this.httpService.get<Transaction[]>(url);
   }
 
   sortirLocataire(bailId: number): Observable<any> {
-    return this.httpService.put(`baux/${bailId}/sortie`, {}).pipe(
-      catchError((err) => {
-        console.error("Erreur sortie locataire:", err);
-        return throwError(() => err);
-      })
-    );
+    return this.httpService.put(`baux/${bailId}/sortie`, {});
   }
 }

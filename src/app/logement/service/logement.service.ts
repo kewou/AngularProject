@@ -1,9 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Observable, of, throwError } from "rxjs";
+import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { UserService } from "../../user/service/user.service";
 import { CookieService } from "ngx-cookie-service";
-import { catchError } from "rxjs/operators";
 import { Logement } from "../modele/logement";
 import { HttpService } from "../../utils/httpService";
 
@@ -21,59 +20,34 @@ export class LogementService {
   getLogements(): Observable<any> {
     const userReference = this.getUserReference();
     const url = `bailleur/users/${userReference}/logements`;
-    return this.httpService.get(url).pipe(
-      catchError((error) => {
-        console.error("Error fetching user logements:");
-        return throwError("Failed to fetch user logements");
-      })
-    );
+    return this.httpService.get(url);
   }
 
   getOneLogement(logementRef: string): Observable<any> {
     const userReference = this.getUserReference();
     const url = `bailleur/users/${userReference}/logements/${logementRef}`;
-    return this.httpService.get(url).pipe(
-      catchError((error) => {
-        console.error("Error fetching user logement:");
-        return throwError("Failed to fetch user logement");
-      })
-    );
+    return this.httpService.get(url);
   }
 
   addLogement(logement: Logement): Observable<any> {
     const userReference = this.getUserReference();
     const url = `bailleur/users/${userReference}/logements/create`;
 
-    return this.httpService.post(url, logement).pipe(
-      catchError((error) => {
-        console.error("Error adding logement:", error);
-        return throwError("Failed to add logement");
-      })
-    );
+    return this.httpService.post(url, logement);
   }
 
   updateLogement(updatedLogement: Logement): Observable<any> {
     const userReference = this.getUserReference();
     const url = `bailleur/users/${userReference}/logements/${updatedLogement.reference}`;
 
-    return this.httpService.put(url, updatedLogement).pipe(
-      catchError((error) => {
-        console.error("Error adding logement:", error);
-        return throwError("Failed to add logement");
-      })
-    );
+    return this.httpService.put(url, updatedLogement);
   }
 
   deleteLogement(refLogement: string): Observable<any> {
     const userReference = this.getUserReference();
     const url = `bailleur/users/${userReference}/logements/${refLogement}`;
 
-    return this.httpService.delete(url).pipe(
-      catchError((error) => {
-        console.error("Error deleteting logement:", error);
-        return throwError("Failed to delete logement");
-      })
-    );
+    return this.httpService.delete(url);
   }
 
   private getUserReference(): string {

@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { UserService } from "../../user/service/user.service";
-import { catchError } from "rxjs/operators";
 import { Appart, UpdateAppartRequest, User, Bail } from "../modele/appart";
 import { HttpService } from "../../utils/httpService";
 import { HttpParams } from "@angular/common/http";
@@ -20,9 +19,7 @@ export class AppartService {
   getAppartsByLogement(logementRef: string): Observable<Appart[]> {
     const userReference = this.getUserReferenceOrThrow();
     const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts`;
-    return this.httpService
-      .get<Appart[]>(url)
-      .pipe(catchError((err) => throwError(() => err)));
+    return this.httpService.get<Appart[]>(url);
   }
 
   private getUserReferenceOrThrow(): string {
@@ -35,12 +32,7 @@ export class AppartService {
     const userReference = this.getUserReferenceOrThrow();
     const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts/create`;
 
-    return this.httpService.post(url, appart).pipe(
-      catchError((error) => {
-        console.error("Error adding appart:", error);
-        return throwError(() => "Failed to add appart");
-      })
-    );
+    return this.httpService.post(url, appart);
   }
 
   updateAppart(logementRef: string, appart: Appart): Observable<any> {
@@ -60,42 +52,25 @@ export class AppartService {
         : appart.bailleur?.reference!,
     };
 
-    return this.httpService.put<Appart>(url, payload).pipe(
-      catchError((error) => {
-        console.error("Error updating appart:", error);
-        return throwError(() => "Failed to update appart");
-      })
-    );
+    return this.httpService.put<Appart>(url, payload);
   }
 
   deleteAppart(logementRef: string, appartReference: string): Observable<any> {
     const userReference = this.getUserReferenceOrThrow();
     const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts/${appartReference}`;
 
-    return this.httpService.delete(url).pipe(
-      catchError((error) => {
-        console.error("Error deleting appart:", error);
-        return throwError(() => "Failed to delete appart");
-      })
-    );
+    return this.httpService.delete(url);
   }
 
   getAppartByRef(logementRef: string, appartRef: string): Observable<Appart> {
     const userReference = this.getUserReferenceOrThrow();
     const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts/${appartRef}`;
-    return this.httpService
-      .get<Appart>(url)
-      .pipe(catchError((err) => throwError(() => err)));
+    return this.httpService.get<Appart>(url);
   }
 
   searchLocatairesByName(name: string): Observable<User[]> {
     const params = new HttpParams().set("role", "LOCATAIRE").set("nom", name);
 
-    return this.httpService.get<User[]>("users/search", params).pipe(
-      catchError((err) => {
-        console.error("Error searching locataires:", err);
-        return throwError(() => "Failed to search locataires");
-      })
-    );
+    return this.httpService.get<User[]>("users/search", params);
   }
 }

@@ -3,6 +3,7 @@ import { User } from "../user/modele/user";
 import { UserService } from "../user/service/user.service";
 import { ActivatedRoute } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { EditProfilUserDialogComponent } from "./edit-profil-user-dialog/edit-profil-user-dialog.component";
 import { CookieService } from "ngx-cookie-service";
@@ -28,7 +29,8 @@ export class CompteUserComponent implements OnInit {
     private userService: UserService,
     private dialog: MatDialog,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -37,14 +39,11 @@ export class CompteUserComponent implements OnInit {
   }
 
   getUserInfo(): void {
-    this.userService.getUserInfo().subscribe(
-      (data) => {
+    this.userService.getUserInfo().subscribe({
+      next: (data) => {
         this.user = data;
       },
-      (error) => {
-        console.error("Erreur fetching user info");
-      }
-    );
+    });
   }
 
   loadUserRole(): void {
@@ -96,9 +95,17 @@ export class CompteUserComponent implements OnInit {
     this.userService.updateUser(user).subscribe({
       next: (userUpdated) => {
         this.user = userUpdated;
-      },
-      error: (error) => {
-        console.error("Failed to update user:", error);
+        // Message de succès spécifique à cette action
+        this.snackBar.open(
+          "Vos informations ont été mises à jour avec succès",
+          "Fermer",
+          {
+            duration: 5000,
+            horizontalPosition: "center",
+            verticalPosition: "top",
+            panelClass: ["success-snackbar"],
+          }
+        );
       },
     });
   }

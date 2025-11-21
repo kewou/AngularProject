@@ -61,12 +61,13 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatChipsModule } from "@angular/material/chips";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { ConfirmPaymentDialogComponent } from "./historique/dialog/comfirmPayment-dialog.component";
 import { LogementTransactionsComponent } from "./logement-transactions/logement-transactions.component";
 import { ConfirmationSentMailResetPasswordComponent } from "./reset-password/confirmation-sent-mail-reset-password/confirmation-sent-mail-reset-password.component";
 import { LocataireComponent } from "./locataire/locataire.component";
 import { DebugTestComponent } from "./debug-test/debug-test.component";
-import { HistoriqueLocataireComponent } from './locataire/historique-locataire/historique-locataire.component';
+import { HistoriqueLocataireComponent } from "./locataire/historique-locataire/historique-locataire.component";
 
 registerLocaleData(localeFr);
 
@@ -133,6 +134,7 @@ registerLocaleData(localeFr);
     MatExpansionModule,
     MatChipsModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: "fr" },

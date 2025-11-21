@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Observable, of, throwError } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { jwtDecode } from "jwt-decode";
 import { CookieService } from "ngx-cookie-service";
-import { catchError } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { User } from "../modele/user";
 import { HttpService } from "../../utils/httpService";
@@ -126,22 +125,12 @@ export class UserService {
 
   getUserInfo(): Observable<any> {
     let endpointUrl = `users/${this.cookieService.get("userReference")}`;
-    return this.httpService.get(endpointUrl).pipe(
-      catchError((error) => {
-        console.error("Error fetching user info:");
-        return throwError("Failed to fetch user info");
-      })
-    );
+    return this.httpService.get(endpointUrl);
   }
 
   updateUser(updatedUser: User): Observable<any> {
     let endpointUrl = `users/${this.cookieService.get("userReference")}`;
-    return this.httpService.put(endpointUrl, updatedUser).pipe(
-      catchError((error) => {
-        console.error("Error fetching update user:");
-        return throwError("Failed to update user ");
-      })
-    );
+    return this.httpService.put(endpointUrl, updatedUser);
   }
 
   searchLocataires(name: string): Observable<User[]> {
@@ -152,12 +141,7 @@ export class UserService {
 
   reinitPassword(email: string): Observable<any> {
     let endpointUrl = `users/reset-password`;
-    return this.httpService.post(endpointUrl, email).pipe(
-      catchError((error) => {
-        console.error("Error fetching reinit password:");
-        return throwError("Failed to reinit password ");
-      })
-    );
+    return this.httpService.post(endpointUrl, email);
   }
 
   private handleForbidden(message: string): void {

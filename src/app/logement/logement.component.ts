@@ -30,14 +30,12 @@ export class LogementComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.logementService.getLogements().subscribe(
-      (data) => {
+    this.logementService.getLogements().subscribe({
+      next: (data) => {
         this.logements = data;
       },
-      (error) => {
-        console.error("Erreur fetching logements");
-      }
-    );
+      // Les erreurs sont maintenant gérées globalement par ErrorInterceptor
+    });
   }
 
   openAddLogementDialog(event: Event): void {

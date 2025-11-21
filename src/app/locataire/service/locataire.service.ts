@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Observable, of, throwError } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { HttpService } from "../../utils/httpService";
 import { CookieService } from "ngx-cookie-service";
 import {
@@ -7,7 +7,6 @@ import {
   LocataireAppartement,
   PaiementInfo,
 } from "../modele/locataire-data";
-import { catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -28,18 +27,7 @@ export class LocataireService {
     }
 
     const endpointUrl = `locataires/${userReference}`;
-    return this.httpService.get<LocataireInfo>(endpointUrl).pipe(
-      catchError((error) => {
-        console.error(
-          "Erreur lors de la récupération des informations du locataire:",
-          error
-        );
-        return throwError(
-          () =>
-            new Error("Impossible de récupérer les informations du locataire")
-        );
-      })
-    );
+    return this.httpService.get<LocataireInfo>(endpointUrl);
   }
 
   /**
@@ -52,17 +40,7 @@ export class LocataireService {
     }
 
     const endpointUrl = `locataires/${userReference}/appartements`;
-    return this.httpService.get<LocataireAppartement[]>(endpointUrl).pipe(
-      catchError((error) => {
-        console.error(
-          "Erreur lors de la récupération des appartements:",
-          error
-        );
-        return throwError(
-          () => new Error("Impossible de récupérer les appartements")
-        );
-      })
-    );
+    return this.httpService.get<LocataireAppartement[]>(endpointUrl);
   }
 
   /**
@@ -75,17 +53,7 @@ export class LocataireService {
     }
 
     const endpointUrl = `locataires/${userReference}/paiements`;
-    return this.httpService.get<PaiementInfo[]>(endpointUrl).pipe(
-      catchError((error) => {
-        console.error(
-          "Erreur lors de la récupération de l'historique des paiements:",
-          error
-        );
-        return throwError(
-          () => new Error("Impossible de récupérer l'historique des paiements")
-        );
-      })
-    );
+    return this.httpService.get<PaiementInfo[]>(endpointUrl);
   }
 
   /**
