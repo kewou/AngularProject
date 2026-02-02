@@ -247,6 +247,7 @@
   margin: 0;
   font-size: 1.5rem;
   font-weight: 600;
+  color: black;
   position: relative;
 }
 
@@ -362,24 +363,24 @@
   .page-title {
     font-size: 2rem;
   }
-  
+
   .appartements-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .info-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .action-buttons {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .card-actions {
     flex-direction: column;
   }
-  
+
   .card-actions button {
     max-width: none;
   }
@@ -389,15 +390,15 @@
   .page-header {
     padding: 1.5rem 0;
   }
-  
+
   .page-title {
     font-size: 1.75rem;
   }
-  
+
   .no-appartement-card {
     padding: 1.5rem;
   }
-  
+
   .appartement-card {
     margin: 0 -0.5rem;
   }

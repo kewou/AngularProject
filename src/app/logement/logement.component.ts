@@ -6,6 +6,7 @@ import { AddLogementDialogComponent } from "./add-logement-dialog/add-logement-d
 import { EditLogementDialogComponent } from "./edit-logement-dialog/edit-logement-dialog.component";
 import { DeleteLogementDialogComponent } from "./delete-logement-dialog/delete-logement-dialog.component";
 import { Router } from "@angular/router";
+import { HttpService } from "../utils/httpService";
 
 @Component({
   selector: "app-logement",
@@ -22,9 +23,11 @@ export class LogementComponent implements OnInit {
   };
 
   isModalOpen = false;
+  errorMessage: string = "";
 
   constructor(
     private logementService: LogementService,
+    private httpService: HttpService,
     private dialog: MatDialog,
     private router: Router
   ) {}
@@ -103,9 +106,23 @@ export class LogementComponent implements OnInit {
         if (index !== -1) {
           this.logements[index] = logementUpdated;
         }
+        this.errorMessage = "";
       },
       error: (error) => {
-        console.error("Failed to add logement:", error);
+        console.error("Erreur complète:", error);
+        console.error("Status:", error?.status);
+        console.error("Message:", error?.message);
+        console.error("Body:", error?.error);
+
+        // Extraire le message d'erreur du backend
+        const statusCode = error?.status || error?.error?.status || 0;
+        const errorMsg = this.httpService.getErrorMessage(statusCode);
+
+        this.errorMessage = errorMsg;
+        console.error("Message d'erreur affiché:", this.errorMessage);
+
+        // Afficher une alerte à l'utilisateur
+        alert(`Erreur lors de la mise à jour : ${this.errorMessage}`);
       },
     });
   }
@@ -114,9 +131,21 @@ export class LogementComponent implements OnInit {
     this.logementService.deleteLogement(logementRef).subscribe({
       next: (logementDeleted) => {
         this.removeLogementByRef(logementRef);
+        this.errorMessage = "";
       },
       error: (error) => {
-        console.error("Failed to delete logement:", error);
+        console.error("Erreur complète:", error);
+        console.error("Status:", error?.status);
+        console.error("Message:", error?.message);
+        console.error("Body:", error?.error);
+
+        const statusCode = error?.status || error?.error?.status || 0;
+        const errorMsg = this.httpService.getErrorMessage(statusCode);
+
+        this.errorMessage = errorMsg;
+        console.error("Message d'erreur affiché:", this.errorMessage);
+
+        alert(`Erreur lors de la suppression : ${this.errorMessage}`);
       },
     });
   }

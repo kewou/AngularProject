@@ -1,5 +1,8 @@
 <div class="historique-container">
     <div class="header-section">
+        <button class="btn-back" (click)="goBack()" title="Retour">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
         <h2>📋 Mon Historique</h2>
         <p class="subtitle">Historique de vos transactions et paiements</p>
     </div>
@@ -84,14 +87,14 @@
                 <div class="card-icon">💰</div>
                 <div class="card-content">
                     <h3>Total Payé</h3>
-                    <p class="amount">{{ formatCurrency(getTotalPaid()) }}</p>
+                    <p class="amount">{{ formatAmount(getTotalPaid()) }}</p>
                 </div>
             </div>
             <div class="summary-card">
                 <div class="card-icon">⏳</div>
                 <div class="card-content">
                     <h3>En Attente</h3>
-                    <p class="amount">{{ formatCurrency(getTotalPending()) }}</p>
+                    <p class="amount">{{ formatAmount(getTotalPending()) }}</p>
                 </div>
             </div>
             <div class="summary-card">
@@ -123,7 +126,7 @@
                         </td>
                         <td class="amount-cell">
                             <strong>{{
-                                formatCurrency(situationAppartement.loyerMensuel)
+                                    formatAmount(situationAppartement.loyerMensuel)
                                 }}</strong>
                         </td>
                         <td class="status-cell">
@@ -137,7 +140,7 @@
                         </td>
                         <td class="amount-cell">
                             <strong>{{
-                                formatCurrency(situationAppartement.caution)
+                                    formatAmount(situationAppartement.caution)
                                 }}</strong>
                         </td>
                         <td class="status-cell">
@@ -151,7 +154,7 @@
                         </td>
                         <td class="amount-cell">
                             <strong>{{
-                                formatCurrency(situationAppartement.loyerPaye)
+                                    formatAmount(situationAppartement.loyerPaye)
                                 }}</strong>
                         </td>
                         <td class="status-cell">
@@ -165,7 +168,7 @@
                         </td>
                         <td class="amount-cell">
                             <strong>{{
-                                formatCurrency(situationAppartement.loyerEnAttente)
+                                    formatAmount(situationAppartement.loyerEnAttente)
                                 }}</strong>
                         </td>
                         <td class="status-cell">
@@ -179,7 +182,7 @@
                         </td>
                         <td class="amount-cell">
                             <strong>{{
-                                formatCurrency(situationAppartement.loyerEnRetard)
+                                    formatAmount(situationAppartement.loyerEnRetard)
                                 }}</strong>
                         </td>
                         <td class="status-cell">
@@ -219,8 +222,8 @@
                     <span
                     >Prochain paiement prévu :
             <strong>{{
-              formatDate(situationAppartement.prochainPaiement)
-            }}</strong></span
+                    formatDate(situationAppartement.prochainPaiement)
+                }}</strong></span
                     >
                 </div>
                 <button class="btn btn-success" disabled>
@@ -270,7 +273,7 @@
                             {{ transaction.description }}
                         </td>
                         <td class="amount-cell">
-                            <strong>{{ formatCurrency(transaction.montant) }}</strong>
+                            <strong>{{ formatAmount(transaction.montant) }}</strong>
                         </td>
                         <td class="status-cell">
                 <span
