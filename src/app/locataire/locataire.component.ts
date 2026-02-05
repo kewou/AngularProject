@@ -129,6 +129,6 @@ export class LocataireComponent implements OnInit {
      * Navigue vers l'historique d'un appartement
      */
     navigateToHistorique(appartementRef: string): void {
-        this.router.navigate([`/locataire/historique/${appartementRef}`]);
+        this.router.navigate([`/locataire/historique/appartement/${appartementRef}`]);
     }
 }

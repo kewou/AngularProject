@@ -68,8 +68,8 @@ export class HistoriqueLocataireComponent implements OnInit {
         this.isLoading = true;
         this.hasError = false;
 
-        // Récupérer la référence de l'appartement depuis l'URL (nouveau paramètre)
-        this.apartmentReference = this.route.snapshot.paramMap.get("reference");
+        // Récupérer la référence de l'appartement depuis l'URL (paramètre 'appartRef')
+        this.apartmentReference = this.route.snapshot.paramMap.get("appartRef");
 
         // Récupérer la référence utilisateur depuis les cookies
         const referenceFromCookies = this.cookieService.get("userReference");
@@ -108,6 +108,27 @@ export class HistoriqueLocataireComponent implements OnInit {
 
                     // Afficher uniquement l'appartement sélectionné
                     this.appartements = [this.selectedAppartement];
+                } else if (!this.apartmentReference && this.hasAppartements) {
+                    // Aucune référence d'appartement fournie dans l'URL
+                    // Filtrer les appartements avec un bail actif
+                    const appartementsActifs = this.appartements.filter(
+                        (a) => a.bail && a.bail.actif
+                    );
+
+                    if (appartementsActifs.length === 1) {
+                        // Un seul appartement actif : rediriger vers son historique
+                        this.router.navigate([
+                            "/locataire/historique/appartement",
+                            appartementsActifs[0].reference,
+                        ]);
+                        return;
+                    } else if (appartementsActifs.length > 1) {
+                        // Plusieurs appartements actifs : afficher la liste pour sélection
+                        this.appartements = appartementsActifs;
+                        this.isLoading = false;
+                        return;
+                    }
+                    // Aucun bail actif : continuer normalement (affichera le message "pas d'appartement")
                 }
 
                 if (this.hasAppartements) {

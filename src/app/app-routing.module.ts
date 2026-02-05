@@ -16,7 +16,7 @@ import {HistoriqueComponent} from "./historique/historique.component";
 import {LogementTransactionsComponent} from "./logement-transactions/logement-transactions.component";
 import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 import {
-  ConfirmationSentMailResetPasswordComponent
+    ConfirmationSentMailResetPasswordComponent
 } from "./reset-password/confirmation-sent-mail-reset-password/confirmation-sent-mail-reset-password.component";
 import {LocataireComponent} from "./locataire/locataire.component";
 import {HistoriqueLocataireComponent} from "./locataire/historique-locataire/historique-locataire.component";
@@ -91,10 +91,10 @@ const routes: Routes = [
         data: {breadcrumb: "Mon historique"},
     },
     {
-        path: "locataire/historique/:reference",
+        path: "locataire/historique/appartement/:appartRef",
         component: HistoriqueLocataireComponent,
         canActivate: [AuthGuard],
-        data: {breadcrumb: "Mon historique"},
+        data: {breadcrumb: "Historique de l'appartement"},
     },
     {
         path: "locataire/compte-user",
@@ -107,12 +107,6 @@ const routes: Routes = [
         component: LocataireComponent,
         canActivate: [AuthGuard],
         data: {breadcrumb: "Mon espace locataire"},
-    },
-    {
-        path: "locataires/:reference/historique",
-        component: HistoriqueLocataireComponent,
-        canActivate: [AuthGuard],
-        data: {breadcrumb: "Mon historique"},
     },
     {path: "**", component: NotFoundComponent},
 ];
