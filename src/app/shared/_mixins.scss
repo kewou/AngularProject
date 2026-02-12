@@ -1,0 +1,112 @@
+// Imports des variables
+@import 'variables';
+
+// Mixins SCSS
+
+// Container
+@mixin container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// Grid responsive
+@mixin grid-responsive {
+  display: grid;
+  gap: 24px;
+  margin: 0 auto;
+}
+
+// Media queries
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'mobile' {
+    @media (max-width: $mobile) {
+      @content;
+    }
+  } @else if $breakpoint == 'tablet' {
+    @media (max-width: $tablet) {
+      @content;
+    }
+  } @else if $breakpoint == 'desktop' {
+    @media (min-width: $desktop) {
+      @content;
+    }
+  } @else if $breakpoint == 'large' {
+    @media (min-width: $large) {
+      @content;
+    }
+  }
+}
+
+// Classes extendables pour @extend
+.card-item {
+  background: #fff;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  border: 1px solid #f0f0f0;
+}
+
+.page-section {
+  padding: 40px 20px;
+}
+
+.btn-primary {
+  background: $primary;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: darken($primary, 10%);
+  }
+
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  color: $text;
+  border: 1px solid $border;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $primary;
+    color: $primary;
+  }
+}
+
+// Text utilities
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-clamp($min, $max) {
+  font-size: clamp($min, 2.5vw, $max);
+}
+
+// Flexbox utilities
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+

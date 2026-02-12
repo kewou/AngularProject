@@ -1,6 +1,7 @@
 @import '../shared/variables';
 @import '../shared/mixins';
 
+// Page d'accueil - Version optimisée
 .hero {
   @extend .page-section;
   @include container;
@@ -12,7 +13,7 @@
 
   &__content {
     @extend .card-item;
-    padding: 20px 3% 36px;
+    padding: clamp(20px, 3.2vw, 36px);
   }
 
   &__title {
@@ -21,13 +22,13 @@
     font-weight: 800;
     letter-spacing: -0.02em;
     line-height: 1.2;
-    font-size: 42px;
+    font-size: clamp(26px, 4.2vw, 42px);
   }
 
   &__subtitle {
     margin: 0 0 24px;
     color: $muted;
-    font-size: 18px;
+    font-size: clamp(14px, 2.2vw, 18px);
   }
 
   &__list {
@@ -95,7 +96,7 @@
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.08s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
 
   &--primary {
     @extend .btn-primary;
