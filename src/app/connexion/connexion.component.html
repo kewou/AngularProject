@@ -1,29 +1,82 @@
-<div id="google-signin-button">
-    <button class="google-login-button" (click)="loginWithGoogle()">
-        <img class="google-icon" src="./assets/css/images/icons8-google.svg" alt="Google Icon"/>
-        Continuer avec Google
-    </button>
-</div>
+<section class="auth">
+    <div class="auth__container">
+        <mat-card class="auth-card">
+            <mat-card-content>
+                <!-- Bouton Google -->
+                <div class="social-login">
+                    <button class="google-login-button" type="button" (click)="loginWithGoogle()">
+                        <img class="google-icon" src="./assets/css/images/icons8-google.svg" alt="" aria-hidden="true"/>
+                        Continuer avec Google
+                    </button>
+                </div>
 
+                <!-- Séparateur -->
+                <div class="divider">
+                    <span>ou</span>
+                </div>
 
-<mat-card>
-    <mat-card-content>
-        <form (submit)="loginSubmit()">
-            <mat-form-field>
-                <input matInput type="email" [(ngModel)]="loginObj.username" name="email" required placeholder="Email">
-            </mat-form-field>
-            <mat-form-field>
-                <input matInput type="password" [(ngModel)]="loginObj.password" name="password" required
-                       placeholder="Mot de passe">
-            </mat-form-field>
-            <div *ngIf="errorMessage" class="error-message">
-                {{ errorMessage }}
-            </div>
-            <button mat-raised-button color="primary" type="submit">CONNECTION</button>
-        </form>
-    </mat-card-content>
-</mat-card>
+                <!-- Formulaire -->
+                <form (ngSubmit)="loginSubmit()" #loginForm="ngForm" class="login-form" novalidate
+                      aria-label="Connexion">
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Email</mat-label>
+                        <input
+                                matInput
+                                type="email"
+                                required
+                                placeholder="name@example.com"
+                                [(ngModel)]="loginObj.username"
+                                name="email"
+                                #emailCtrl="ngModel"
+                                aria-required="true"
+                        />
+                        <mat-error *ngIf="emailCtrl.errors?.['required'] && emailCtrl.touched">
+                            L’email est obligatoire.
+                        </mat-error>
+                        <mat-error *ngIf="emailCtrl.errors?.['email'] && emailCtrl.touched">
+                            L’email doit être valide.
+                        </mat-error>
+                    </mat-form-field>
 
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Mot de passe</mat-label>
+                        <input
+                                matInput
+                                type="password"
+                                required
+                                placeholder="Votre mot de passe"
+                                [(ngModel)]="loginObj.password"
+                                name="password"
+                                #passwordCtrl="ngModel"
+                                aria-required="true"
+                        />
+                        <mat-error *ngIf="passwordCtrl.invalid && passwordCtrl.touched">
+                            Le mot de passe est obligatoire.
+                        </mat-error>
+                    </mat-form-field>
 
+                    <!-- Erreur globale -->
+                    <div *ngIf="errorMessage" class="form-error" role="alert">
+                        {{ errorMessage }}
+                    </div>
 
+                    <!-- Actions -->
+                    <div class="form-actions">
+                        <button
+                                mat-raised-button
+                                color="primary"
+                                class="btn-primary"
+                                type="submit"
+                                [disabled]="!loginForm.form.valid"
+                        >
+                            CONNEXION
+                        </button>
 
+                        <a routerLink="/password-reset" class="link">Mot de passe oublié ?</a>
+                    </div>
+                </form>
+            </mat-card-content>
+        </mat-card>
+        
+    </div>
+</section>

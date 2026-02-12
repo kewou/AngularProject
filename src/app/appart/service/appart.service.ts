@@ -1,88 +1,101 @@
-import { Injectable } from '@angular/core';
-import { Observable, of ,throwError} from 'rxjs';
-import { Router } from '@angular/router';
-import { UserService } from '../../user/service/user.service';
-import { CookieService } from 'ngx-cookie-service';
-import { catchError } from 'rxjs/operators';
-import { Appart } from '../modele/appart';
-import { HttpService } from '../../utils/httpService';
+import { Injectable } from "@angular/core";
+import { Observable, throwError } from "rxjs";
+import { UserService } from "../../user/service/user.service";
+import { catchError } from "rxjs/operators";
+import { Appart, UpdateAppartRequest, User, Bail } from "../modele/appart";
+import { HttpService } from "../../utils/httpService";
+import { HttpParams } from "@angular/common/http";
+import { CookieService } from "ngx-cookie-service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AppartService {
+  constructor(
+    private readonly httpService: HttpService,
+    private readonly userService: UserService,
+    private readonly cookieService: CookieService
+  ) {}
 
+  getAppartsByLogement(logementRef: string): Observable<Appart[]> {
+    const userReference = this.getUserReferenceOrThrow();
+    const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts`;
+    return this.httpService
+      .get<Appart[]>(url)
+      .pipe(catchError((err) => throwError(() => err)));
+  }
 
-  constructor(readonly httpService:HttpService,private cookieService: CookieService,
-              private router: Router, private userService: UserService) {}
+  private getUserReferenceOrThrow(): string {
+    const ref = this.cookieService.get("userReference");
+    if (!ref) throw new Error("User reference is not available");
+    return ref;
+  }
 
-  getAppartmentsByLogementRef(logementRef: string): Observable<Appart[]> {
-            const userReference = this.getUserReference();
-            const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts`;
-    return this.httpService.get(url).
-                pipe(
-                       catchError((error) => {
-                         console.error('Error fetching user apparts:')
-                         return throwError('Failed to fetch user apparts');
-                       })
-                   );
-    }
+  addAppart(logementRef: string, appart: Appart): Observable<any> {
+    const userReference = this.getUserReferenceOrThrow();
+    const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts/create`;
 
-   addAppart(logementRef: string,appart: Appart): Observable<any> {
-       const userReference = this.getUserReference();
-       const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts/create`;
+    return this.httpService.post(url, appart).pipe(
+      catchError((error) => {
+        console.error("Error adding appart:", error);
+        return throwError(() => "Failed to add appart");
+      })
+    );
+  }
 
-       return this.httpService.post(url,appart).pipe(
-                   catchError((error) => {
-                     console.error('Error adding appart:', error);
-                     return throwError('Failed to add appart');
-                   })
-               );
+  updateAppart(logementRef: string, appart: Appart): Observable<any> {
+    const userReference = this.getUserReferenceOrThrow();
+    const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts/${appart.reference}`;
 
-   }
+    // récupère le bail actif si présent
+    const bailActif: Bail | undefined = appart.baux?.find((b) => b.actif);
 
-   updateAppart(logementRef: string,updatedAppart: Appart): Observable<any>  {
-      const userReference = this.getUserReference();
-      const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts/${updatedAppart.reference}`;
+    const payload: UpdateAppartRequest = {
+      reference: appart.reference,
+      nom: appart.nom,
+      prixLoyer: appart.prixLoyer,
+      prixCaution: appart.prixCaution,
+      bailleurId: bailActif
+        ? bailActif.locataire.reference
+        : appart.bailleur?.reference!,
+    };
 
-      return this.httpService.put(url,updatedAppart).pipe(
-                  catchError((error) => {
-                    console.error('Error adding appart:', error);
-                    return throwError('Failed to add appart');
-                  })
-              );
-   }
+    return this.httpService.put<Appart>(url, payload).pipe(
+      catchError((error) => {
+        console.error("Error updating appart:", error);
+        return throwError(() => "Failed to update appart");
+      })
+    );
+  }
 
-   deleteAppart(logementRef: string,appartReference:string) : Observable<any> {
-      const userReference = this.getUserReference();
-      const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts/${appartReference}`;
+  deleteAppart(logementRef: string, appartReference: string): Observable<any> {
+    const userReference = this.getUserReferenceOrThrow();
+    const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts/${appartReference}`;
 
-      return this.httpService.delete(url).pipe(
-                  catchError((error) => {
-                    console.error('Error deleteting appart:', error);
-                    return throwError('Failed to delete appart');
-                  })
-              );
-   }
+    return this.httpService.delete(url).pipe(
+      catchError((error) => {
+        console.error("Error deleting appart:", error);
+        return throwError(() => "Failed to delete appart");
+      })
+    );
+  }
 
-     getAppartmentByLogementRefAndAppartRef(logementRef: string,appartRef: string): Observable<Appart> {
-               const userReference = this.getUserReference();
-               const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts/${appartRef}`;
-       return this.httpService.get(url).
-                   pipe(
-                          catchError((error) => {
-                            console.error('Error fetching user one appart:')
-                            return throwError('Failed to fetch one appart');
-                          })
-                      );
-       }
+  getAppartByRef(logementRef: string, appartRef: string): Observable<Appart> {
+    const userReference = this.getUserReferenceOrThrow();
+    const url = `bailleur/users/${userReference}/logements/${logementRef}/apparts/${appartRef}`;
+    return this.httpService
+      .get<Appart>(url)
+      .pipe(catchError((err) => throwError(() => err)));
+  }
 
-   private getUserReference(){
-      const userReference = this.userService.getCurrentUserReference('userReference');
-      if (!userReference) {
-        return throwError('User reference is not available');
-      }
-       return userReference;
-   }
+  searchLocatairesByName(name: string): Observable<User[]> {
+    const params = new HttpParams().set("role", "LOCATAIRE").set("nom", name);
 
+    return this.httpService.get<User[]>("users/search", params).pipe(
+      catchError((err) => {
+        console.error("Error searching locataires:", err);
+        return throwError(() => "Failed to search locataires");
+      })
+    );
+  }
 }

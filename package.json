@@ -1,12 +1,19 @@
 {
   "name": "gestion-loyer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:debug": "ng serve --configuration=development --port=4200 --host=0.0.0.0 --disable-host-check",
+    "start:dev": "ng serve --configuration=development --port=4200 --open",
+    "start:prod": "ng serve --configuration=production --port=4200",
     "build": "ng build",
+    "build:debug": "ng build --configuration=development --source-map=true",
+    "build:prod": "ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "private": false,
   "dependencies": {
@@ -31,12 +38,16 @@
     "@angular/cli": "~15.2.9",
     "@angular/compiler-cli": "^15.2.9",
     "@types/jasmine": "~4.0.0",
+    "@types/jest": "^29.5.0",
     "jasmine-core": "~4.3.0",
+    "jest": "^29.5.0",
+    "jest-preset-angular": "^13.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
+    "prettier": "^3.6.2",
     "typescript": "~4.9.5"
   }
 }

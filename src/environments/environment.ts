@@ -3,8 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  backendUrl: "https://api.beezyweb.net/beezyApi"
+    production: false,
+    debug: true,
+    backendUrl: "http://localhost:8090/beezyApi",
+    enableConsoleLogs: true,
+    enablePerformanceMonitoring: true,
+    apiTimeout: 30000,
+    enableMockData: false,
+    logLevel: "debug",
 };
 
 /*
