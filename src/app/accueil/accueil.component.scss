@@ -2,8 +2,12 @@
 @import '../shared/mixins';
 
 .hero {
-  @extend .page-section;
-  @include container;
+  // Styles de .page-section
+  padding: 40px 20px;
+  // Styles de @include container
+  max-width: 1200px;
+  margin: 0 auto;
+
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
@@ -11,7 +15,11 @@
   border-radius: $radius;
 
   &__content {
-    @extend .card-item;
+    // Styles de .card-item
+    background: #fff;
+    border-radius: $radius;
+    box-shadow: $shadow;
+    border: 1px solid #f0f0f0;
     padding: 20px 3% 36px;
   }
 
@@ -98,9 +106,19 @@
   transition: transform 0.08s ease, box-shadow 0.2s ease, background 0.2s ease;
 
   &--primary {
-    @extend .btn-primary;
+    // Styles de .btn-primary
+    background: $primary;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
     width: 100%;
     max-width: 360px;
+
+    &:hover {
+      background: darken($primary, 10%);
+    }
   }
 
   &--ghost {
@@ -124,15 +142,22 @@
 }
 
 .features {
-  @include container;
-  @extend .grid-responsive;
+  // Styles de @include container
+  max-width: 1200px;
   margin: 28px auto 0;
+  padding: 0 20px;
+  // Styles de .grid-responsive
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
 }
 
 .feature-card {
-  @extend .card-item;
+  // Styles de .card-item
+  background: #fff;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  border: 1px solid #f0f0f0;
   padding: 18px 18px 14px;
   display: flex;
   flex-direction: column;
@@ -177,9 +202,21 @@
 }
 
 button.button {
-  @extend .btn-primary;
+  // Styles de .btn-primary
+  background: $primary;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-weight: 600;
+  cursor: pointer;
   height: 55px;
   width: 65%;
+  transition: background 0.3s ease;
+
+  &:hover {
+    background: darken($primary, 10%);
+  }
 
   &:active {
     transform: translateY(0);
@@ -212,14 +249,100 @@ button.button {
 }
 
 @media (max-width: $mobile) {
+  .hero {
+    padding: 20px 15px;
+    gap: 20px;
+
+    &__content {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__title {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    &__subtitle {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    // Mettre le bouton en haut sur mobile
+    .button {
+      order: -1;
+      margin-bottom: 15px;
+      width: 100%;
+      height: 50px;
+      font-size: 16px;
+    }
+
+    &__list {
+      gap: 12px;
+      margin-bottom: 0;
+    }
+
+    &__item {
+      padding: 12px;
+
+      h3 {
+        font-size: 16px;
+      }
+
+      p {
+        font-size: 13px;
+        margin: 5px 0 0;
+
+        // Masquer le 2ème paragraphe sur mobile pour gagner de l'espace
+        &:nth-child(3) {
+          display: none;
+        }
+      }
+    }
+
+    // Masquer l'image sur mobile pour prioriser le contenu principal
+    &__media {
+      display: none;
+    }
+  }
+
   .hero__item {
     padding: 14px;
   }
+
   .btn--primary {
     max-width: none;
   }
+
   .features {
     grid-template-columns: 1fr;
+    margin-top: 20px;
+    gap: 12px;
+  }
+
+  .feature-card {
+    min-height: auto;
+    padding: 14px;
+
+    h3 {
+      font-size: 16px;
+    }
+
+    li {
+      font-size: 13px;
+      margin: 5px 0;
+    }
+  }
+
+  .quick-actions {
+    flex-direction: column;
+    gap: 8px;
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
   }
 }
 
@@ -228,4 +351,6 @@ button.button {
     transition: none;
   }
 }
+
+
 

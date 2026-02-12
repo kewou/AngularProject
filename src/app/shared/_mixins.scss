@@ -50,6 +50,12 @@
   padding: 40px 20px;
 }
 
+.grid-responsive {
+  display: grid;
+  gap: 24px;
+  margin: 0 auto;
+}
+
 .btn-primary {
   background: $primary;
   color: #fff;
@@ -108,5 +114,6 @@
   align-items: center;
   justify-content: space-between;
 }
+
 
 
