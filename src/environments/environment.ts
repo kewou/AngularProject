@@ -5,7 +5,7 @@
 export const environment = {
     production: false,
     debug: true,
-    backendUrl: "http://localhost:8090/beezyApi",
+    backendUrl: "https://api.beezyweb.net/beezyApi",
     enableConsoleLogs: true,
     enablePerformanceMonitoring: true,
     apiTimeout: 30000,
