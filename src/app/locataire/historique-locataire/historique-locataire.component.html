@@ -282,6 +282,9 @@
                 >
                   {{ transaction.statut }}
                 </span>
+                <span *ngIf="transaction.statut === 'En retard'" class="retard-amount">
+                  {{ transaction.retardCumul }} €
+                </span>
                         </td>
                     </tr>
                     </tbody>
