@@ -28,16 +28,20 @@ describe('ResetPasswordComponent with email empty', () => {
     // Create mocks
     httpServiceMock = {
       post: jest.fn(),
-      getErrorMessage: jest.fn(),
+      getErrorMessage: jest.fn().mockReturnValue('Erreur test'),
     } as unknown as jest.Mocked<HttpService>;
 
     routerMock = {
       navigate: jest.fn(),
       url: '/reset-password#token123',
+      events: of(null),
+      createUrlTree: jest.fn(),
+      serializeUrl: jest.fn().mockReturnValue('/login'),
     } as unknown as jest.Mocked<Router>;
 
     activatedRouteMock = {
       queryParams: of({}),
+      snapshot: { fragment: null } as any,
     };
 
     await TestBed.configureTestingModule({
@@ -83,16 +87,20 @@ describe('ResetPasswordComponent', () => {
     // Create mocks
     httpServiceMock = {
       post: jest.fn(),
-      getErrorMessage: jest.fn(),
+      getErrorMessage: jest.fn().mockReturnValue('Erreur test'),
     } as unknown as jest.Mocked<HttpService>;
 
     routerMock = {
       navigate: jest.fn(),
       url: '/reset-password#token123',
+      events: of(null),
+      createUrlTree: jest.fn(),
+      serializeUrl: jest.fn().mockReturnValue('/login'),
     } as unknown as jest.Mocked<Router>;
 
     activatedRouteMock = {
       queryParams: of({ email: 'test@example.com' }),
+      snapshot: { fragment: 'token123' } as any,
     };
 
     await TestBed.configureTestingModule({
@@ -142,12 +150,12 @@ describe('ResetPasswordComponent', () => {
 
       expect(httpServiceMock.post).toHaveBeenCalledWith(
         component.url,
-        'test@example.com'
+        { email: 'test@example.com' }
       );
       expect(routerMock.navigate).toHaveBeenCalledWith(['/confirmation-sent-mail-reset-password']);
     });
 
-    it('should navigate to password-reset page on error', () => {
+    it('should show error message on reset password request error', () => {
       component.formData.email = 'test@example.com';
       httpServiceMock.post.mockReturnValue(throwError(() => new Error('Error')));
 
@@ -155,9 +163,9 @@ describe('ResetPasswordComponent', () => {
 
       expect(httpServiceMock.post).toHaveBeenCalledWith(
         component.url,
-        'test@example.com'
+        { email: 'test@example.com' }
       );
-      expect(routerMock.navigate).toHaveBeenCalledWith(['/password-reset']);
+      expect(component.errorMessage).toBe('Erreur test');
     });
   });
 
@@ -196,7 +204,7 @@ describe('ResetPasswordComponent', () => {
       expect(httpServiceMock.post).not.toHaveBeenCalled();
     });
 
-    it('should handle error during password update', () => {
+    it('should show error during password update', () => {
       component.formData.password = 'newPassword123';
       component.formData.confirmPassword = 'newPassword123';
       httpServiceMock.post.mockReturnValue(throwError(() => new Error('Error')));
@@ -204,7 +212,7 @@ describe('ResetPasswordComponent', () => {
       component.updatePasswordSubmit();
 
       expect(httpServiceMock.post).toHaveBeenCalled();
-      // We're just checking that it doesn't crash and logs the error
+      expect(component.errorMessage).toBe('Erreur test');
     });
   });
 

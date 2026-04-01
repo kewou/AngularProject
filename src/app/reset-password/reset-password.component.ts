@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import { HttpService } from '../utils/httpService'
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -26,6 +27,7 @@ export class ResetPasswordComponent implements OnInit {
   showPass: boolean = false;
   showConfirmPass: boolean = false;
   errorMessages: any[] = [];
+  errorMessage: string | null = null;
   verificationToken: string | null = null;
 
   constructor(
@@ -39,28 +41,35 @@ export class ResetPasswordComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (params['email']) {
         this.formData.email = params['email'];
-        this.verificationToken = this.router.url.toString().split('#')[1];
+        this.verificationToken = this.route.snapshot.fragment;
         this.isResetMode = true;
       }
     });
   }
 
   sentMailResetPasswordSubmit(): void {
-    console.log("Envoi du mail avec changement de mot de passe", this.formData.email);
-    this.httpService.post(this.url, this.formData.email).subscribe(
-      response => {
+    this.errorMessage = null;
+    const email = this.formData.email?.trim();
+    this.httpService.post(this.url, { email }).subscribe(
+      () => {
         this.router.navigate(['/confirmation-sent-mail-reset-password']);
       },
-      error => {
-        this.router.navigate(['/password-reset']);
+      (error: HttpErrorResponse) => {
+        this.errorMessage = this.getReadableError(error);
       }
     );
   }
 
   updatePasswordSubmit(): void {
     this.errorMessages = []
+    this.errorMessage = null;
     if (this.formData.password !== this.formData.confirmPassword) {
       this.errorMessages.push("Les mots de passe ne correspondent pas");
+      return;
+    }
+
+    if (!this.verificationToken) {
+      this.errorMessage = "Le lien de reinitialisation est invalide. Veuillez recommencer la procedure.";
       return;
     }
 
@@ -71,14 +80,25 @@ export class ResetPasswordComponent implements OnInit {
     };
 
     this.httpService.post(this.updatePasswordUrl, data).subscribe(
-      response => {
+      () => {
         // Redirect to login page after successful password update
         this.router.navigate(['/login']);
       },
-      error => {
-        console.error("Erreur lors de la mise à jour du mot de passe", error);
+      (error: HttpErrorResponse) => {
+        this.errorMessage = this.getReadableError(error);
       }
     );
+  }
+
+  private getReadableError(error: HttpErrorResponse): string {
+    const backendMessage = error?.error?.message;
+    if (backendMessage && typeof backendMessage === 'string') {
+      if (backendMessage.toLowerCase().includes('client not found')) {
+        return 'Cette fonctionnalite ne fonctionne pas pour le moment. Veuillez reessayer plus tard.';
+      }
+      return backendMessage;
+    }
+    return this.httpService.getErrorMessage(error.status);
   }
 
   showPassword() {

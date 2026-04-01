@@ -1,0 +1,62 @@
+// Shared SCSS tokens and helpers used by accueil styles.
+
+// Design tokens
+$brand: #e13652;
+$accent: #1f4fa3;
+$text: #1f2937;
+$muted: #6b7280;
+$radius: 20px;
+$shadow: 0 18px 40px rgba(2, 8, 23, 0.12);
+
+// Responsive breakpoints
+$tablet: 980px;
+$mobile: 640px;
+
+// Layout helper
+@mixin container {
+  width: min(1120px, calc(100% - 32px));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Common surfaces
+.page-section {
+  margin-top: 24px;
+  background: linear-gradient(180deg, #ffffff, #f8fbff);
+  border: 1px solid #e5eaf3;
+  border-radius: $radius;
+  padding: clamp(16px, 3vw, 28px);
+}
+
+.grid-responsive {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card-item {
+  background: #ffffff;
+  border: 1px solid #e9eef6;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(2, 8, 23, 0.06);
+}
+
+// CTA style shared as extendable class and mixin (legacy compatibility)
+@mixin btn-primary {
+  background: linear-gradient(135deg, #e13652, #e13652cc);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(225, 54, 82, 0.3);
+
+  &:hover {
+    background: linear-gradient(135deg, #6ec654, #6ec654cc);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 18px rgba(110, 198, 84, 0.35);
+  }
+}
+
+.btn-primary {
+  @include btn-primary;
+}
+
