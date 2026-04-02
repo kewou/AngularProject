@@ -254,6 +254,11 @@
       }
 
       .status-cell {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        flex-wrap: wrap;
+
         .status-badge {
           padding: 6px 12px;
           border-radius: 20px;
@@ -280,6 +285,16 @@
             background: #e2e3e5;
             color: #383d41;
           }
+        }
+
+        .retard-amount {
+          font-size: 0.8rem;
+          font-weight: 700;
+          background: #c62828;
+          color: #fff;
+          border-radius: 999px;
+          padding: 3px 10px;
+          white-space: nowrap;
         }
       }
     }

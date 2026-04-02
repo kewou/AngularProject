@@ -63,6 +63,7 @@
                       [class.status--ko]="!l.ok"
               >
                 {{ l.ok ? "Payé" : "En retard" }}
+                  <span *ngIf="!l.ok" class="retard-amount">{{ l.retardCumul }}</span>
               </span>
                     </td>
                 </tr>
@@ -109,7 +110,7 @@
                 <mat-error
                         *ngIf="transactionForm.get('montantVerser')?.hasError('notMultiple')"
                 >
-                    Le montant doit être un multiple du loyer ({{ appart?.prixLoyer }} €).
+                    Le montant doit être un multiple du loyer ({{ appart?.prixLoyer }}).
                 </mat-error>
             </mat-form-field>
 

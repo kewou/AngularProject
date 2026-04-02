@@ -43,4 +43,5 @@ export interface Loyer {
   montantVerse: number;
   ok: boolean;
   courant: boolean;
+  retardCumul: number;
 }

@@ -11,6 +11,7 @@ interface Loyer {
     montantVerse: number;
     ok: boolean;
     courant: boolean;
+    retardCumul: number;
 }
 
 interface HistoriqueTransaction {
@@ -20,6 +21,7 @@ interface HistoriqueTransaction {
     montant: number;
     description: string;
     statut: string;
+    retardCumul: number;
 }
 
 interface SituationAppartement {
@@ -210,6 +212,7 @@ export class HistoriqueLocataireComponent implements OnInit {
                         year: 'numeric'
                     })}`,
                     statut: loyer.ok ? "Payé" : "En retard",
+                    retardCumul: loyer.retardCumul ?? 0,
                 }));
                 this.isLoading = false;
                 this.hasError = false;
